@@ -1,0 +1,33 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "install-immutable": {
+      "dependsOn": ["^install-immutable"],
+      "outputs": [],
+      "cache": false
+    },
+    "export-dynamic": {
+      "cache": false,
+      "dependsOn": ["tsc"]
+    },
+    "package-dynamic": {
+      "cache": false,
+      "dependsOn": ["clean-build", "install-immutable", "tsc"]
+    },
+    "clean-build": {
+      "dependsOn": ["^clean-build"],
+      "outputs": [],
+      "cache": false
+    },
+    "build": {
+      "cache": false,
+      "outputs": ["dist/**"],
+      "dependsOn": ["^build", "tsc"]
+    },
+    "tsc": {
+      "outputs": ["../../dist-types/**"],
+      "cache": false,
+      "dependsOn": ["^tsc"]
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "@rhtap-plugins/backstage-community-plugin-tekton",
+  "version": "3.22.1",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.cjs.js",
+    "types": "dist/index.d.ts"
+  },
+  "backstage": {
+    "role": "frontend-plugin",
+    "supported-versions": "1.36.1",
+    "pluginId": "tekton",
+    "pluginPackages": [
+      "backstage-community-plugin-tekton"
+    ]
+  },
+  "sideEffects": false,
+  "scripts": {
+    "tsc": "tsc",
+    "build": "backstage-cli package build",
+    "lint:check": "backstage-cli package lint",
+    "test": "backstage-cli package test --passWithNoTests --coverage",
+    "clean": "backstage-cli package clean",
+    "clean-build": "rimraf dist dist-dynamic dist-scalprum dist-plugin",
+    "install-immutable": "yarn install --immutable",
+    "export-dynamic": "janus-cli package export-dynamic-plugin --clean",
+    "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
+  },
+  "dependencies": {
+    "@backstage-community/plugin-tekton": "3.22.1",
+    "@mui/material": "5.17.1"
+  },
+  "devDependencies": {
+    "@backstage/cli": "0.30.0",
+    "@janus-idp/cli": "3.3.1",
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "typescript": "5.8.2"
+  },
+  "files": [
+    "dist",
+    "dist-scalprum"
+  ],
+  "scalprum": {
+    "name": "rhtap-plugins.backstage-community-plugin-tekton",
+    "exposedModules": {
+      "PluginRoot": "./src/index.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redhat-appstudio/rhtap-backstage-plugins",
+    "directory": "plugins/tekton"
+  },
+  "author": "Red Hat",
+  "homepage": "https://red.ht/trusted",
+  "bugs": "https://issues.redhat.com/browse/RHTAP",
+  "keywords": [
+    "support:tech-preview",
+    "lifecycle:active"
+  ]
+}
