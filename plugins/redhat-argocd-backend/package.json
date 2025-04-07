@@ -1,0 +1,76 @@
+{
+  "name": "@rhtap-plugins/backstage-community-plugin-redhat-argocd-backend",
+  "version": "0.4.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.cjs.js",
+    "types": "dist/index.d.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caugello/rhtap-plugins",
+    "directory": "packages/redhat-argocd-backend"
+  },
+  "backstage": {
+    "role": "backend-plugin",
+    "supported-versions": "1.36.1",
+    "pluginId": "quay",
+    "pluginPackages": [
+      "@backstage-community/plugin-redhat-argocd-backend"
+    ]
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "package.json": [
+        "package.json"
+      ]
+    }
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "backstage-cli package build",
+    "lint:check": "backstage-cli package lint",
+    "test": "backstage-cli package test --passWithNoTests --coverage",
+    "clean": "backstage-cli package clean",
+    "clean-build": "rimraf dist dist-dynamic dist-scalprum dist-plugin",
+    "install-immutable": "yarn install --immutable",
+    "export-dynamic": "janus-cli package export-dynamic-plugin --clean --embed-package @backstage-community/plugin-redhat-argocd-backend",
+    "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
+  },
+  "dependencies": {
+    "@backstage-community/plugin-redhat-argocd-backend": "0.4.0"
+  },
+  "devDependencies": {
+    "@backstage/cli": "0.30.0",
+    "@janus-idp/cli": "3.3.1",
+    "typescript": "5.8.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "scalprum": {
+    "name": "rhtap-plugins.backstage-community-plugin-redhat-argocd-backend",
+    "exposedModules": {
+      "PluginRoot": "./src/index.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redhat-appstudio/rhtap-backstage-plugins",
+    "directory": "plugins/redhat-argocd-backend"
+  },
+  "homepage": "https://red.ht/trusted",
+  "bugs": "https://issues.redhat.com/browse/RHTAP",
+  "author": "Red Hat",
+  "keywords": [
+    "support:production",
+    "lifecycle:active"
+  ]
+}

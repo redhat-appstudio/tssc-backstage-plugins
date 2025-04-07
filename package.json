@@ -1,0 +1,27 @@
+{
+  "name": "rhtap-plugins",
+  "version": "1.0.0",
+  "private": true,
+  "engine": {
+    "node": 22
+  },
+  "workspaces": {
+    "packages": [
+      "plugins/*"
+    ]
+  },
+  "scripts": {
+    "install-immutable": "turbo run install-immutable",
+    "tsc": "turbo run tsc",
+    "build": "turbo run build",
+    "plugins:prepare": "rimraf dist-plugin && turbo run clean-build --filter='./plugins/**'",
+    "plugins:build": "turbo run package-dynamic --filter='./plugins/**'"
+  },
+  "packageManager": "yarn@1.22.22",
+  "devDependencies": {
+    "@backstage/cli": "0.30.0",
+    "rimraf": "6.0.1",
+    "turbo": "^2.4.4",
+    "typescript": "5.8.2"
+  }
+}
