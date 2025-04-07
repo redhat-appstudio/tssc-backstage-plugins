@@ -9,11 +9,11 @@ metadata:
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression:
       event == "push" && target_branch
-      == "main"
+      == "release-1.5"
   creationTimestamp: null
   labels:
-    appstudio.openshift.io/application: rhtap-backstage-plugins
-    appstudio.openshift.io/component: rhtap-backstage-plugins
+    appstudio.openshift.io/application: rhtap-backstage-plugins-1-5
+    appstudio.openshift.io/component: rhtap-backstage-plugins-1-5
     pipelines.appstudio.openshift.io/type: build
   name: rhtap-backstage-plugins-on-push
   namespace: rhtap-shared-team-tenant
