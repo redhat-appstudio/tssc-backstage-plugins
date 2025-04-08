@@ -1,0 +1,207 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tekton-pipelines
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: backstage-read-only
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backstage-tekton
+  namespace: tekton-pipelines
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: backstage-read-only-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: backstage-read-only
+subjects:
+- kind: ServiceAccount
+  name: backstage-tekton
+  namespace: tekton-pipelines
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: backstage-tekton-token
+  namespace: tekton-pipelines
+  annotations:
+    kubernetes.io/service-account.name: backstage-tekton
+---
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  labels:
+    backstage.io/kubernetes-id: rhtap
+  name: simple-pipeline
+  namespace: tekton-pipelines
+spec:
+  tasks:
+  - name: echo-task
+    taskSpec:
+      steps:
+      - image: busybox
+        name: echo-message
+        script: |
+          #!/bin/sh
+          echo "Hello, Tekton!"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 3000
+          seccompProfile:
+            type: "RuntimeDefault"
+---
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  labels:
+    backstage.io/kubernetes-id: rhtap
+    tekton.dev/pipeline: simple-pipeline
+  name: simple-pipeline-run
+  namespace: tekton-pipelines
+spec:
+  pipelineRef:
+    name: simple-pipeline
+  taskRunTemplate:
+    serviceAccountName: backstage-tekton
+  timeouts:
+    pipeline: 1h0m0s
+---
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  labels:
+    backstage.io/kubernetes-id: rhtap
+  name: show-sbom-demo
+  namespace: tekton-pipelines
+spec:
+  workspaces:
+  - name:  shared-data
+  tasks:
+  - name: init-pipeline
+    taskSpec:
+      steps:
+      - image: busybox
+        name: init-echo
+        script: |
+          #!/bin/sh
+          echo "---------------------------------------"
+          echo "Starting Pipeline Tasks"
+          echo "---------------------------------------"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 3000
+          seccompProfile:
+            type: "RuntimeDefault"
+  - name: show-sbom
+    workspaces:
+    - name: sbom-output
+      workspace: shared-data
+    taskSpec:
+      metadata:
+        annotations:
+          tekton.dev/pipelines.minVersion: "0.12.1"
+          tekton.dev/tags: "containers, ai-rhdh"
+          task.results.key: LINK_TO_SBOM
+          task.output.location: results
+      results:
+      - name: LINK_TO_SBOM
+        description: "link to SBOM data"
+      steps:
+      - image: alpine/curl
+        name: curl-sbom-data
+        script: |
+          #!/bin/sh
+          # Save link to SBOM scans in results
+          SBOM_DATA_LINK='https://raw.githubusercontent.com/redhat-appstudio/tssc-sample-sbom-scans/refs/heads/main/live-demo'
+          echo -n "$SBOM_DATA_LINK" > $(results.LINK_TO_SBOM.path)
+          # Fetch the data and save to file
+          curl "$SBOM_DATA_LINK" > $(workspaces.sbom-output.path)/sbom.json
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 3000
+          seccompProfile:
+            type: "RuntimeDefault"
+      - image: busybox
+        name: echo-sbom-data
+        script: |
+          #!/bin/sh
+          cat $(workspaces.sbom-output.path)/sbom.json
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 3000
+          seccompProfile:
+            type: "RuntimeDefault"
+  - name: show-summary
+    taskSpec:
+      steps:
+      - image: busybox
+        name: summary-step
+        script: |
+          #!/bin/sh
+          echo "Finalizing Pipeline tasks"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 3000
+          seccompProfile:
+            type: "RuntimeDefault"
+  results:
+  - name: sbom-file-link
+    description: "Link to where the SBOM dummy data is located"
+    value: "$(tasks.show-sbom.results.LINK_TO_SBOM)"
+---
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  labels:
+    backstage.io/kubernetes-id: rhtap
+    tekton.dev/pipeline: show-sbom-demo
+  name: show-sbom-demo-run
+  namespace: tekton-pipelines
+spec:
+  pipelineRef:
+    name: show-sbom-demo
+  workspaces:
+  - name: shared-data
+    emptyDir: {}
+  taskRunTemplate:
+    serviceAccountName: backstage-tekton
+  timeouts:
+    pipeline: 1h0m0s

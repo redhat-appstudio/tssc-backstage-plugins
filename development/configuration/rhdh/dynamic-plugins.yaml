@@ -1,0 +1,127 @@
+# These are plugins provided by RHDH.
+# They're disabled in this config so we can use ours, which may be newer than the ones pre-loaded.
+#includes:
+#  - ../local-plugins/dynamic-plugins.yaml
+
+plugins:
+  # TODO - change 'package' values for each plugin to the OCI artifact for latest RHTAP plugins
+
+  # TEKTON + K8s
+  - package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
+    disabled: false
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          backstage-community.plugin-tekton:
+            mountPoints:
+              - mountPoint: entity.page.ci/cards
+                importName: TektonCI
+                config:
+                  layout:
+                    gridColumn: 1 / -1
+                  if:
+                    anyOf:
+                      - isTektonCIAvailable
+
+  - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+    disabled: false
+
+  # QUAY
+  - package: oci://quay.io/redhat-user-workloads/rhtap-shared-team-tenant/backstage-community-plugins:on-pr-364724f23c7ad589622ab2286a1e6a9d6d59d43b!backstage-community-plugin-quay
+    disabled: false
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          backstage-community.plugin-quay:
+            mountPoints:
+              - mountPoint: entity.page.image-registry/cards
+                importName: QuayPage
+                config:
+                  layout:
+                    gridColumn: 1 / -1
+                  if:
+                    anyOf:
+                      - isQuayAvailable
+  
+  - package: oci://quay.io/redhat-user-workloads/rhtap-shared-team-tenant/backstage-community-plugins:on-pr-364724f23c7ad589622ab2286a1e6a9d6d59d43b!backstage-community-plugin-quay-backend-dynamic
+    disabled: false
+
+  # ArgoCD
+  
+  - package: oci://quay.io/redhat-user-workloads/rhtap-shared-team-tenant/backstage-community-plugins:on-pr-364724f23c7ad589622ab2286a1e6a9d6d59d43b!backstage-community-plugin-redhat-argocd
+    disabled: false
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          backstage-community.plugin-redhat-argocd:
+            mountPoints:
+              - mountPoint: entity.page.cd/cards
+                importName: ArgocdDeploymentLifecycle
+                config:
+                  layout:
+                    gridColumn: 1 / -1
+                  if:
+                    anyOf:
+                      - isArgocdConfigured
+              - mountPoint: entity.page.cd/cards
+                importName: ArgocdDeploymentSummary
+                config:
+                  layout:
+                    gridColumn: 1 / -1
+                  if:
+                    anyOf:
+                      - isArgocdConfigured
+  
+  - package: oci://quay.io/redhat-user-workloads/rhtap-shared-team-tenant/backstage-community-plugins:on-pr-364724f23c7ad589622ab2286a1e6a9d6d59d43b!backstage-community-plugin-redhat-argocd-backend-dynamic
+    disabled: false
+
+  # Jenkins
+  - package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins
+    disabled: false
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          backstage-community.plugin-jenkins:
+            mountPoints:
+              - mountPoint: entity.page.ci/cards
+                importName: EntityJenkinsContent
+                config:
+                  layout:
+                    gridColumn: 1 / -1
+                  if:
+                    anyOf:
+                      - isJenkinsAvailable
+              - mountPoint: entity.page.ci/cards
+                importName: EntityLatestJenkinsRunCard
+                config:
+                  layout:
+                    gridColumn: 1 / -1
+                  if:
+                    anyOf:
+                      - isJenkinsAvailable
+
+  - package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins-backend-dynamic
+    disabled: false
+
+  # Multi Source Security Viewer
+  # TODO
+  #  - package: oci://quay.io/bramos/mssv:latest!backstage-community-plugin-multi-source-security-viewer-dynamic
+  #    disabled: false
+  #    pluginConfig:
+  #      dynamicPlugins:
+  #        frontend:
+  #          backstage-community.plugin-multi-source-security-viewer:
+  #            mountPoints:
+  #              - config:
+  #                  layout:
+  #                    gridColumn: 1 / -1
+  #                    gridRowStart: 2
+  #                importName: EntityMultiCIPipelinesContent
+  #                mountPoint: entity.page.ci/cards
+  #            entityTabs:
+  #              - path: /ci
+  #                title: CI
+  #                mountPoint: entity.page.ci
+
+  # AZURE-DEVOPS
+  # TODO

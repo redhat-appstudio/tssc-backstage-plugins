@@ -1,0 +1,16 @@
+services:
+  jenkins:
+    image: jenkins-custom:lts-jdk17
+    build:
+      context: .
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_logs:/var/jenkins_home
+    restart: on-failure
+
+volumes:
+  jenkins_logs:
+    driver: local

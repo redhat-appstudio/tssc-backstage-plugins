@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app: backstage
+  name: guestbook
+  namespace: argocd
+spec:
+  destination:
+    namespace: demo-apps
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+  - path: ./development/configuration/argocd/apps/kustomize-guestbook/
+    repoURL: https://github.com/redhat-appstudio/rhtap-backstage-plugins.git
+    targetRevision: main
+  - path: ./development/configuration/argocd/apps/jsonnet-guestbook-tla/
+    repoURL: https://github.com/redhat-appstudio/rhtap-backstage-plugins.git
+    targetRevision: main
+  - path: ./development/configuration/argocd/apps/jsonnet-guestbook/
+    repoURL: https://github.com/redhat-appstudio/rhtap-backstage-plugins.git
+    targetRevision: main
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app: backstage
+  name: basic-app
+  namespace: argocd
+spec:
+  destination:
+    namespace: demo-apps
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+  - path: ./development/configuration/argocd/apps/basic-app/
+    repoURL: https://github.com/redhat-appstudio/rhtap-backstage-plugins.git
+    targetRevision: main
