@@ -1,0 +1,124 @@
+auth:
+  environment: development
+  providers:
+    guest:
+      dangerouslyAllowOutsideDevelopment: true
+    # github:
+    #   development:
+    #     clientId: ${AUTH_GITHUB_CLIENT_ID}
+    #     clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+
+# integrations:
+#   github:
+#     - host: github.com
+#       apps:
+#         - $include: github-app-credentials.yaml
+
+app:
+  title: RHDH
+  baseUrl: ${BASE_URL}
+
+backend:
+  listen:
+    port: 7007
+  baseUrl: ${BASE_URL}
+  # uncomment this if backend.baseUrl is exposed over HTTPS
+  # and you want RHDH to auto-generate and serve a self-signed certificate.
+  # https: true
+  cors:
+    origin: ${BASE_URL}
+    methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
+    credentials: true
+  csp:
+   upgrade-insecure-requests: false
+
+# comment out the following 'database' section to use the PostgreSQL database
+  database:
+    client: better-sqlite3
+    connection: ':memory:'
+
+  auth:
+    keys:
+      - secret: "development"
+
+# You can use local files from catalog-entities directory to load entities into the catalog
+catalog:
+
+  rules:
+    - allow: [Component, API, Location, Template, Domain, User, Group, System, Resource]
+
+  locations:
+    - type: file
+      target: /opt/app-root/src/configs/catalog-entities/users.yaml
+      rules:
+        - allow: [User, Group]
+    - type: file
+      target: /opt/app-root/src/configs/catalog-entities/components.yaml
+      rules:
+        - allow: [Component, System]
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
+    #   rules:
+    #     - allow: [Component, User, Group, Domain]
+
+techdocs:
+  generator:
+    runIn: local
+  builder: local
+  publisher:
+    type: local
+    local:
+      publishDirectory: /tmp/techdocs
+
+quay:
+  uiUrl: 'https://quay.io'
+  apiUrl: 'https://quay.io'
+  # See docs for generating API key: https://docs.redhat.com/en/documentation/red_hat_quay/3/html-single/red_hat_quay_api_guide/index#creating-oauth-access-token
+  apiKey: <api-key>
+
+argocd:
+  localDevelopment: true
+  username: admin
+  # kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+  password: <admin-password>
+  appLocatorMethods:
+    - type: 'config'
+      instances:
+        - name: default
+          # K8s server URL: kubectl config view -o jsonpath='{.clusters[0].cluster.server}'
+          # ArgoCD Service Port: kubectl get svc argocd-server -n argocd -o jsonpath='{.spec.ports[0].nodePort}'
+          url: <k8s-argocd-url>
+
+kubernetes:
+  # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
+  serviceLocatorMethod:
+    type: 'singleTenant'
+  clusterLocatorMethods:
+    - type: 'config'
+      clusters:
+        # taken from kubeconfig, might need to be changed for you. Run `kubectl config view --minify --output json` to find the server URL
+        - name: default
+          authProvider: serviceAccount
+          url: <k8s-server-url>
+          # kubectl get secret backstage-tekton-token -n tekton-pipelines -o jsonpath='{.data.token}' | base64 --decode
+          serviceAccountToken: <token>
+          skipTLSVerify: true
+          skipMetricsLookup: true
+          customResources:
+            - group: tekton.dev
+              apiVersion: v1
+              plural: pipelineruns
+            - group: tekton.dev
+              apiVersion: v1
+              plural: taskruns
+jenkins:
+  instances:
+    - name: default
+      baseUrl: http://localhost:8080
+      username: admin
+      # See docs: https://github.com/redhat-appstudio/rhtap-backstage-plugins/tree/main/development/configuration/jenkins#api-token
+      apiKey: <api-token>
+
+permission:
+  enabled: false
+
