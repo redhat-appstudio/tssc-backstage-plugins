@@ -5,31 +5,34 @@ WORKDIR /plugin-workspace
 ENV PLUGINS_OUTPUT="/plugin-output"
 ENV PLUGINS_WORKSPACE="/plugin-workspace"
 ENV TURBO_TELEMETRY_DISABLED=1
+# Ensure using local headers. (nodejs-devel)
+ENV npm_config_nodedir=/usr
+ENV NODE_GYP_FORCE_LOCAL=true
 
 USER root
 
 COPY . .
 
-# Remove local settings
-RUN rm -f .npmrc
+RUN ln -s $PLUGINS_WORKSPACE/.yarn/releases/yarn-4.8.1.cjs /usr/local/bin/yarn
 
-# The recommended way of using yarn is via corepack. However, corepack is not included in the UBI
-# image. Below we install corepack so we can install yarn.
-# https://github.com/nodejs/corepack?tab=readme-ov-file#default-installs
+# Install rpms and packages
 RUN \
     node --version && \
-    npm install -g corepack && \
-    corepack --version && \
-    corepack enable yarn && \
-    corepack use 'yarn@4' && \
     yarn --version && \
-    mkdir -p $PLUGINS_OUTPUT && \
-    dnf -y install jq
+    dnf module enable nodejs:20 && \
+    dnf install -y jq nodejs-devel && \
+    yarn install --inline-builds && \
+    mkdir -p $PLUGINS_OUTPUT
 
+# Process dynamic plugins
+RUN \
+    yarn plugins:prepare && \
+    yarn plugins:build:frontend && \
+    yarn plugins:build:backend && \
+    yarn plugins:build:backend:postinstall && \
+    yarn plugins:package
 
-RUN yarn plugins:prepare && \
-    yarn plugins:build
-
+# Compose merged index.json
 RUN for plugin in $(ls ${PLUGINS_WORKSPACE}/plugins); do \
      mv "${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/index.json" "${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/${plugin}-index.json" && \
      cp -R ${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/* ${PLUGINS_OUTPUT}; \
@@ -37,9 +40,11 @@ RUN for plugin in $(ls ${PLUGINS_WORKSPACE}/plugins); do \
    jq -c -s 'flatten' ${PLUGINS_OUTPUT}/*-index.json > ${PLUGINS_OUTPUT}/index.json && \
    rm -f ${PLUGINS_OUTPUT}/*-index.json
 
+# Copy to compy ecosystem preflight-checks
 RUN mkdir -p $PLUGINS_OUTPUT/licenses && \
     cp $PLUGINS_WORKSPACE/LICENSE.TXT $PLUGINS_OUTPUT/licenses
 
+# Create artifact
 FROM scratch
 
 LABEL name="RHTAP backstage plugins" \

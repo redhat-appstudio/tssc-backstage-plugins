@@ -1,0 +1,8 @@
+moduleEnable:
+  - nodejs:20
+packages:
+  - jq
+  - nodejs-devel
+contentOrigin:
+  repofiles: ["./ubi.repo"]
+arches: [x86_64]

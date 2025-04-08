@@ -26,8 +26,7 @@
     "test": "backstage-cli package test --passWithNoTests --coverage",
     "clean": "backstage-cli package clean",
     "clean-build": "rimraf dist dist-dynamic dist-scalprum dist-plugin",
-    "install-immutable": "yarn install --immutable",
-    "export-dynamic": "janus-cli package export-dynamic-plugin",
+    "export-dynamic:frontend": "janus-cli package export-dynamic-plugin --clean",
     "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
   },
   "dependencies": {
