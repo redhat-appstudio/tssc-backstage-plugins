@@ -6,7 +6,12 @@
 **/coverage/
 .npmrc
 .env
-.yarn/
+**/.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
 .turbo/
-.yarnrc.yml
 **/dist-plugin/
+.npm/
+.cache/

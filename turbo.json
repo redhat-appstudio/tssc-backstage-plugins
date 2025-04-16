@@ -1,18 +1,27 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "install-immutable": {
-      "dependsOn": ["^install-immutable"],
-      "outputs": [],
-      "cache": false
-    },
-    "export-dynamic": {
+    "export-dynamic:frontend": {
       "cache": false,
       "dependsOn": ["tsc"]
     },
+    "export-dynamic:backend": {
+      "cache": false,
+      "dependsOn": ["tsc"]
+    },
+    "export-dynamic:backend:postinstall": {
+      "cache": false,
+      "dependsOn": ["^export-dynamic:backend:postinstall"],
+      "env": [
+        "YARN_ENABLE_GLOBAL_CACHE",
+        "YARN_ENABLE_IMMUTABLE_CACHE",
+        "YARN_ENABLE_MIRROR",
+        "YARN_GLOBAL_FOLDER"
+      ]
+    },
     "package-dynamic": {
       "cache": false,
-      "dependsOn": ["clean-build", "install-immutable", "tsc"]
+      "dependsOn": ["^package-dynamic"]
     },
     "clean-build": {
       "dependsOn": ["^clean-build"],

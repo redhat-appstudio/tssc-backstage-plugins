@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/caugello/rhtap-plugins",
-    "directory": "packages/redhat-argocd-backend"
+    "url": "https://github.com/redhat-appstudio/rhtap-backstage-plugins",
+    "directory": "plugins/redhat-argocd-backend"
   },
   "backstage": {
     "role": "backend-plugin",
     "supported-versions": "1.36.1",
     "pluginId": "quay",
     "pluginPackages": [
-      "@backstage-community/plugin-redhat-argocd-backend"
+      "@rhtap-plugins/backstage-community-plugin-redhat-argocd-backend"
     ]
   },
   "exports": {
@@ -40,8 +40,8 @@
     "test": "backstage-cli package test --passWithNoTests --coverage",
     "clean": "backstage-cli package clean",
     "clean-build": "rimraf dist dist-dynamic dist-scalprum dist-plugin",
-    "install-immutable": "yarn install --immutable",
-    "export-dynamic": "janus-cli package export-dynamic-plugin --clean --embed-package @backstage-community/plugin-redhat-argocd-backend",
+    "export-dynamic:backend": "janus-cli package export-dynamic-plugin --no-install --embed-package @backstage-community/plugin-redhat-argocd-backend",
+    "export-dynamic:backend:postinstall": "cd dist-dynamic && yarn install --inline-builds",
     "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
   },
   "dependencies": {
@@ -53,19 +53,10 @@
     "typescript": "5.8.2"
   },
   "files": [
-    "dist"
+    "dist",
+    "dist-dynamic/*.*",
+    "dist-dynamic/dist/**"
   ],
-  "scalprum": {
-    "name": "rhtap-plugins.backstage-community-plugin-redhat-argocd-backend",
-    "exposedModules": {
-      "PluginRoot": "./src/index.ts"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/redhat-appstudio/rhtap-backstage-plugins",
-    "directory": "plugins/redhat-argocd-backend"
-  },
   "homepage": "https://red.ht/trusted",
   "bugs": "https://issues.redhat.com/browse/RHTAP",
   "author": "Red Hat",
