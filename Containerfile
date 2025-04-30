@@ -53,6 +53,7 @@ LABEL name="RHTAP backstage plugins" \
       version="1" \
       release="5" \
       description="Artifact with Backstage plugins for RHTAP" \
+      io.k8s.description="Artifact with Backstage plugins for RHTAP" \
       summary="Artifact with Backstage plugins for RHTAP" \
       url="https://github.com/redhat-appstudio/backstage-community-plugins" \
       distribution-scope="public"
