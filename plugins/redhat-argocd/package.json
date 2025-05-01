@@ -46,6 +46,7 @@
   "devDependencies": {
     "@backstage/cli": "^0.32.0",
     "@janus-idp/cli": "3.3.1",
+    "@types/react": "^17.0.0 || ^18.0.0",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-router-dom": "^6.0.0",

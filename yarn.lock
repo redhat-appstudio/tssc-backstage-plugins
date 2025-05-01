@@ -6795,9 +6795,11 @@ __metadata:
     "@janus-idp/cli": "npm:3.3.1"
     "@mui/icons-material": "npm:5.16.14"
     "@mui/material": "npm:5.16.14"
+    "@types/react": "npm:^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
-    react-router-dom: "npm:^6.0.0"
+    react-router: "npm:^6.20.0"
+    react-router-dom: "npm:^6.20.0"
     typescript: "npm:5.8.2"
   peerDependencies:
     "@gitbeaker/rest": ^42.2.0
@@ -6827,6 +6829,7 @@ __metadata:
     "@backstage/cli": "npm:^0.32.0"
     "@janus-idp/cli": "npm:3.3.1"
     "@mui/material": "npm:5.17.1"
+    "@types/react": "npm:^17.0.0 || ^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
     react-router-dom: "npm:^6.0.0"
@@ -6853,6 +6856,7 @@ __metadata:
     "@backstage/cli": "npm:^0.32.0"
     "@janus-idp/cli": "npm:3.3.1"
     "@mui/material": "npm:5.17.1"
+    "@types/react": "npm:^17.0.0 || ^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
     react-router-dom: "npm:^6.0.0"
@@ -6868,6 +6872,7 @@ __metadata:
     "@backstage/cli": "npm:^0.32.0"
     "@janus-idp/cli": "npm:3.3.1"
     "@mui/material": "npm:5.17.1"
+    "@types/react": "npm:^17.0.0 || ^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
     react-router-dom: "npm:^6.0.0"
@@ -9201,7 +9206,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^16.13.1 || ^17.0.0 || ^18.0.0":
+"@types/react@npm:^16.13.1 || ^17.0.0 || ^18.0.0, @types/react@npm:^17.0.0 || ^18.0.0, @types/react@npm:^18.0.0":
   version: 18.3.20
   resolution: "@types/react@npm:18.3.20"
   dependencies:
@@ -22852,7 +22857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.0.0":
+"react-router-dom@npm:^6.0.0, react-router-dom@npm:^6.20.0":
   version: 6.30.0
   resolution: "react-router-dom@npm:6.30.0"
   dependencies:
@@ -22865,7 +22870,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:6.30.0":
+"react-router@npm:6.30.0, react-router@npm:^6.20.0":
   version: 6.30.0
   resolution: "react-router@npm:6.30.0"
   dependencies:
