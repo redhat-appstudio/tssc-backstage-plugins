@@ -2554,9 +2554,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage-community/plugin-multi-source-security-viewer@npm:0.3.2":
-  version: 0.3.2
-  resolution: "@backstage-community/plugin-multi-source-security-viewer@npm:0.3.2"
+"@backstage-community/plugin-multi-source-security-viewer@npm:0.4.0":
+  version: 0.4.0
+  resolution: "@backstage-community/plugin-multi-source-security-viewer@npm:0.4.0"
   dependencies:
     "@aonic-ui/pipelines": "npm:^3.1.1"
     "@backstage-community/plugin-azure-devops": "npm:^0.13.0"
@@ -2587,7 +2587,7 @@ __metadata:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
-  checksum: 10c0/9d33119ba5655e98dba2ed44efb1911d713081ab5d12d53338880b2ed28b0f223f52899ddf478f12f99d3fe506e1b0680932895d2612b4b75d0f06c462f75900
+  checksum: 10c0/524b6b6bff5b8a17de67050a7115f4ce709b6602f4fcd77ddc58aecb4a94c6bd618f63177f0aaa67bd4b03c584d90e350982502dcfbe22d6906e0f4477999037
   languageName: node
   linkType: hard
 
@@ -6788,7 +6788,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@rhtap-plugins/backstage-community-plugin-multi-source-security-viewer@workspace:plugins/multi-source-security-viewer"
   dependencies:
-    "@backstage-community/plugin-multi-source-security-viewer": "npm:0.3.2"
+    "@backstage-community/plugin-multi-source-security-viewer": "npm:0.4.0"
     "@backstage/cli": "npm:^0.32.0"
     "@gitbeaker/rest": "npm:^42.2.0"
     "@immobiliarelabs/backstage-plugin-gitlab": "npm:^6.11.0"
