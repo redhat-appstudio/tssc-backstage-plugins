@@ -95,13 +95,13 @@ arches:
     name: lua-srpm-macros
     evr: 1-6.el9
     sourcerpm: lua-rpm-macros-1-6.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-devel-20.18.2-1.module+el9.5.0+22758+4ad2c198.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-devel-20.18.2-2.module+el9.5.0+22906+d1a288c7.x86_64.rpm
     repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 267039
-    checksum: sha256:0fad33240d0fe1d197b34834b0fe1041cf423968f613c474ea052f304dc64f71
+    size: 267162
+    checksum: sha256:952edf433d7b2327396f5325b9fbfdc55f53991ffcc04b6c95d6042048876164
     name: nodejs-devel
-    evr: 1:20.18.2-1.module+el9.5.0+22758+4ad2c198
-    sourcerpm: nodejs-20.18.2-1.module+el9.5.0+22758+4ad2c198.src.rpm
+    evr: 1:20.18.2-2.module+el9.5.0+22906+d1a288c7
+    sourcerpm: nodejs-20.18.2-2.module+el9.5.0+22906+d1a288c7.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-packaging-2021.06-4.module+el9.3.0+19518+63aad52d.noarch.rpm
     repoid: ubi-9-for-x86_64-appstream-rpms
     size: 23898
@@ -202,7 +202,7 @@ arches:
     sourcerpm: zip-3.0-35.el9.src.rpm
   source: []
   module_metadata:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/repodata/5e16fda42b643ffd6782541d4c5fe4bc733f5013e593a20600ab6351baac3ffc-modules.yaml.gz
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/repodata/7148f9365cece9e51679d79130e777cc258bcf1ebd28683c1dd22649373291c0-modules.yaml.gz
     repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 5920
-    checksum: sha256:5e16fda42b643ffd6782541d4c5fe4bc733f5013e593a20600ab6351baac3ffc
+    size: 5929
+    checksum: sha256:7148f9365cece9e51679d79130e777cc258bcf1ebd28683c1dd22649373291c0
