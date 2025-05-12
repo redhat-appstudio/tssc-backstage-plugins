@@ -23,8 +23,7 @@
   },
   "lint-staged": {
     "*.{js,ts,json}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "packageManager": "yarn@4.8.1",

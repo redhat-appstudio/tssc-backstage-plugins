@@ -3,8 +3,9 @@ name: CI
 on:
   push:
     branches: ["**"]
-  pull_request:
-    branches: ["**"]
+
+env:
+  YARN_ENABLE_IMMUTABLE_INSTALLS: false
 
 jobs:
   run-version-mismatch:
@@ -33,7 +34,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: yarn instal --immutable
+        run: yarn install
 
       - name: Run prettier
         run: yarn prettier
@@ -50,7 +51,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: yarn instal --immutable
+        run: yarn install --inline-builds
 
       - name: Run build frontend plugins
         run: yarn plugins:build:frontend
