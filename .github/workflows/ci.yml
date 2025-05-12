@@ -1,4 +1,4 @@
-name: CI - Verify version mismatch
+name: CI
 
 on:
   push:
@@ -33,10 +33,10 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn instal --immutable
 
-      - name: Run build frontend plugins
-        run: yarn exec prettier "*/**.{js,ts,json}" -c
+      - name: Run prettier
+        run: yarn prettier
 
   run-plugins-build:
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn instal --immutable
 
       - name: Run build frontend plugins
         run: yarn plugins:build:frontend
