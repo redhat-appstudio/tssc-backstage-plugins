@@ -1,35 +1,15 @@
 #!/usr/bin/env node
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
-
-// Find all package.json files recursively
-function findPackageJsonFiles(dir, ignoreDirs = ['node_modules', '.git']) {
-  let results = [];
-  const items = fs.readdirSync(dir);
-
-  for (const item of items) {
-    if (ignoreDirs.includes(item)) continue;
-
-    const itemPath = path.join(dir, item);
-    const stat = fs.statSync(itemPath);
-
-    if (stat.isDirectory()) {
-      results = results.concat(findPackageJsonFiles(itemPath, ignoreDirs));
-    } else if (stat.isFile() && item === 'package.json') {
-      results.push(itemPath);
-    }
-  }
-
-  return results;
-}
+const findPackageJsonFiles = require("./shared").findPackageJsonFiles;
+const fs = require("fs");
 
 // Transform a single package.json
 function transformPackageJson(inputJson) {
-  if (!inputJson.name || !inputJson.version || !inputJson.backstage) return null;
+  if (!inputJson.name || !inputJson.version || !inputJson.backstage)
+    return null;
 
-  const dynamicKey = `${inputJson.name.replace('@', '').replace('/', '-')}-dynamic`;
+  const dynamicKey = `${inputJson.name.replace("@", "").replace("/", "-")}-dynamic`;
 
   return {
     [dynamicKey]: {
@@ -41,20 +21,22 @@ function transformPackageJson(inputJson) {
       license: inputJson.license || null,
       author: inputJson.author || null,
       bugs: inputJson.bugs || null,
-      keywords: inputJson.keywords || []
-    }
+      keywords: inputJson.keywords || [],
+    },
   };
 }
 
 // Main function to process plugins directory
 function main() {
-  const pluginsDir = './plugins';
-  const outputFilePath = './temp.json';
+  const pluginsDir = "./plugins";
+  const outputFilePath = "./temp.json";
 
   try {
     // Find all package.json files in plugins dir
     const packageJsonFiles = findPackageJsonFiles(pluginsDir);
-    console.log(`Found ${packageJsonFiles.length} package.json files in ${pluginsDir}`);
+    console.log(
+      `Found ${packageJsonFiles.length} package.json files in ${pluginsDir}`,
+    );
 
     // Process each file and combine results
     const results = [];
@@ -62,7 +44,7 @@ function main() {
 
     for (const filePath of packageJsonFiles) {
       try {
-        const content = fs.readFileSync(filePath, 'utf8');
+        const content = fs.readFileSync(filePath, "utf8");
         const packageJson = JSON.parse(content);
         const transformedObject = transformPackageJson(packageJson);
 
@@ -77,15 +59,24 @@ function main() {
     }
 
     // Write the combined result
-    fs.writeFileSync(outputFilePath, JSON.stringify(results, null, null), 'utf8');
-    console.log(`Successfully processed ${processedCount} plugins and saved to ${outputFilePath}`);
+    fs.writeFileSync(
+      outputFilePath,
+      JSON.stringify(results, null, null),
+      "utf8",
+    );
+    console.log(
+      `Successfully processed ${processedCount} plugins and saved to ${outputFilePath}`,
+    );
 
     // Base64 encode the contents, print it.
     const jsonContent = fs.readFileSync(outputFilePath);
-    const hash = jsonContent.toString('base64');
+    const hash = jsonContent.toString("base64");
     // Delete temp json file
     fs.unlinkSync(outputFilePath);
-    fs.writeFileSync('annotations.txt', `io.backstage.dynamic-packages=${hash}`);
+    fs.writeFileSync(
+      "annotations.txt",
+      `io.backstage.dynamic-packages=${hash}`,
+    );
     // Output so it gets grabbed by next task.
     console.log(hash);
   } catch (err) {
