@@ -13,15 +13,25 @@
   "scripts": {
     "tsc": "turbo run tsc",
     "build": "turbo run build",
+    "format": "prettier \"**/*.{js,ts,json}\" --write",
+    "prettier": "prettier \"**/*.{js,ts,json}\" --check",
     "plugins:prepare": "rimraf dist-plugin && turbo run clean-build --filter='./plugins/**'",
     "plugins:build:frontend": "turbo run export-dynamic:frontend --filter='./plugins/**'",
     "plugins:build:backend": "turbo run export-dynamic:backend --filter='./plugins/**'",
     "plugins:build:backend:postinstall": "turbo run export-dynamic:backend:postinstall --filter='./plugins/**'",
     "plugins:package": "turbo run package-dynamic --filter='./plugins/**'"
   },
+  "lint-staged": {
+    "*.{js,ts,json}": [
+      "prettier --write"
+    ]
+  },
   "packageManager": "yarn@4.8.1",
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.0.0",
     "node-gyp": "^11.2.0",
+    "prettier": "^3.5.3",
     "react": "16.13.1 || ^17.0.0 || ^18.0.0",
     "rimraf": "6.0.1",
     "turbo": "^2.4.4",
