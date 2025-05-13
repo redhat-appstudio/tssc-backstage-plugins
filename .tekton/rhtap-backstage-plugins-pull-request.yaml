@@ -113,6 +113,15 @@ spec:
       - description: ""
         name: IMAGE_URL
         value: $(tasks.build-image-index.results.IMAGE_URL)
+      - description: ""
+        name: IMAGE_DIGEST
+        value: $(tasks.build-image-index.results.IMAGE_DIGEST)
+      - description: ""
+        name: CHAINS-GIT_URL
+        value: $(tasks.clone-repository.results.url)
+      - description: ""
+        name: CHAINS-GIT_COMMIT
+        value: $(tasks.clone-repository.results.commit)
       taskRef:
         params:
         - name: name
@@ -122,76 +131,6 @@ spec:
         - name: kind
           value: task
         resolver: bundles
-    params:
-    - description: Source Repository URL
-      name: git-url
-      type: string
-    - default: ""
-      description: Revision of the Source Repository
-      name: revision
-      type: string
-    - description: Fully Qualified Output Image
-      name: output-image
-      type: string
-    - default: .
-      description: Path to the source code of an application's component from where
-        to build image.
-      name: path-context
-      type: string
-    - default: Dockerfile
-      description: Path to the Dockerfile inside the context specified by parameter
-        path-context
-      name: dockerfile
-      type: string
-    - default: "false"
-      description: Force rebuild image
-      name: rebuild
-      type: string
-    - default: "false"
-      description: Skip checks against built image
-      name: skip-checks
-      type: string
-    - default: "true"
-      description: Execute the build with network isolation
-      name: hermetic
-      type: string
-    - default: '[{"type": "yarn", "path": "."},{"type": "rpm", "path": "./.cachi2/rpms/"}]'
-      description: Build dependencies to be prefetched by Cachi2
-      name: prefetch-input
-      type: string
-    - default: ""
-      description: Image tag expiration time, time values could be something like
-        1h, 2d, 3w for hours, days, and weeks, respectively.
-      name: image-expires-after
-    - default: "true"
-      description: Build a source image.
-      name: build-source-image
-      type: string
-    - default: "false"
-      description: Add built image into an OCI image index
-      name: build-image-index
-      type: string
-    - default: []
-      description: Array of --build-arg values ("arg=value" strings) for buildah
-      name: build-args
-      type: array
-    - default: ""
-      description: Path to a file with build arguments for buildah, see https://www.mankier.com/1/buildah-build#--build-arg-file
-      name: build-args-file
-      type: string
-    results:
-    - description: ""
-      name: IMAGE_URL
-      value: $(tasks.build-image-index.results.IMAGE_URL)
-    - description: ""
-      name: IMAGE_DIGEST
-      value: $(tasks.build-image-index.results.IMAGE_DIGEST)
-    - description: ""
-      name: CHAINS-GIT_URL
-      value: $(tasks.clone-repository.results.url)
-    - description: ""
-      name: CHAINS-GIT_COMMIT
-      value: $(tasks.clone-repository.results.commit)
     tasks:
     - name: init
       params:
@@ -661,11 +600,6 @@ spec:
         operator: in
         values:
         - "false"
-    workspaces:
-    - name: git-auth
-      optional: true
-    - name: netrc
-      optional: true
   taskRunSpecs:
   - pipelineTaskName: build-container
     stepSpecs:
