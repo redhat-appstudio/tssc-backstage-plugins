@@ -25,6 +25,39 @@ function findPackageJsonFiles(dir, ignoreDirs = ["node_modules", ".git"]) {
   return results;
 }
 
+function extractDependencyFromPackageName(name) {
+  return name.replace(/@rhtap-plugins|backstage-community-/g, (match) => {
+    if (match === "@rhtap-plugins") return "@backstage-community";
+    if (match === "backstage-community-") return "";
+  });
+}
+
+function updateDependencies(pkg, upstreamDependency, latest) {
+  const dependencies = Object.keys(pkg?.dependencies || {}).reduce(
+    (acc, key) => {
+      acc[key] =
+        key === upstreamDependency ? latest.version : pkg.dependencies[key];
+      return acc;
+    },
+    {},
+  );
+
+  const devDependencies = Object.keys(pkg?.devDependencies || {}).reduce(
+    (acc, key) => {
+      acc[key] =
+        key in latest.devDependencies
+          ? latest.devDependencies[key]
+          : pkg.devDependencies[key];
+      return acc;
+    },
+    {},
+  );
+
+  return { dependencies, devDependencies };
+}
+
 module.exports = {
   findPackageJsonFiles,
+  extractDependencyFromPackageName,
+  updateDependencies,
 };

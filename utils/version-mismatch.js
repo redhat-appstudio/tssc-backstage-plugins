@@ -1,18 +1,14 @@
 #!/usr/bin/env node
 "use strict";
 
-const findPackageJsonFiles = require("./shared").findPackageJsonFiles;
 const fs = require("fs");
+const {
+  extractDependencyFromPackageName,
+  findPackageJsonFiles,
+} = require("./shared");
 
 function verifyVersions(pkg) {
-  const name = pkg.name;
-  const dependency = name.replace(
-    /@rhtap-plugins|backstage-community-/g,
-    (match) => {
-      if (match === "@rhtap-plugins") return "@backstage-community";
-      if (match === "backstage-community-") return "";
-    },
-  );
+  const dependency = extractDependencyFromPackageName(pkg.name);
 
   if (pkg.dependencies[dependency] !== pkg.version) {
     throw new Error(
