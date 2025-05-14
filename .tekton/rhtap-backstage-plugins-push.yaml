@@ -615,7 +615,8 @@ spec:
         optional: true
       - name: netrc
         optional: true
-  taskRunTemplate: {}
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-rhtap-backstage-plugins
   workspaces:
     - name: git-auth
       secret:
