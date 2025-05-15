@@ -31,6 +31,14 @@ spec:
     - name: dockerfile
       value: ./Containerfile
   taskRunSpecs:
+    - pipelineTaskName: prefetch-dependencies
+      stepSpecs:
+        - name: prefetch-dependencies
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
     - pipelineTaskName: build-container
       stepSpecs:
         - name: build
