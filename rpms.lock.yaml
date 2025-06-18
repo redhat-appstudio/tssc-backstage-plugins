@@ -25,13 +25,6 @@ arches:
     name: brotli-devel
     evr: 1.0.9-7.el9_5
     sourcerpm: brotli-1.0.9-7.el9_5.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/c/cpp-11.5.0-5.el9_5.x86_64.rpm
-    repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 11229073
-    checksum: sha256:b5567c690d46d4f5a2cb13be6a4f962dbe8cc7e821b9d3baa09a4f10c59014d9
-    name: cpp
-    evr: 11.5.0-5.el9_5
-    sourcerpm: gcc-11.5.0-5.el9_5.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/d/dwz-0.14-3.el9.x86_64.rpm
     repoid: ubi-9-for-x86_64-appstream-rpms
     size: 133177
@@ -53,20 +46,6 @@ arches:
     name: fonts-srpm-macros
     evr: 1:2.0.5-7.el9.1
     sourcerpm: fonts-rpm-macros-2.0.5-7.el9.1.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/g/gcc-11.5.0-5.el9_5.x86_64.rpm
-    repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 34006000
-    checksum: sha256:03c99bc1021dbe54dd93120ed6b5249bbb02dbd5da9e0dc5d8c4a21d674fb1fd
-    name: gcc
-    evr: 11.5.0-5.el9_5
-    sourcerpm: gcc-11.5.0-5.el9_5.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/g/gcc-c++-11.5.0-5.el9_5.x86_64.rpm
-    repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 13479598
-    checksum: sha256:b8392274e302d665bc132aee4ed023f8a777d9c446531679ede18150d7867189
-    name: gcc-c++
-    evr: 11.5.0-5.el9_5
-    sourcerpm: gcc-11.5.0-5.el9_5.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/g/gcc-plugin-annobin-11.5.0-5.el9_5.x86_64.rpm
     repoid: ubi-9-for-x86_64-appstream-rpms
     size: 42533
@@ -102,13 +81,6 @@ arches:
     name: kernel-srpm-macros
     evr: 1.0-13.el9
     sourcerpm: kernel-srpm-macros-1.0-13.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/l/libstdc++-devel-11.5.0-5.el9_5.x86_64.rpm
-    repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 2531717
-    checksum: sha256:84695eeeb1daa8ff74baf7efd9fc57fb136bec7e8a2ca56c105be6d83ec22d07
-    name: libstdc++-devel
-    evr: 11.5.0-5.el9_5
-    sourcerpm: gcc-11.5.0-5.el9_5.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/l/llvm-libs-19.1.7-2.el9.x86_64.rpm
     repoid: ubi-9-for-x86_64-appstream-rpms
     size: 30399454
@@ -123,48 +95,20 @@ arches:
     name: lua-srpm-macros
     evr: 1-6.el9
     sourcerpm: lua-rpm-macros-1-6.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-20.19.1-1.module+el9.6.0+23053+4195b0b2.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-devel-20.19.2-1.module+el9.6.0+23146+be9976bd.x86_64.rpm
     repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 14749591
-    checksum: sha256:86b08b8e815860b1fbd6c87763f09f65cd4f15b690a6c62c02969c5964d82282
-    name: nodejs
-    evr: 1:20.19.1-1.module+el9.6.0+23053+4195b0b2
-    sourcerpm: nodejs-20.19.1-1.module+el9.6.0+23053+4195b0b2.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-devel-20.19.1-1.module+el9.6.0+23053+4195b0b2.x86_64.rpm
-    repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 262908
-    checksum: sha256:ba27705735e79971b830f65258e7e07b3d1f48d15cc3880bdc2a49f22d9c3974
+    size: 263103
+    checksum: sha256:8ead3b6bd36ff38e6aa89aac3962b8257dcbadcc11a277269e695993bea4963d
     name: nodejs-devel
-    evr: 1:20.19.1-1.module+el9.6.0+23053+4195b0b2
-    sourcerpm: nodejs-20.19.1-1.module+el9.6.0+23053+4195b0b2.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-docs-20.19.1-1.module+el9.6.0+23053+4195b0b2.noarch.rpm
+    evr: 1:20.19.2-1.module+el9.6.0+23146+be9976bd
+    sourcerpm: nodejs-20.19.2-1.module+el9.6.0+23146+be9976bd.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-packaging-2021.06-4.module+el9.6.0+23146+be9976bd.noarch.rpm
     repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 8999753
-    checksum: sha256:592cd15c0b449728da64dc7bbbeab4e446bf3abaebb4f454c33b61f8d76bb156
-    name: nodejs-docs
-    evr: 1:20.19.1-1.module+el9.6.0+23053+4195b0b2
-    sourcerpm: nodejs-20.19.1-1.module+el9.6.0+23053+4195b0b2.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-full-i18n-20.19.1-1.module+el9.6.0+23053+4195b0b2.x86_64.rpm
-    repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 9011567
-    checksum: sha256:946e71c295282694ceb41a8955043496d40ab4b8bc5d66699437a526b1650ea9
-    name: nodejs-full-i18n
-    evr: 1:20.19.1-1.module+el9.6.0+23053+4195b0b2
-    sourcerpm: nodejs-20.19.1-1.module+el9.6.0+23053+4195b0b2.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/nodejs-packaging-2021.06-4.module+el9.3.0+19518+63aad52d.noarch.rpm
-    repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 23898
-    checksum: sha256:810088ee03562362c2cb87651afebc2ac7828747678195922304fe1c4000dd97
+    size: 21622
+    checksum: sha256:462e0fe02f348af6a1bb7fb1ea5313968b565e01323681011fbfb5e93c2a3aae
     name: nodejs-packaging
-    evr: 2021.06-4.module+el9.3.0+19518+63aad52d
-    sourcerpm: nodejs-packaging-2021.06-4.module+el9.3.0+19518+63aad52d.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/n/npm-10.8.2-1.20.19.1.1.module+el9.6.0+23053+4195b0b2.x86_64.rpm
-    repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 2433655
-    checksum: sha256:4fdf0ff8b8d24b72eecea8b29da6d6c78bfdc222f90daeb35e9ed75052cad994
-    name: npm
-    evr: 1:10.8.2-1.20.19.1.1.module+el9.6.0+23053+4195b0b2
-    sourcerpm: nodejs-20.19.1-1.module+el9.6.0+23053+4195b0b2.src.rpm
+    evr: 2021.06-4.module+el9.6.0+23146+be9976bd
+    sourcerpm: nodejs-packaging-2021.06-4.module+el9.6.0+23146+be9976bd.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/o/ocaml-srpm-macros-6-6.el9.noarch.rpm
     repoid: ubi-9-for-x86_64-appstream-rpms
     size: 9270
@@ -242,34 +186,13 @@ arches:
     name: file
     evr: 5.39-16.el9
     sourcerpm: file-5.39-16.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/g/glibc-gconv-extra-2.34-168.el9_6.14.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/g/glibc-gconv-extra-2.34-168.el9_6.19.x86_64.rpm
     repoid: ubi-9-for-x86_64-baseos-rpms
-    size: 1753645
-    checksum: sha256:df6ded7d6c44fb4b23e9d11cf63b8b81f12f1edc08f5a19f20c1c059d3cf8649
+    size: 1754220
+    checksum: sha256:58655a175ca0441113749257ac099d6e5ed6097469ad3c5e6df530bc504570b4
     name: glibc-gconv-extra
-    evr: 2.34-168.el9_6.14
-    sourcerpm: glibc-2.34-168.el9_6.14.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/l/libgcc-11.5.0-5.el9_5.x86_64.rpm
-    repoid: ubi-9-for-x86_64-baseos-rpms
-    size: 89621
-    checksum: sha256:6f7bc4ed734b01d36f9dba66f34f610f2f39e5280588814a666b4d4be2dd8807
-    name: libgcc
-    evr: 11.5.0-5.el9_5
-    sourcerpm: gcc-11.5.0-5.el9_5.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/l/libgomp-11.5.0-5.el9_5.x86_64.rpm
-    repoid: ubi-9-for-x86_64-baseos-rpms
-    size: 269396
-    checksum: sha256:da7af36960df4b59178f4d7c42353d48c53fbe231e7e62d734a4319748f897a9
-    name: libgomp
-    evr: 11.5.0-5.el9_5
-    sourcerpm: gcc-11.5.0-5.el9_5.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/l/libstdc++-11.5.0-5.el9_5.x86_64.rpm
-    repoid: ubi-9-for-x86_64-baseos-rpms
-    size: 759582
-    checksum: sha256:bd344d5654cc4385fc5480249a873a418bcdee6ba8a257012edc3bc255c63ab0
-    name: libstdc++
-    evr: 11.5.0-5.el9_5
-    sourcerpm: gcc-11.5.0-5.el9_5.src.rpm
+    evr: 2.34-168.el9_6.19
+    sourcerpm: glibc-2.34-168.el9_6.19.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/z/zip-3.0-35.el9.x86_64.rpm
     repoid: ubi-9-for-x86_64-baseos-rpms
     size: 276200
@@ -279,7 +202,7 @@ arches:
     sourcerpm: zip-3.0-35.el9.src.rpm
   source: []
   module_metadata:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/repodata/1a0c4c8f94a1b0b78ac66ff0ac4392ea7ed302cbdcd6c417f6518a39b1e674a9-modules.yaml.gz
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/repodata/a4f0e8f2ea6c21dec264a8d8f005b457174f6e203359b310f9a7b00eae99569f-modules.yaml.gz
     repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 7928
-    checksum: sha256:1a0c4c8f94a1b0b78ac66ff0ac4392ea7ed302cbdcd6c417f6518a39b1e674a9
+    size: 7942
+    checksum: sha256:a4f0e8f2ea6c21dec264a8d8f005b457174f6e203359b310f9a7b00eae99569f
