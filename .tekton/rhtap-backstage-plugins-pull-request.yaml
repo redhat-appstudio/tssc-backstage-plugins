@@ -242,6 +242,8 @@ spec:
               node ./utils/generate-annotations.js
           - name: SOURCE_ARTIFACT
             value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+          - name: HERMETIC
+            value: $(params.hermetic)
         runAfter:
           - prefetch-dependencies
         taskRef:
@@ -280,6 +282,9 @@ spec:
             value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
           - name: ANNOTATIONS_FILE
             value: "annotations.txt"
+          - name: ADDITIONAL_BASE_IMAGES
+            value:
+              - $(tasks.generate-annotations.results.SCRIPT_RUNNER_IMAGE_REFERENCE)
         runAfter:
           - generate-annotations
         taskRef:
