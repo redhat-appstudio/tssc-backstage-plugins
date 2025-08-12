@@ -179,13 +179,13 @@ arches:
     name: file
     evr: 5.39-16.el9
     sourcerpm: file-5.39-16.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/g/glibc-gconv-extra-2.34-168.el9_6.20.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/g/glibc-gconv-extra-2.34-168.el9_6.23.x86_64.rpm
     repoid: ubi-9-for-x86_64-baseos-rpms
-    size: 1754285
-    checksum: sha256:b09fc8f9f307e0cff6606718db43356e08880cc50019ee60a5d6ac1257ce78b9
+    size: 1753998
+    checksum: sha256:065f2e745d62034fa3f72cb138ba599338c491921d5c0a9ad4900725721f0507
     name: glibc-gconv-extra
-    evr: 2.34-168.el9_6.20
-    sourcerpm: glibc-2.34-168.el9_6.20.src.rpm
+    evr: 2.34-168.el9_6.23
+    sourcerpm: glibc-2.34-168.el9_6.23.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/j/jq-1.6-17.el9_6.2.x86_64.rpm
     repoid: ubi-9-for-x86_64-baseos-rpms
     size: 191681
@@ -202,7 +202,7 @@ arches:
     sourcerpm: zip-3.0-35.el9.src.rpm
   source: []
   module_metadata:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/repodata/28c68f9be1a205811f319c23b227610f2512fb7f89aa42c91d142c52086172bb-modules.yaml.gz
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/repodata/bd300a95d85f14303a423898a25f9e8658ab26c2f5e415f64d33af13741d6228-modules.yaml.gz
     repoid: ubi-9-for-x86_64-appstream-rpms
-    size: 7910
-    checksum: sha256:28c68f9be1a205811f319c23b227610f2512fb7f89aa42c91d142c52086172bb
+    size: 7922
+    checksum: sha256:bd300a95d85f14303a423898a25f9e8658ab26c2f5e415f64d33af13741d6228
