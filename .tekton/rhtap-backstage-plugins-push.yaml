@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/redhat-appstudio/rhtap-backstage-plugins?rev={{revision}}
+    build.appstudio.openshift.io/repo: https://github.com/redhat-appstudio/tssc-backstage-plugins?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: "{{revision}}"
     build.appstudio.redhat.com/target_branch: "{{target_branch}}"
     pipelinesascode.tekton.dev/cancel-in-progress: "false"
@@ -12,10 +12,10 @@ metadata:
       == "main"
   creationTimestamp: null
   labels:
-    appstudio.openshift.io/application: rhtap-backstage-plugins
-    appstudio.openshift.io/component: rhtap-backstage-plugins
+    appstudio.openshift.io/application: tssc-backstage-plugins
+    appstudio.openshift.io/component: tssc-backstage-plugins
     pipelines.appstudio.openshift.io/type: build
-  name: rhtap-backstage-plugins-on-push
+  name: tssc-backstage-plugins-on-push
   namespace: rhtap-shared-team-tenant
 spec:
   params:
@@ -24,7 +24,7 @@ spec:
     - name: revision
       value: "{{revision}}"
     - name: output-image
-      value: quay.io/redhat-user-workloads/rhtap-shared-team-tenant/rhtap-backstage-plugins:{{revision}}
+      value: quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins:{{revision}}
     - name: dockerfile
       value: ./Containerfile
   taskRunSpecs:
@@ -635,7 +635,7 @@ spec:
       - name: netrc
         optional: true
   taskRunTemplate:
-    serviceAccountName: build-pipeline-rhtap-backstage-plugins
+    serviceAccountName: build-pipeline-tssc-backstage-plugins
   workspaces:
     - name: git-auth
       secret:
