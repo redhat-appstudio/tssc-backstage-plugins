@@ -24,7 +24,7 @@ spec:
     - name: revision
       value: "{{revision}}"
     - name: output-image
-      value: quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins:{{revision}}
+      value: quay.io/redhat-user-workloads/rhtap-shared-team-tenant/rhtap-shared-team-tenant-tenant/tssc-backstage-plugins/tssc-backstage-plugins:{{revision}}
     - name: dockerfile
       value: ./Containerfile
   taskRunSpecs:
