@@ -9,13 +9,13 @@ metadata:
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression:
       event == "push" && target_branch
-      == "main"
+      == "release-1.7"
   creationTimestamp: null
   labels:
-    appstudio.openshift.io/application: tssc-backstage-plugins
-    appstudio.openshift.io/component: tssc-backstage-plugins
+    appstudio.openshift.io/application: tssc-backstage-plugins-1-7
+    appstudio.openshift.io/component: tssc-backstage-plugins-1-7
     pipelines.appstudio.openshift.io/type: build
-  name: tssc-backstage-plugins-on-push
+  name: tssc-backstage-plugins-1-7-on-push
   namespace: rhtap-shared-team-tenant
 spec:
   params:
@@ -24,7 +24,7 @@ spec:
     - name: revision
       value: "{{revision}}"
     - name: output-image
-      value: quay.io/redhat-user-workloads/rhtap-shared-team-tenant/rhtap-shared-team-tenant-tenant/tssc-backstage-plugins/tssc-backstage-plugins:{{revision}}
+      value: quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins-1-7:{{revision}}
     - name: dockerfile
       value: ./Containerfile
     - name: hermetic
@@ -639,7 +639,7 @@ spec:
       - name: netrc
         optional: true
   taskRunTemplate:
-    serviceAccountName: build-pipeline-tssc-backstage-plugins
+    serviceAccountName: build-pipeline-tssc-backstage-plugins-1-7
   workspaces:
     - name: git-auth
       secret:
