@@ -27,6 +27,10 @@ spec:
       value: quay.io/redhat-user-workloads/rhtap-shared-team-tenant/rhtap-shared-team-tenant-tenant/tssc-backstage-plugins/tssc-backstage-plugins:{{revision}}
     - name: dockerfile
       value: ./Containerfile
+    - name: hermetic
+      value: "true"
+    - name: prefetch-input
+      value: '[{"type": "yarn", "path": "."},{"type": "rpm", "path": "."}]'
   taskRunSpecs:
     - pipelineTaskName: prefetch-dependencies
       stepSpecs:
