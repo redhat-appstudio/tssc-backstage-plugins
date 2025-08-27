@@ -47,15 +47,15 @@ RUN mkdir -p $PLUGINS_OUTPUT/licenses && \
 # Create artifact
 FROM scratch
 
-LABEL name="RHTAP backstage plugins" \
-      com.redhat.component="rhtap" \
+LABEL name="TSSC backstage plugins" \
+      com.redhat.component="rhads" \
       vendor="Red Hat, Inc." \
       version="1" \
-      release="5" \
-      description="Artifact with Backstage plugins for RHTAP" \
-      io.k8s.description="Artifact with Backstage plugins for RHTAP" \
-      summary="Artifact with Backstage plugins for RHTAP" \
-      url="https://github.com/redhat-appstudio/backstage-community-plugins" \
+      release="7" \
+      description="Artifact with Backstage plugins for TSSC" \
+      io.k8s.description="Artifact with Backstage plugins for TSSC" \
+      summary="Artifact with Backstage plugins for TSSC" \
+      url="https://github.com/redhat-appstudio/tssc-backstage-plugins" \
       distribution-scope="public"
 
 COPY --chown=1001:1001 --from=builder /plugin-output /

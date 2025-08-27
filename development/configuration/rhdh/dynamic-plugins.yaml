@@ -4,7 +4,7 @@
 #  - ../local-plugins/dynamic-plugins.yaml
 
 plugins:
-  # TODO - change 'package' values for each plugin to the OCI artifact for latest RHTAP plugins
+  # TODO - change 'package' values for each plugin to the OCI artifact for latest TSSC plugins
 
   # TEKTON + K8s
   - package: ./dynamic-plugins/dist/backstage-community-plugin-tekton
@@ -42,12 +42,12 @@ plugins:
                   if:
                     anyOf:
                       - isQuayAvailable
-  
+
   - package: oci://quay.io/redhat-user-workloads/rhtap-shared-team-tenant/backstage-community-plugins:on-pr-364724f23c7ad589622ab2286a1e6a9d6d59d43b!backstage-community-plugin-quay-backend-dynamic
     disabled: false
 
   # ArgoCD
-  
+
   - package: oci://quay.io/redhat-user-workloads/rhtap-shared-team-tenant/backstage-community-plugins:on-pr-364724f23c7ad589622ab2286a1e6a9d6d59d43b!backstage-community-plugin-redhat-argocd
     disabled: false
     pluginConfig:
@@ -71,7 +71,7 @@ plugins:
                   if:
                     anyOf:
                       - isArgocdConfigured
-  
+
   - package: oci://quay.io/redhat-user-workloads/rhtap-shared-team-tenant/backstage-community-plugins:on-pr-364724f23c7ad589622ab2286a1e6a9d6d59d43b!backstage-community-plugin-redhat-argocd-backend-dynamic
     disabled: false
 
