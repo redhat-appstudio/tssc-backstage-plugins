@@ -1,5 +1,5 @@
 {
-  "name": "@rhtap-plugins/backstage-community-plugin-quay",
+  "name": "@tssc-plugins/backstage-community-plugin-quay",
   "version": "1.23.2",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -14,7 +14,7 @@
     "supported-versions": "1.38.1",
     "pluginId": "backstage-community-plugin-quay",
     "pluginPackages": [
-      "@rhtap-plugins/backstage-community-plugin-quay"
+      "@tssc-plugins/backstage-community-plugin-quay"
     ]
   },
   "sideEffects": false,
@@ -46,14 +46,14 @@
     "dist-scalprum"
   ],
   "scalprum": {
-    "name": "rhtap-plugins.backstage-community-plugin-quay",
+    "name": "tssc-plugins.backstage-community-plugin-quay",
     "exposedModules": {
       "PluginRoot": "./src/index.ts"
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/redhat-appstudio/rhtap-backstage-plugins",
+    "url": "https://github.com/redhat-appstudio/tssc-backstage-plugins",
     "directory": "plugins/quay"
   },
   "author": "Red Hat",

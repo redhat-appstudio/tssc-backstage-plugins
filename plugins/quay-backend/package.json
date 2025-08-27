@@ -1,5 +1,5 @@
 {
-  "name": "@rhtap-plugins/backstage-community-plugin-quay-backend",
+  "name": "@tssc-plugins/backstage-community-plugin-quay-backend",
   "version": "1.5.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/redhat-appstudio/rhtap-backstage-plugins",
+    "url": "https://github.com/redhat-appstudio/tssc-backstage-plugins",
     "directory": "plugins/quay-backend"
   },
   "backstage": {
@@ -19,7 +19,7 @@
     "supported-versions": "1.38.1",
     "pluginId": "backstage-community-plugin-quay-backend",
     "pluginPackages": [
-      "@rhtap-plugins/backstage-community-plugin-quay-backend"
+      "@tssc-plugins/backstage-community-plugin-quay-backend"
     ]
   },
   "exports": {
