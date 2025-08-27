@@ -1,7 +1,8 @@
-# RHTAP
+# TSSC
 
-## What is RHTAP?
-**Red Hat Trusted Application Pipeline** is a managed service that helps developers build secure cloud applications quickly. It lets you:
+## What is TSSC?
+
+**Red Hat Advanced Developer Suite - software supply chain** is a managed service that helps developers build secure cloud applications quickly. It lets you:
 
 - Set up applications in seconds using Red Hat templates
 - Create container images that can be deployed to Kubernetes environments
@@ -10,6 +11,6 @@
 - Customize your build process while keeping security tight
 - Automate everything through GitHub, so new code updates trigger automatic builds and security checks
 
-The big advantage is that it combines security, automation, and simplicity. It meets high security standards ([SLSA](https://slsa.dev/spec/v1.0/about) level 3) without developers needing to set up complex security systems themselves. 
+The big advantage is that it combines security, automation, and simplicity. It meets high security standards ([SLSA](https://slsa.dev/spec/v1.0/about) level 3) without developers needing to set up complex security systems themselves.
 
 The entire pipeline travels with your code as configuration, making it easier to maintain.
