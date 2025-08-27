@@ -7681,102 +7681,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rhtap-plugins/backstage-community-plugin-multi-source-security-viewer@workspace:plugins/multi-source-security-viewer":
-  version: 0.0.0-use.local
-  resolution: "@rhtap-plugins/backstage-community-plugin-multi-source-security-viewer@workspace:plugins/multi-source-security-viewer"
-  dependencies:
-    "@backstage-community/plugin-multi-source-security-viewer": "npm:0.6.1"
-    "@backstage/cli": "npm:^0.32.1"
-    "@gitbeaker/rest": "npm:^42.2.0"
-    "@immobiliarelabs/backstage-plugin-gitlab": "npm:^6.11.0"
-    "@janus-idp/cli": "npm:3.3.1"
-    "@mui/icons-material": "npm:5.16.14"
-    "@mui/material": "npm:5.16.14"
-    "@types/react": "npm:^18.0.0"
-    react: "npm:^17.0.0 || ^18.0.0"
-    react-dom: "npm:^17.0.0 || ^18.0.0"
-    react-router: "npm:^6.20.0"
-    react-router-dom: "npm:^6.20.0"
-    typescript: "npm:5.8.2"
-  peerDependencies:
-    "@gitbeaker/rest": ^42.2.0
-    "@janus-idp/shared-react": ^2.17.0
-    react: ^17.0.0 || ^18.0.0
-    react-dom: ^17.0.0 || ^18.0.0
-    react-router-dom: ^6.0.0
-  languageName: unknown
-  linkType: soft
-
-"@rhtap-plugins/backstage-community-plugin-quay-backend@workspace:plugins/quay-backend":
-  version: 0.0.0-use.local
-  resolution: "@rhtap-plugins/backstage-community-plugin-quay-backend@workspace:plugins/quay-backend"
-  dependencies:
-    "@backstage-community/plugin-quay-backend": "npm:1.5.0"
-    "@backstage/cli": "npm:^0.33.1"
-    "@janus-idp/cli": "npm:3.3.1"
-    typescript: "npm:5.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@rhtap-plugins/backstage-community-plugin-quay@workspace:plugins/quay":
-  version: 0.0.0-use.local
-  resolution: "@rhtap-plugins/backstage-community-plugin-quay@workspace:plugins/quay"
-  dependencies:
-    "@backstage-community/plugin-quay": "npm:1.23.2"
-    "@backstage/cli": "npm:^0.33.1"
-    "@janus-idp/cli": "npm:3.3.1"
-    "@mui/material": "npm:5.17.1"
-    "@types/react": "npm:^18.2.58"
-    react: "npm:^17.0.0 || ^18.0.0"
-    react-dom: "npm:^17.0.0 || ^18.0.0"
-    react-router-dom: "npm:^6.0.0"
-    typescript: "npm:5.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@rhtap-plugins/backstage-community-plugin-redhat-argocd-backend@workspace:plugins/redhat-argocd-backend":
-  version: 0.0.0-use.local
-  resolution: "@rhtap-plugins/backstage-community-plugin-redhat-argocd-backend@workspace:plugins/redhat-argocd-backend"
-  dependencies:
-    "@backstage-community/plugin-redhat-argocd-backend": "npm:0.9.0"
-    "@backstage/cli": "npm:^0.33.1"
-    "@janus-idp/cli": "npm:3.3.1"
-    typescript: "npm:5.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@rhtap-plugins/backstage-community-plugin-redhat-argocd@workspace:plugins/redhat-argocd":
-  version: 0.0.0-use.local
-  resolution: "@rhtap-plugins/backstage-community-plugin-redhat-argocd@workspace:plugins/redhat-argocd"
-  dependencies:
-    "@backstage-community/plugin-redhat-argocd": "npm:1.22.2"
-    "@backstage/cli": "npm:^0.33.1"
-    "@janus-idp/cli": "npm:3.3.1"
-    "@mui/material": "npm:5.17.1"
-    "@types/react": "npm:^17.0.0 || ^18.0.0"
-    react: "npm:^17.0.0 || ^18.0.0"
-    react-dom: "npm:^18"
-    react-router-dom: "npm:^6.3.0"
-    typescript: "npm:5.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@rhtap-plugins/backstage-community-plugin-tekton@workspace:plugins/tekton":
-  version: 0.0.0-use.local
-  resolution: "@rhtap-plugins/backstage-community-plugin-tekton@workspace:plugins/tekton"
-  dependencies:
-    "@backstage-community/plugin-tekton": "npm:3.27.3"
-    "@backstage/cli": "npm:^0.33.1"
-    "@janus-idp/cli": "npm:3.3.1"
-    "@mui/material": "npm:5.17.1"
-    "@types/react": "npm:^17.0.0 || ^18.0.0"
-    react: "npm:^17.0.0 || ^18.0.0"
-    react-dom: "npm:^17.0.0 || ^18.0.0"
-    react-router-dom: "npm:^6.0.0"
-    typescript: "npm:5.8.2"
-  languageName: unknown
-  linkType: soft
-
 "@rollup/plugin-commonjs@npm:^25.0.4":
   version: 25.0.8
   resolution: "@rollup/plugin-commonjs@npm:25.0.8"
@@ -9265,6 +9169,102 @@ __metadata:
   checksum: 10c0/05f8f2734e266fb1839eb1d57290df1664fe2aa3b0fdd685a9035806daa635f7519bf6d5d9b33f6e69dd545b8c46bd6e2b5c79acb2b1f146e885f7f11a42a5bb
   languageName: node
   linkType: hard
+
+"@tssc-plugins/backstage-community-plugin-multi-source-security-viewer@workspace:plugins/multi-source-security-viewer":
+  version: 0.0.0-use.local
+  resolution: "@tssc-plugins/backstage-community-plugin-multi-source-security-viewer@workspace:plugins/multi-source-security-viewer"
+  dependencies:
+    "@backstage-community/plugin-multi-source-security-viewer": "npm:0.6.1"
+    "@backstage/cli": "npm:^0.32.1"
+    "@gitbeaker/rest": "npm:^42.2.0"
+    "@immobiliarelabs/backstage-plugin-gitlab": "npm:^6.11.0"
+    "@janus-idp/cli": "npm:3.3.1"
+    "@mui/icons-material": "npm:5.16.14"
+    "@mui/material": "npm:5.16.14"
+    "@types/react": "npm:^18.0.0"
+    react: "npm:^17.0.0 || ^18.0.0"
+    react-dom: "npm:^17.0.0 || ^18.0.0"
+    react-router: "npm:^6.20.0"
+    react-router-dom: "npm:^6.20.0"
+    typescript: "npm:5.8.2"
+  peerDependencies:
+    "@gitbeaker/rest": ^42.2.0
+    "@janus-idp/shared-react": ^2.17.0
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+    react-router-dom: ^6.0.0
+  languageName: unknown
+  linkType: soft
+
+"@tssc-plugins/backstage-community-plugin-quay-backend@workspace:plugins/quay-backend":
+  version: 0.0.0-use.local
+  resolution: "@tssc-plugins/backstage-community-plugin-quay-backend@workspace:plugins/quay-backend"
+  dependencies:
+    "@backstage-community/plugin-quay-backend": "npm:1.5.0"
+    "@backstage/cli": "npm:^0.33.1"
+    "@janus-idp/cli": "npm:3.3.1"
+    typescript: "npm:5.8.2"
+  languageName: unknown
+  linkType: soft
+
+"@tssc-plugins/backstage-community-plugin-quay@workspace:plugins/quay":
+  version: 0.0.0-use.local
+  resolution: "@tssc-plugins/backstage-community-plugin-quay@workspace:plugins/quay"
+  dependencies:
+    "@backstage-community/plugin-quay": "npm:1.23.2"
+    "@backstage/cli": "npm:^0.33.1"
+    "@janus-idp/cli": "npm:3.3.1"
+    "@mui/material": "npm:5.17.1"
+    "@types/react": "npm:^18.2.58"
+    react: "npm:^17.0.0 || ^18.0.0"
+    react-dom: "npm:^17.0.0 || ^18.0.0"
+    react-router-dom: "npm:^6.0.0"
+    typescript: "npm:5.8.2"
+  languageName: unknown
+  linkType: soft
+
+"@tssc-plugins/backstage-community-plugin-redhat-argocd-backend@workspace:plugins/redhat-argocd-backend":
+  version: 0.0.0-use.local
+  resolution: "@tssc-plugins/backstage-community-plugin-redhat-argocd-backend@workspace:plugins/redhat-argocd-backend"
+  dependencies:
+    "@backstage-community/plugin-redhat-argocd-backend": "npm:0.9.0"
+    "@backstage/cli": "npm:^0.33.1"
+    "@janus-idp/cli": "npm:3.3.1"
+    typescript: "npm:5.8.2"
+  languageName: unknown
+  linkType: soft
+
+"@tssc-plugins/backstage-community-plugin-redhat-argocd@workspace:plugins/redhat-argocd":
+  version: 0.0.0-use.local
+  resolution: "@tssc-plugins/backstage-community-plugin-redhat-argocd@workspace:plugins/redhat-argocd"
+  dependencies:
+    "@backstage-community/plugin-redhat-argocd": "npm:1.22.2"
+    "@backstage/cli": "npm:^0.33.1"
+    "@janus-idp/cli": "npm:3.3.1"
+    "@mui/material": "npm:5.17.1"
+    "@types/react": "npm:^17.0.0 || ^18.0.0"
+    react: "npm:^17.0.0 || ^18.0.0"
+    react-dom: "npm:^18"
+    react-router-dom: "npm:^6.3.0"
+    typescript: "npm:5.8.2"
+  languageName: unknown
+  linkType: soft
+
+"@tssc-plugins/backstage-community-plugin-tekton@workspace:plugins/tekton":
+  version: 0.0.0-use.local
+  resolution: "@tssc-plugins/backstage-community-plugin-tekton@workspace:plugins/tekton"
+  dependencies:
+    "@backstage-community/plugin-tekton": "npm:3.27.3"
+    "@backstage/cli": "npm:^0.33.1"
+    "@janus-idp/cli": "npm:3.3.1"
+    "@mui/material": "npm:5.17.1"
+    "@types/react": "npm:^17.0.0 || ^18.0.0"
+    react: "npm:^17.0.0 || ^18.0.0"
+    react-dom: "npm:^17.0.0 || ^18.0.0"
+    react-router-dom: "npm:^6.0.0"
+    typescript: "npm:5.8.2"
+  languageName: unknown
+  linkType: soft
 
 "@types/aws-lambda@npm:^8.10.83":
   version: 8.10.149
@@ -24871,21 +24871,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rhtap-plugins@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "rhtap-plugins@workspace:."
-  dependencies:
-    husky: "npm:^9.1.7"
-    lint-staged: "npm:^16.0.0"
-    node-gyp: "npm:^11.2.0"
-    prettier: "npm:^3.5.3"
-    react: "npm:16.13.1 || ^17.0.0 || ^18.0.0"
-    rimraf: "npm:6.0.1"
-    turbo: "npm:^2.4.4"
-    typescript: "npm:5.8.2"
-  languageName: unknown
-  linkType: soft
-
 "rifm@npm:^0.7.0":
   version: 0.7.0
   resolution: "rifm@npm:0.7.0"
@@ -27084,6 +27069,21 @@ __metadata:
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
   languageName: node
   linkType: hard
+
+"tssc-plugins@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "tssc-plugins@workspace:."
+  dependencies:
+    husky: "npm:^9.1.7"
+    lint-staged: "npm:^16.0.0"
+    node-gyp: "npm:^11.2.0"
+    prettier: "npm:^3.5.3"
+    react: "npm:16.13.1 || ^17.0.0 || ^18.0.0"
+    rimraf: "npm:6.0.1"
+    turbo: "npm:^2.4.4"
+    typescript: "npm:5.8.2"
+  languageName: unknown
+  linkType: soft
 
 "tsscmp@npm:1.0.6":
   version: 1.0.6

@@ -1,5 +1,5 @@
 {
-  "name": "@rhtap-plugins/backstage-community-plugin-tekton",
+  "name": "@tssc-plugins/backstage-community-plugin-tekton",
   "version": "3.27.3",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -46,14 +46,14 @@
     "dist-scalprum"
   ],
   "scalprum": {
-    "name": "rhtap-plugins.backstage-community-plugin-tekton",
+    "name": "tssc-plugins.backstage-community-plugin-tekton",
     "exposedModules": {
       "PluginRoot": "./src/index.ts"
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/redhat-appstudio/rhtap-backstage-plugins",
+    "url": "https://github.com/redhat-appstudio/tssc-backstage-plugins",
     "directory": "plugins/tekton"
   },
   "author": "Red Hat",

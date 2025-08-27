@@ -26,8 +26,8 @@ function findPackageJsonFiles(dir, ignoreDirs = ["node_modules", ".git"]) {
 }
 
 function extractDependencyFromPackageName(name) {
-  return name.replace(/@rhtap-plugins|backstage-community-/g, (match) => {
-    if (match === "@rhtap-plugins") return "@backstage-community";
+  return name.replace(/@tssc-plugins|backstage-community-/g, (match) => {
+    if (match === "@tssc-plugins") return "@backstage-community";
     if (match === "backstage-community-") return "";
   });
 }
