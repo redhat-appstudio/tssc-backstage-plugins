@@ -46,6 +46,18 @@ spec:
               memory: 10Gi
             limits:
               memory: 10Gi
+        - name: sbom-syft-generate
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
+        - name: prepare-sboms
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
