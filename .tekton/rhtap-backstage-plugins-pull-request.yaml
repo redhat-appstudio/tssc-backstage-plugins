@@ -81,6 +81,26 @@ spec:
               memory: 15Gi
             limits:
               memory: 15Gi
+    - pipelineTaskName: build-source-image
+      stepSpecs:
+        - name: use-trusted-artifact
+          computeResources:
+            requests:
+              memory: 15Gi
+            limits:
+              memory: 15Gi
+        - name: get-base-images
+          computeResources:
+            requests:
+              memory: 15Gi
+            limits:
+              memory: 15Gi
+        - name: build
+          computeResources:
+            requests:
+              memory: 15Gi
+            limits:
+              memory: 15Gi
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
