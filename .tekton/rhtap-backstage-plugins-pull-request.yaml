@@ -49,14 +49,6 @@ spec:
               memory: 10Gi
             limits:
               memory: 10Gi
-    - pipelineTaskName: build-image-index
-      stepSpecs:
-        - name: build-image-index
-          computeResources:
-            requests:
-              memory: 15Gi
-            limits:
-              memory: 15Gi
         - name: sbom-syft-generate
           computeResources:
             requests:
@@ -69,6 +61,26 @@ spec:
               memory: 10Gi
             limits:
               memory: 10Gi
+    - pipelineTaskName: build-image-index
+      stepSpecs:
+        - name: build
+          computeResources:
+            requests:
+              memory: 15Gi
+            limits:
+              memory: 15Gi
+        - name: create-sbom
+          computeResources:
+            requests:
+              memory: 15Gi
+            limits:
+              memory: 15Gi
+        - name: upload-sbom
+          computeResources:
+            requests:
+              memory: 15Gi
+            limits:
+              memory: 15Gi
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
