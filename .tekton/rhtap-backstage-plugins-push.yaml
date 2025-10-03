@@ -43,9 +43,9 @@ spec:
         - name: build
           computeResources:
             requests:
-              memory: 10Gi
+              memory: 15Gi
             limits:
-              memory: 10Gi
+              memory: 15Gi
         - name: sbom-syft-generate
           computeResources:
             requests:
