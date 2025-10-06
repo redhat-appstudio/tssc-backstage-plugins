@@ -101,6 +101,46 @@ spec:
               memory: 10Gi
             limits:
               memory: 10Gi
+    - pipelineTaskName: build-image-index
+      stepSpecs:
+        - name: build
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
+        - name: create-sbom
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
+        - name: upload-sbom
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
+    - pipelineTaskName: build-source-image
+      stepSpecs:
+        - name: use-trusted-artifact
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
+        - name: get-base-images
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
+        - name: build
+          computeResources:
+            requests:
+              memory: 10Gi
+            limits:
+              memory: 10Gi
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
