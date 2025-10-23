@@ -50,7 +50,7 @@
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^18",
     "react-router-dom": "^6.3.0",
-    "typescript": "5.8.2"
+    "typescript": "5.9.3"
   },
   "files": [
     "dist",
