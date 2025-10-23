@@ -5323,36 +5323,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gitbeaker/core@npm:^42.5.0":
-  version: 42.5.0
-  resolution: "@gitbeaker/core@npm:42.5.0"
+"@gitbeaker/core@npm:^43.5.0":
+  version: 43.5.0
+  resolution: "@gitbeaker/core@npm:43.5.0"
   dependencies:
-    "@gitbeaker/requester-utils": "npm:^42.5.0"
-    qs: "npm:^6.12.2"
+    "@gitbeaker/requester-utils": "npm:^43.5.0"
+    qs: "npm:^6.14.0"
     xcase: "npm:^2.0.1"
-  checksum: 10c0/fac9a4694b3e78df577eef23863c58b99e956ebd1b2fdc4f2cfaff0c696c7e5e8832c8ead25ed53abcc1ab41b51824fbb880e79203204517f711f1a3f547b1ff
+  checksum: 10c0/ae7e2101055cfc56751ad8e3e8a032687ff94856ffecb588d5bd50de01df4eda4f5bef943ae293513f7e0c23c60104fa7664ade976384b877dbc2f25a6f48680
   languageName: node
   linkType: hard
 
-"@gitbeaker/requester-utils@npm:^42.5.0":
-  version: 42.5.0
-  resolution: "@gitbeaker/requester-utils@npm:42.5.0"
+"@gitbeaker/requester-utils@npm:^43.5.0":
+  version: 43.5.0
+  resolution: "@gitbeaker/requester-utils@npm:43.5.0"
   dependencies:
     picomatch-browser: "npm:^2.2.6"
-    qs: "npm:^6.12.2"
-    rate-limiter-flexible: "npm:^4.0.1"
+    qs: "npm:^6.14.0"
+    rate-limiter-flexible: "npm:^7.2.0"
     xcase: "npm:^2.0.1"
-  checksum: 10c0/db4106afac5909078d676a6b26ffdca1c1ee5321fbaa75d5ab29b79e02d7e62bbcb422acbc2d5286a15c1f1100ffaf092d5b20da61ac35b6cf4b7137fe927550
+  checksum: 10c0/5baf881c95815c0881a6adc4fc6895beb5162ff21ae383b14c93731ecbcbf09c2a93d492fbac46a5e7e5d88ef47aae17592bc58f1e6ec0c602641452f4328414
   languageName: node
   linkType: hard
 
-"@gitbeaker/rest@npm:^42.2.0":
-  version: 42.5.0
-  resolution: "@gitbeaker/rest@npm:42.5.0"
+"@gitbeaker/rest@npm:^43.0.0":
+  version: 43.5.0
+  resolution: "@gitbeaker/rest@npm:43.5.0"
   dependencies:
-    "@gitbeaker/core": "npm:^42.5.0"
-    "@gitbeaker/requester-utils": "npm:^42.5.0"
-  checksum: 10c0/19e2f722c63595c7f374815e1352a4bdb2415a041021a776ba3466b377127b09401f59b500ba3f821373cc5246884d1cbfd2bf0933b8fd1b1e8df20681a65e4d
+    "@gitbeaker/core": "npm:^43.5.0"
+    "@gitbeaker/requester-utils": "npm:^43.5.0"
+  checksum: 10c0/26e6d8d687a92fb9662d2aa2f42c3be53015eb6ea0322dab99293e21f2f675e3a9ee0270d602a6b4d1d2ed569531109a218f7dece6dd2c20d45dd6373fbce456
   languageName: node
   linkType: hard
 
@@ -9176,7 +9176,7 @@ __metadata:
   dependencies:
     "@backstage-community/plugin-multi-source-security-viewer": "npm:0.6.1"
     "@backstage/cli": "npm:^0.32.1"
-    "@gitbeaker/rest": "npm:^42.2.0"
+    "@gitbeaker/rest": "npm:^43.0.0"
     "@immobiliarelabs/backstage-plugin-gitlab": "npm:^6.11.0"
     "@janus-idp/cli": "npm:3.3.1"
     "@mui/icons-material": "npm:5.16.14"
@@ -23639,7 +23639,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.12.2, qs@npm:^6.12.3, qs@npm:^6.9.4":
+"qs@npm:^6.12.3, qs@npm:^6.14.0, qs@npm:^6.9.4":
   version: 6.14.0
   resolution: "qs@npm:6.14.0"
   dependencies:
@@ -23742,10 +23742,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rate-limiter-flexible@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "rate-limiter-flexible@npm:4.0.1"
-  checksum: 10c0/93db9ed61a62c4d7d411713e12ed9cd7ea196a08b81cb289156f7ff0fe85bd4607916e82be750d2d8c44248dafefaff3f4a1cd4b7caae077b078573ad7f24fa6
+"rate-limiter-flexible@npm:^7.2.0":
+  version: 7.4.0
+  resolution: "rate-limiter-flexible@npm:7.4.0"
+  checksum: 10c0/abda366a8449384911241d4abd404ba341115cec003c64fc96ea3210080fb473f34a4d8ae955e979e1f485d8d6a0126243f8b00f362aa74e7bb781783881ba58
   languageName: node
   linkType: hard
 
