@@ -30,7 +30,7 @@
     "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
   },
   "dependencies": {
-    "@backstage-community/plugin-multi-source-security-viewer": "0.6.1"
+    "@backstage-community/plugin-multi-source-security-viewer": "0.8.1"
   },
   "devDependencies": {
     "@backstage/cli": "^0.32.1",
