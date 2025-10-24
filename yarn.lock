@@ -6575,7 +6575,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/core-downloads-tracker@npm:^5.16.14, @mui/core-downloads-tracker@npm:^5.17.1":
+"@mui/core-downloads-tracker@npm:^5.17.1":
   version: 5.17.1
   resolution: "@mui/core-downloads-tracker@npm:5.17.1"
   checksum: 10c0/c36641e274a27cdef8a75218021a5ebef0ce588cd0aec004802d56e8d59ac9d8603b8b4840df480de40ce2c3af8898d49929a8564ed5a784ff2b3100dce31366
@@ -6602,22 +6602,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/9aac249ab4b55f546e8749c7237b2407ae7f470defb2bc1a18a6f1df6a75cf1a6feb3bf073e3b2e7220ed9847fd21b7bd28f14790899299321acaba169bf8bb1
-  languageName: node
-  linkType: hard
-
-"@mui/icons-material@npm:5.16.14":
-  version: 5.16.14
-  resolution: "@mui/icons-material@npm:5.16.14"
-  dependencies:
-    "@babel/runtime": "npm:^7.23.9"
-  peerDependencies:
-    "@mui/material": ^5.0.0
-    "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
-    react: ^17.0.0 || ^18.0.0 || ^19.0.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  checksum: 10c0/11632d1f9904fda0a751e442d3d948a83977cd9ba81481cda4e61b9dfdbd80b0616e27750728c066a4dc505035d7ad6aa29ff7c6160a9b52a2b313fc89aa4be3
   languageName: node
   linkType: hard
 
@@ -6653,72 +6637,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:5.16.14":
-  version: 5.16.14
-  resolution: "@mui/material@npm:5.16.14"
-  dependencies:
-    "@babel/runtime": "npm:^7.23.9"
-    "@mui/core-downloads-tracker": "npm:^5.16.14"
-    "@mui/system": "npm:^5.16.14"
-    "@mui/types": "npm:^7.2.15"
-    "@mui/utils": "npm:^5.16.14"
-    "@popperjs/core": "npm:^2.11.8"
-    "@types/react-transition-group": "npm:^4.4.10"
-    clsx: "npm:^2.1.0"
-    csstype: "npm:^3.1.3"
-    prop-types: "npm:^15.8.1"
-    react-is: "npm:^19.0.0"
-    react-transition-group: "npm:^4.4.5"
-  peerDependencies:
-    "@emotion/react": ^11.5.0
-    "@emotion/styled": ^11.3.0
-    "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
-    react: ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
-  peerDependenciesMeta:
-    "@emotion/react":
-      optional: true
-    "@emotion/styled":
-      optional: true
-    "@types/react":
-      optional: true
-  checksum: 10c0/e313c1274f18a245f7128c9ccbd6444d6edb91a99fef7b6ec9ece4d2d19da0fec9a484afc24c0c35e9fcc53fb090dc524083d682c78428754a1c5b6cebb70a63
-  languageName: node
-  linkType: hard
-
-"@mui/material@npm:5.17.1, @mui/material@npm:^5.12.2, @mui/material@npm:^5.15.16, @mui/material@npm:^5.15.17":
-  version: 5.17.1
-  resolution: "@mui/material@npm:5.17.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.23.9"
-    "@mui/core-downloads-tracker": "npm:^5.17.1"
-    "@mui/system": "npm:^5.17.1"
-    "@mui/types": "npm:~7.2.15"
-    "@mui/utils": "npm:^5.17.1"
-    "@popperjs/core": "npm:^2.11.8"
-    "@types/react-transition-group": "npm:^4.4.10"
-    clsx: "npm:^2.1.0"
-    csstype: "npm:^3.1.3"
-    prop-types: "npm:^15.8.1"
-    react-is: "npm:^19.0.0"
-    react-transition-group: "npm:^4.4.5"
-  peerDependencies:
-    "@emotion/react": ^11.5.0
-    "@emotion/styled": ^11.3.0
-    "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
-    react: ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
-  peerDependenciesMeta:
-    "@emotion/react":
-      optional: true
-    "@emotion/styled":
-      optional: true
-    "@types/react":
-      optional: true
-  checksum: 10c0/55c120879e65833dda16ae1100eb1e2b43d0a7c80a9d1209121c71953c5e7646a1e76d8bd0204382a401af2d8d11b59383e92969525a6cc3f0149a138b25cad7
-  languageName: node
-  linkType: hard
-
 "@mui/material@npm:5.18.0":
   version: 5.18.0
   resolution: "@mui/material@npm:5.18.0"
@@ -6749,6 +6667,39 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10c0/a743c9105d08b636d4d9cf0aa276283b9095113771c188c7f5ac6953606dd77a5eb082dbbd889446a9a8573b8676d7249140c29eec55ae8320592e5f02d0f2cb
+  languageName: node
+  linkType: hard
+
+"@mui/material@npm:^5.12.2, @mui/material@npm:^5.15.16, @mui/material@npm:^5.15.17":
+  version: 5.17.1
+  resolution: "@mui/material@npm:5.17.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.9"
+    "@mui/core-downloads-tracker": "npm:^5.17.1"
+    "@mui/system": "npm:^5.17.1"
+    "@mui/types": "npm:~7.2.15"
+    "@mui/utils": "npm:^5.17.1"
+    "@popperjs/core": "npm:^2.11.8"
+    "@types/react-transition-group": "npm:^4.4.10"
+    clsx: "npm:^2.1.0"
+    csstype: "npm:^3.1.3"
+    prop-types: "npm:^15.8.1"
+    react-is: "npm:^19.0.0"
+    react-transition-group: "npm:^4.4.5"
+  peerDependencies:
+    "@emotion/react": ^11.5.0
+    "@emotion/styled": ^11.3.0
+    "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/react":
+      optional: true
+    "@emotion/styled":
+      optional: true
+    "@types/react":
+      optional: true
+  checksum: 10c0/55c120879e65833dda16ae1100eb1e2b43d0a7c80a9d1209121c71953c5e7646a1e76d8bd0204382a401af2d8d11b59383e92969525a6cc3f0149a138b25cad7
   languageName: node
   linkType: hard
 
@@ -6812,7 +6763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/system@npm:^5.16.14, @mui/system@npm:^5.17.1":
+"@mui/system@npm:^5.17.1":
   version: 5.17.1
   resolution: "@mui/system@npm:5.17.1"
   dependencies:
@@ -6868,7 +6819,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/types@npm:^7.2.14-dev.20240529-082515-213b5e33ab, @mui/types@npm:^7.2.15":
+"@mui/types@npm:^7.2.14-dev.20240529-082515-213b5e33ab":
   version: 7.4.1
   resolution: "@mui/types@npm:7.4.1"
   dependencies:
@@ -6894,7 +6845,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/utils@npm:^5.16.14, @mui/utils@npm:^5.17.1":
+"@mui/utils@npm:^5.17.1":
   version: 5.17.1
   resolution: "@mui/utils@npm:5.17.1"
   dependencies:
@@ -9179,8 +9130,8 @@ __metadata:
     "@gitbeaker/rest": "npm:^42.2.0"
     "@immobiliarelabs/backstage-plugin-gitlab": "npm:^6.11.0"
     "@janus-idp/cli": "npm:3.3.1"
-    "@mui/icons-material": "npm:5.16.14"
-    "@mui/material": "npm:5.16.14"
+    "@mui/icons-material": "npm:5.18.0"
+    "@mui/material": "npm:5.18.0"
     "@types/react": "npm:^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
@@ -9214,7 +9165,7 @@ __metadata:
     "@backstage-community/plugin-quay": "npm:1.23.2"
     "@backstage/cli": "npm:^0.33.1"
     "@janus-idp/cli": "npm:3.3.1"
-    "@mui/material": "npm:5.17.1"
+    "@mui/material": "npm:5.18.0"
     "@types/react": "npm:^18.2.58"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
@@ -9241,7 +9192,7 @@ __metadata:
     "@backstage-community/plugin-redhat-argocd": "npm:1.22.2"
     "@backstage/cli": "npm:^0.33.1"
     "@janus-idp/cli": "npm:3.3.1"
-    "@mui/material": "npm:5.17.1"
+    "@mui/material": "npm:5.18.0"
     "@types/react": "npm:^17.0.0 || ^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^18"
@@ -9257,7 +9208,7 @@ __metadata:
     "@backstage-community/plugin-tekton": "npm:3.27.3"
     "@backstage/cli": "npm:^0.33.1"
     "@janus-idp/cli": "npm:3.3.1"
-    "@mui/material": "npm:5.17.1"
+    "@mui/material": "npm:5.18.0"
     "@types/react": "npm:^17.0.0 || ^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
