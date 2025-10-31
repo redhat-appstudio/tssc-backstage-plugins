@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.0",
-    "@gitbeaker/rest": "^42.2.0",
+    "@gitbeaker/rest": "^43.0.0",
     "@immobiliarelabs/backstage-plugin-gitlab": "^6.11.0",
     "@janus-idp/cli": "3.3.1",
     "@mui/icons-material": "5.16.14",
