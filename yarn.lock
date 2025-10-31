@@ -2608,7 +2608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage-community/plugin-quay-common@npm:^1.11.0":
+"@backstage-community/plugin-quay-common@npm:^1.11.0, @backstage-community/plugin-quay-common@npm:^1.13.0":
   version: 1.13.0
   resolution: "@backstage-community/plugin-quay-common@npm:1.13.0"
   peerDependencies:
@@ -2618,18 +2618,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage-community/plugin-quay@npm:1.24.0":
-  version: 1.24.0
-  resolution: "@backstage-community/plugin-quay@npm:1.24.0"
+"@backstage-community/plugin-quay@npm:1.26.0":
+  version: 1.26.0
+  resolution: "@backstage-community/plugin-quay@npm:1.26.0"
   dependencies:
-    "@backstage-community/plugin-quay-common": "npm:^1.11.0"
+    "@backstage-community/plugin-quay-common": "npm:^1.13.0"
     "@backstage/catalog-model": "npm:^1.7.5"
-    "@backstage/core-components": "npm:^0.17.5"
-    "@backstage/core-plugin-api": "npm:^1.10.9"
-    "@backstage/plugin-catalog-common": "npm:^1.1.5"
-    "@backstage/plugin-catalog-react": "npm:^1.20.1"
-    "@backstage/plugin-permission-react": "npm:^0.4.36"
-    "@backstage/theme": "npm:^0.6.8"
+    "@backstage/core-components": "npm:^0.18.2"
+    "@backstage/core-plugin-api": "npm:^1.11.1"
+    "@backstage/plugin-catalog-common": "npm:^1.1.6"
+    "@backstage/plugin-catalog-react": "npm:^1.21.2"
+    "@backstage/plugin-permission-react": "npm:^0.4.37"
+    "@backstage/theme": "npm:^0.7.0"
     "@material-ui/core": "npm:^4.12.2"
     "@material-ui/icons": "npm:^4.11.3"
     "@material-ui/lab": "npm:4.0.0-alpha.61"
@@ -2640,7 +2640,7 @@ __metadata:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.0.0
-  checksum: 10c0/c024e02cc175ab1968a2af3e41307c52a57c2af88c841667dee9c5cda1ce69017f2b48de1dfa9a92436bd8400f44c5e5fef095b8f66b35ae8f014ad91329c035
+  checksum: 10c0/501ac3188bdba90244a7d11576ac3839ca6ccd2cacb78de2efd9a70c728fe253ac264418f026e5ba56b7ee1120812dcc8f38f2ff24135af71c6788e31d27ac8a
   languageName: node
   linkType: hard
 
@@ -8815,7 +8815,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tssc-plugins/backstage-community-plugin-quay@workspace:plugins/quay"
   dependencies:
-    "@backstage-community/plugin-quay": "npm:1.24.0"
+    "@backstage-community/plugin-quay": "npm:1.26.0"
     "@backstage/cli": "npm:^0.34.1"
     "@janus-idp/cli": "npm:3.6.1"
     "@mui/material": "npm:5.18.0"
