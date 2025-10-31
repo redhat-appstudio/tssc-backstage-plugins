@@ -3148,7 +3148,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-components@npm:^0.16.3, @backstage/core-components@npm:^0.16.4":
+"@backstage/core-components@npm:^0.16.3":
   version: 0.16.4
   resolution: "@backstage/core-components@npm:0.16.4"
   dependencies:
@@ -3610,7 +3610,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/plugin-catalog-react@npm:^1.15.2, @backstage/plugin-catalog-react@npm:^1.20.1, @backstage/plugin-catalog-react@npm:^1.21.2":
+"@backstage/plugin-catalog-react@npm:^1.20.1, @backstage/plugin-catalog-react@npm:^1.21.2":
   version: 1.21.2
   resolution: "@backstage/plugin-catalog-react@npm:1.21.2"
   dependencies:
@@ -4843,13 +4843,13 @@ __metadata:
   linkType: hard
 
 "@immobiliarelabs/backstage-plugin-gitlab@npm:^6.11.0, @immobiliarelabs/backstage-plugin-gitlab@npm:^6.8.0":
-  version: 6.11.0
-  resolution: "@immobiliarelabs/backstage-plugin-gitlab@npm:6.11.0"
+  version: 6.13.0
+  resolution: "@immobiliarelabs/backstage-plugin-gitlab@npm:6.13.0"
   dependencies:
-    "@backstage/core-components": "npm:^0.16.4"
-    "@backstage/core-plugin-api": "npm:^1.10.4"
-    "@backstage/plugin-catalog-react": "npm:^1.15.2"
-    "@backstage/theme": "npm:^0.6.4"
+    "@backstage/core-components": "npm:^0.17.5"
+    "@backstage/core-plugin-api": "npm:^1.10.9"
+    "@backstage/plugin-catalog-react": "npm:^1.20.1"
+    "@backstage/theme": "npm:^0.6.8"
     "@material-ui/core": "npm:^4.12.2"
     "@material-ui/icons": "npm:^4.9.1"
     "@material-ui/lab": "npm:4.0.0-alpha.61"
@@ -4867,7 +4867,7 @@ __metadata:
     react-dom: ^16.13.1 || ^18.0.0
     react-router: 6.0.0-beta.0 || ^6.20.0
     react-router-dom: 6.0.0-beta.0 || ^6.20.0
-  checksum: 10c0/f53ea676dd706e2b768d255e175453aaaa38a3e9421eeee93242275cc3fe05e43a9126da3a586878c1384b4979b79e1a6b6bf653f0fb5aed828cbba627a57d17
+  checksum: 10c0/dde02c488125e197975a8d341e2772402a8953eb1945375e0f24100cb4174bfa8d9becee2e584f2e96255c5e1c5494880cb6c0ee4dd4c19e8da3b21659ad56f8
   languageName: node
   linkType: hard
 
