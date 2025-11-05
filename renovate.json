@@ -6,9 +6,7 @@
     ":disableDependencyDashboard"
   ],
   "baseBranchPatterns": ["main"],
-  "ignorePresets": [
-    ":dependencyDashboard"
-  ],
+  "ignorePresets": [":dependencyDashboard"],
   "onboarding": false,
   "requireConfig": "optional",
   "inheritConfig": true,
@@ -82,13 +80,8 @@
     "puppet"
   ],
   "tekton": {
-    "managerFilePatterns": [
-      "/\\.yaml$/",
-      "/\\.yml$/"
-    ],
-    "includePaths": [
-      ".tekton/**"
-    ],
+    "managerFilePatterns": ["/\\.yaml$/", "/\\.yml$/"],
+    "includePaths": [".tekton/**"],
     "packageRules": [
       {
         "matchPackageNames": [
@@ -104,11 +97,7 @@
           "commitMessageTopic": "{{{groupName}}}"
         },
         "commitMessageTopic": "Konflux references",
-        "prBodyColumns": [
-          "Package",
-          "Change",
-          "Notes"
-        ],
+        "prBodyColumns": ["Package", "Change", "Notes"],
         "prBodyDefinitions": {
           "Notes": "{{#if (or (containsString updateType 'minor') (containsString updateType 'major'))}}:warning:[migration](https://github.com/redhat-appstudio/build-definitions/blob/main/task/{{{replace '^quay.io/(redhat-appstudio-tekton-catalog|konflux-ci/tekton-catalog)/task-' '' packageName}}}/{{{newVersion}}}/MIGRATION.md):warning:{{/if}}"
         },
@@ -117,12 +106,8 @@
         "rebaseWhen": "behind-base-branch"
       },
       {
-        "matchPackageNames": [
-          "/^quay.io/redhat-appstudio-tekton-catalog//"
-        ],
-        "matchUpdateTypes": [
-          "replacement"
-        ],
+        "matchPackageNames": ["/^quay.io/redhat-appstudio-tekton-catalog//"],
+        "matchUpdateTypes": ["replacement"],
         "branchPrefix": "konflux/references-replacement/",
         "groupName": "Konflux references replacement",
         "group": {
@@ -522,9 +507,7 @@
         "replacementName": "quay.io/konflux-ci/tekton-catalog/task-verify-signed-rpms"
       }
     ],
-    "schedule": [
-      "* 5-23 * * 6"
-    ],
+    "schedule": ["* 5-23 * * 6"],
     "postUpgradeTasks": {
       "commands": [
         "pipeline-migration-tool migrate -f \"$RENOVATE_POST_UPGRADE_COMMAND_DATA_FILE\""
@@ -578,9 +561,7 @@
     "recreateWhen": "always",
     "rebaseWhen": "behind-base-branch",
     "branchTopic": "lock-file-maintenance",
-    "schedule": [
-      "before 5am"
-    ]
+    "schedule": ["before 5am"]
   },
   "git-submodules": {
     "enabled": true
@@ -589,18 +570,11 @@
     "enabled": true
   },
   "gomod": {
-    "postUpdateOptions": [
-      "gomodUpdateImportPaths",
-      "gomodTidy"
-    ],
+    "postUpdateOptions": ["gomodUpdateImportPaths", "gomodTidy"],
     "packageRules": [
       {
-        "matchManagers": [
-          "gomod"
-        ],
-        "matchDepTypes": [
-          "indirect"
-        ],
+        "matchManagers": ["gomod"],
+        "matchDepTypes": ["indirect"],
         "enabled": true
       }
     ]
