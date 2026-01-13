@@ -69,7 +69,7 @@ async function main() {
 
   const packageUpdates = Object.assign({}, ...results);
   if (args.debug) {
-    console.log('🔍 Debug info on packages being updated');
+    console.log('🔍 Debug info on packages with Backstage target', target);
     console.log(packageUpdates);
     console.log("\n");
   }
