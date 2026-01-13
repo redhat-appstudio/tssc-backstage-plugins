@@ -167,7 +167,13 @@ async function listRepoContents({ owner, repo, dirPath, ref }) {
 /**
  * Traverse down the directory in the specified repo
  */
-async function collectPackageJsonUnderDir({ owner, repo, ref, startDir, backstageJsonPath }) {
+async function collectPackageJsonUnderDir({
+  owner,
+  repo,
+  ref,
+  startDir,
+  backstageJsonPath,
+}) {
   let result = {};
 
   // Get directories using:
@@ -199,7 +205,7 @@ async function collectPackageJsonUnderDir({ owner, repo, ref, startDir, backstag
         path: pkgPath,
         rawUrl: pkg.rawUrl,
         // Used to verify that the target version matches what we want.
-        verifyTarget: `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${backstageJsonPath}`
+        verifyTarget: `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${backstageJsonPath}`,
       };
     }
   }
