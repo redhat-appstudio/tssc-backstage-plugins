@@ -10,6 +10,7 @@
  *   node bump-plugins.js \
  *     --target 1.46.0 \
  *     --ref main (optional)
+ *     --debug (optional)
  *
  */
 const {
@@ -67,6 +68,11 @@ async function main() {
   );
 
   const packageUpdates = Object.assign({}, ...results);
+  if (args.debug) {
+    console.log('🔍 Debug info on packages being updated');
+    console.log(packageUpdates);
+    console.log("\n");
+  }
 
   const pluginsDir = "./plugins";
   // Find all package.json files in plugins dir

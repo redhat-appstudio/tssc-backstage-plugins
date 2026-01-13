@@ -167,7 +167,7 @@ async function listRepoContents({ owner, repo, dirPath, ref }) {
 /**
  * Traverse down the directory in the specified repo
  */
-async function collectPackageJsonUnderDir({ owner, repo, ref, startDir }) {
+async function collectPackageJsonUnderDir({ owner, repo, ref, startDir, backstageJsonPath }) {
   let result = {};
 
   // Get directories using:
@@ -198,6 +198,8 @@ async function collectPackageJsonUnderDir({ owner, repo, ref, startDir }) {
         version,
         path: pkgPath,
         rawUrl: pkg.rawUrl,
+        // Used to verify that the target version matches what we want.
+        verifyTarget: `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${backstageJsonPath}`
       };
     }
   }
@@ -234,6 +236,7 @@ async function getPluginPackagesForBackstageVersion(
     repo,
     ref: match.sha,
     startDir: pluginsDir,
+    backstageJsonPath,
   });
 
   return packages;
