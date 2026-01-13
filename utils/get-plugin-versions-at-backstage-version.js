@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 "use strict";
 
-
 const path = require("node:path");
 
 // Formats request headers for Github
@@ -26,7 +25,9 @@ async function ghJson(url) {
   const res = await fetch(url, { headers: ghHeaders() });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`GitHub API error ${res.status} ${res.statusText}: ${text}`);
+    throw new Error(
+      `GitHub API error ${res.status} ${res.statusText}: ${text}`,
+    );
   }
   return res.json();
 }
@@ -70,7 +71,11 @@ async function findCommitWhereBackstageVersionMatches({
   // Check if we already found the version we want.
   const currentVersion = String(current.json?.version);
   if (currentVersion === target) {
-    return { sha: ref, info: { date: null, msg: null }, rawUrl: current.rawUrl };
+    return {
+      sha: ref,
+      info: { date: null, msg: null },
+      rawUrl: current.rawUrl,
+    };
   }
 
   // Walk commit history for that file
@@ -94,7 +99,9 @@ async function findCommitWhereBackstageVersionMatches({
 
     if (!Array.isArray(commits) || commits.length === 0) {
       const debugJson = { [backstageJsonPath]: versionsFound };
-      console.warn(`❌ No commit found where ${backstageJsonPath} has version=${target}`);
+      console.warn(
+        `❌ No commit found where ${backstageJsonPath} has version=${target}`,
+      );
       console.debug("🕵️ Logging what was found:");
       console.debug(debugJson);
       console.debug("\n");
@@ -105,7 +112,12 @@ async function findCommitWhereBackstageVersionMatches({
       // Grab commit SHA
       const sha = c.sha;
       // Grab backstage.json file at that commit SHA
-      const fileAtCommit = await fetchRawJson(owner, repo, sha, backstageJsonPath);
+      const fileAtCommit = await fetchRawJson(
+        owner,
+        repo,
+        sha,
+        backstageJsonPath,
+      );
       // No file? Continue.
       if (!fileAtCommit) continue;
 
@@ -115,7 +127,7 @@ async function findCommitWhereBackstageVersionMatches({
       // Collect version found for debug.
       versionsFound[v] = {
         commitSha: sha,
-        url: `https://raw.githubusercontent.com/${owner}/${repo}/${sha}/${backstageJsonPath}`
+        url: `https://raw.githubusercontent.com/${owner}/${repo}/${sha}/${backstageJsonPath}`,
       };
 
       // Keep track of latest version found
@@ -123,11 +135,11 @@ async function findCommitWhereBackstageVersionMatches({
         // Remove last version found if it matches target.
         delete versionsFound[v];
 
-        const date = c.commit?.committer?.date ?? c.commit?.author?.date ?? null;
+        const date =
+          c.commit?.committer?.date ?? c.commit?.author?.date ?? null;
         const msg = c.commit?.message?.split("\n")[0] ?? null;
         return { sha, info: { date, msg }, rawUrl: fileAtCommit.rawUrl };
       }
-
     }
     // Next page
     page++;
@@ -140,7 +152,7 @@ async function findCommitWhereBackstageVersionMatches({
 async function listRepoContents({ owner, repo, dirPath, ref }) {
   // GET /repos/{owner}/{repo}/contents/{path}?ref=
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(
-    dirPath
+    dirPath,
   )}?ref=${encodeURIComponent(ref)}`;
   const data = await ghJson(url);
 
@@ -152,14 +164,9 @@ async function listRepoContents({ owner, repo, dirPath, ref }) {
 }
 
 /**
-  * Traverse down the directory in the specified repo
-  */
-async function collectPackageJsonUnderDir({
-  owner,
-  repo,
-  ref,
-  startDir,
-}) {
+ * Traverse down the directory in the specified repo
+ */
+async function collectPackageJsonUnderDir({ owner, repo, ref, startDir }) {
   let result = {};
 
   // Get directories using:
@@ -167,7 +174,12 @@ async function collectPackageJsonUnderDir({
   // repo name (community-plugins)
   // directory path
   // SHA ref
-  const entries = await listRepoContents({ owner, repo, dirPath: startDir, ref });
+  const entries = await listRepoContents({
+    owner,
+    repo,
+    dirPath: startDir,
+    ref,
+  });
 
   for (const e of entries) {
     if (e.type !== "dir") {
@@ -192,7 +204,11 @@ async function collectPackageJsonUnderDir({
   return result;
 }
 
-async function getPluginPackagesForBackstageVersion(workspace, target, ref = "main") {
+async function getPluginPackagesForBackstageVersion(
+  workspace,
+  target,
+  ref = "main",
+) {
   const owner = "backstage";
   const repo = "community-plugins";
   const backstageJsonPath = `workspaces/${workspace}/backstage.json`;

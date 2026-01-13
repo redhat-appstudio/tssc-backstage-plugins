@@ -66,8 +66,8 @@ function required(name, value) {
 }
 
 /**
-  * Parses the arguments passed through the CLI
-  */
+ * Parses the arguments passed through the CLI
+ */
 function parseArgs(argv) {
   const args = {};
   // Loop through args
@@ -86,8 +86,7 @@ function parseArgs(argv) {
       // This means we want the option set.
       if (!val || val.startsWith("--")) {
         args[key] = true;
-      }
-      else {
+      } else {
         // Assign arg to val passed.
         args[key] = val;
         // Increment to go to next set of args.

@@ -20,23 +20,20 @@ const {
   required,
 } = require("./shared");
 const {
-  getPluginPackagesForBackstageVersion
-} = require('./get-plugin-versions-at-backstage-version');
+  getPluginPackagesForBackstageVersion,
+} = require("./get-plugin-versions-at-backstage-version");
 const fs = require("fs");
 const semver = require("semver");
 
 // Workspaces used to get updates.
-const WORKSPACES = [
-  "tekton",
-  "argocd",
-  "quay",
-  "multi-source-security-viewer",
-];
+const WORKSPACES = ["tekton", "argocd", "quay", "multi-source-security-viewer"];
 
 // Get the pkg versions of the plugin and check if there is an update
 async function lookForUpdate(pkg, version = "latest") {
   const dependency = extractDependencyFromPackageName(pkg.name);
-  const lookup = await fetch(`https://registry.npmjs.org/${dependency}/${version}`);
+  const lookup = await fetch(
+    `https://registry.npmjs.org/${dependency}/${version}`,
+  );
 
   if (!lookup.ok) {
     throw new Error(`HTTP response ${lookup.status}: ${lookup.statusText}`);
@@ -59,7 +56,6 @@ async function lookForUpdate(pkg, version = "latest") {
   };
 }
 
-
 async function main() {
   const args = parseArgs(process.argv.slice(2)); //Ignore 'node <filename>'
   const target = required("target", args.target);
@@ -67,9 +63,7 @@ async function main() {
 
   // Get all package updates at backstage version target
   const results = await Promise.all(
-    WORKSPACES.map(
-      w => getPluginPackagesForBackstageVersion(w, target, ref)
-    )
+    WORKSPACES.map((w) => getPluginPackagesForBackstageVersion(w, target, ref)),
   );
 
   const packageUpdates = Object.assign({}, ...results);
@@ -109,7 +103,9 @@ async function main() {
   }
   console.log("🚀 Package bump process finished");
 
-  console.log(`The following packages were bumped: ${updated.length ? updated : 'no updates'}`);
+  console.log(
+    `The following packages were bumped: ${updated.length ? updated : "no updates"}`,
+  );
   console.log("👋 Bye!");
 }
 
