@@ -75,7 +75,8 @@ async function main() {
     `Found ${packageJsonFiles.length} package.json files in ${pluginsDir}`,
   );
 
-  const updated = [];
+  console.log("⏳ Starting plugin bumps\n");
+  let updated = 0;
   // Iterate and look for pkg udpates
   for (const pkgPath of packageJsonFiles) {
     const data = fs.readFileSync(pkgPath, "utf8");
@@ -92,21 +93,19 @@ async function main() {
     const update = await lookForUpdate(pkg, version);
 
     if (semver.lt(pkg.version, update.version)) {
-      console.log(`Updating ${pkg.name}: ${pkg.version} => ${update.version}`);
+      console.log(`🚀 Updating ${pkg.name}: ${pkg.version} => ${update.version}`);
       const newValues = { ...pkg, ...update };
       const jsonFileContent = JSON.stringify(newValues, null, 2);
       fs.writeFileSync(pkgPath, jsonFileContent + "\n", "utf8");
-
-      // Used for final summary data.
-      updated.push(pkg.name);
+      updated += 1;
     }
   }
-  console.log("🚀 Package bump process finished");
 
-  console.log(
-    `The following packages were bumped: ${updated.length ? updated : "no updates"}`,
-  );
-  console.log("👋 Bye!");
+  if (!updated) {
+    console.warn('🤔 Nothing was updated, please ensure you used the correct target');
+  }
+
+  console.log("\n🏁 Bump process completed");
 }
 
 main().catch((err) => {

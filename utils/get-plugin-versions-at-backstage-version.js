@@ -99,8 +99,9 @@ async function findCommitWhereBackstageVersionMatches({
 
     if (!Array.isArray(commits) || commits.length === 0) {
       const debugJson = { [backstageJsonPath]: versionsFound };
+      console.log("\n");
       console.warn(
-        `❌ No commit found where ${backstageJsonPath} has version=${target}`,
+        `🚨 No commit found where ${backstageJsonPath} has version=${target}`,
       );
       console.debug("🕵️ Logging what was found:");
       console.debug(debugJson);
@@ -213,11 +214,6 @@ async function getPluginPackagesForBackstageVersion(
   const repo = "community-plugins";
   const backstageJsonPath = `workspaces/${workspace}/backstage.json`;
   const pluginsDir = `workspaces/${workspace}/plugins`;
-
-  console.log(`Repo:      ${owner}/${repo}`);
-  console.log(`Ref:       ${ref}`);
-  console.log(`Workspace: ${workspace}`);
-  console.log(`Target:    ${target}`);
 
   // Find the commit that has the version we want.
   const match = await findCommitWhereBackstageVersionMatches({
