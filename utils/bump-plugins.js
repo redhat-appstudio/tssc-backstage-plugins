@@ -93,7 +93,9 @@ async function main() {
     const update = await lookForUpdate(pkg, version);
 
     if (semver.lt(pkg.version, update.version)) {
-      console.log(`🚀 Updating ${pkg.name}: ${pkg.version} => ${update.version}`);
+      console.log(
+        `🚀 Updating ${pkg.name}: ${pkg.version} => ${update.version}`,
+      );
       const newValues = { ...pkg, ...update };
       const jsonFileContent = JSON.stringify(newValues, null, 2);
       fs.writeFileSync(pkgPath, jsonFileContent + "\n", "utf8");
@@ -102,7 +104,9 @@ async function main() {
   }
 
   if (!updated) {
-    console.warn('🤔 Nothing was updated, please ensure you used the correct target');
+    console.warn(
+      "🤔 Nothing was updated, please ensure you used the correct target",
+    );
   }
 
   console.log("\n🏁 Bump process completed");
