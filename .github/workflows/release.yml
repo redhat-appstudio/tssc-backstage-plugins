@@ -42,6 +42,9 @@ jobs:
             --ref main \
             --debug
 
+      - name: Install plugin updates
+        run: yarn install --mode=update-lockfile
+
       - name: Update release.json file
         run: |
           node utils/update-release-json.js \
@@ -82,3 +85,4 @@ jobs:
             plugins/**
             Containerfile
             .tekton/**
+            yarn.lock
