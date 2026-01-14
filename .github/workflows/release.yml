@@ -49,7 +49,7 @@ jobs:
 
       - name: Update Containerfile
         run: |
-          node utils/update-container-release-version \
+          node utils/update-container-release-version.js \
             --version ${{ inputs.version }}
 
       - name: Configure git
