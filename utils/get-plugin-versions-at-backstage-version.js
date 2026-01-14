@@ -131,9 +131,10 @@ async function findCommitWhereBackstageVersionMatches({
         url: `https://raw.githubusercontent.com/${owner}/${repo}/${sha}/${backstageJsonPath}`,
       };
 
-      // Keep track of latest version found
+      // We found a version that matches or Backstage target
       if (v === target) {
         // Remove last version found if it matches target.
+        // It won't be needed in the debug logs.
         delete versionsFound[v];
 
         const date =
