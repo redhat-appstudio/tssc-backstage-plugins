@@ -23,10 +23,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          set -euo pipefail
+
+          LIMIT=50
+
           echo "Finding open PRs that are for release branches"
 
           prs=$(gh pr list \
             --state open \
+            --limit "$LIMIT" \
             --json number,headRefName \
             --jq '.[] | select(.headRefName | contains("release-")) | .number') 
 
@@ -34,6 +39,9 @@ jobs:
             echo "No matching PRs found."
             exit 0
           fi
+
+          count=$(echo "$prs" | wc -w | tr -d ' ')
+          echo "Found $count release-* PR(s) to close."
 
           for pr in $prs; do
             echo "Closing PR #$pr"
