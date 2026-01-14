@@ -17,19 +17,21 @@ const RELEASE_REGEX = /release\=\".\"/g;
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const versionArg = required("version", args.version);
-  const [version, release] = versionArg.split('.');
-  const path = 'Containerfile'
-  const raw = await readFile(path, 'utf8');
+  const [version, release] = versionArg.split(".");
+  const path = "Containerfile";
+  const raw = await readFile(path, "utf8");
   const updatedVersion = raw.replace(VERSION_REGEX, `version="${version}"`);
-  const updatedRelease = updatedVersion.replace(RELEASE_REGEX, `release="${release}"`);
+  const updatedRelease = updatedVersion.replace(
+    RELEASE_REGEX,
+    `release="${release}"`,
+  );
 
   await writeFile(path, updatedRelease, "utf8");
 
   console.log(`Updated ${path} version -> ${versionArg}`);
-
 }
 
 main().catch((e) => {
   console.log(`Error: ${e.message}`);
   process.exit(1);
-})
+});
