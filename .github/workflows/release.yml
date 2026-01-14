@@ -80,3 +80,5 @@ jobs:
           add-paths: |
             release.json
             plugins/**
+            Containerfile
+            .tekton/**
