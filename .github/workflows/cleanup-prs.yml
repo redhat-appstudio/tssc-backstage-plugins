@@ -1,0 +1,39 @@
+name: Close release-* PRs
+
+on:
+  # Manual
+  workflow_dispatch:
+  schedule:
+    # Run daily at 2am UTC
+    - cron: "0 2 * * *"
+
+permission:
+  pull-requests: write
+  contents: read
+
+jobs:
+  close-release-prs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Close PRs for release-* branches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Finding open PRs that are for release branches"
+
+          prs=$(gh pr list \
+            --state open \
+            --json number,headRefName \
+            --jq '.[] | select(.headRefName | contains("release-")) | .number') 
+
+          if [ -z "$prs" ]; then
+            echo "No matching PRs found."
+            exit 0
+          fi
+
+          for pr in $prs; do
+            echo "Closing PR #$pr"
+            gh pr close "$pr" --comment "Automatically closing pull request for release branch."
+          done
+
