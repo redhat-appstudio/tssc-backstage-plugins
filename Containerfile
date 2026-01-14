@@ -1,4 +1,5 @@
-FROM registry.redhat.io/ubi9/nodejs-20:latest AS builder
+FROM registry.redhat.io/ubi9/nodejs-20:9.7-1764217677 AS builder
+
 
 WORKDIR /plugin-workspace
 
