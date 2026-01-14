@@ -36,7 +36,9 @@ jobs:
         env:
           VERSION: ${{ inputs.version }}
         run: |
-          node scripts/update-release-json.js
+          node scripts/update-release-json.js \
+            --version ${{ inputs.version }}
+
           node scripts/bump-plugins.js \
             --target ${{ inputs.backstage_target }}
             --ref main

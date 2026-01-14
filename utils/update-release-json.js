@@ -1,11 +1,20 @@
+#!/usr/bin/env node
+"use strict";
+/**
+ * Update the 'release.json' file to the next release
+ *
+ * Usage:
+ *   node update-release-json.js \
+ *     --version 1.9
+ */
+
 const { readFile, writeFile } = require("node:fs/promises");
+const {
+  parseArgs,
+  required
+} = require('./shared');
 
 async function updateVersionFile(version) {
-  if (!version || !version.trim()) {
-    console.error("ERROR: VERSION env var is required");
-    process.exit(1);
-  }
-
   const path = 'release.json';
 
   const raw = await readFile(path, "utf8");
@@ -25,6 +34,8 @@ async function updateVersionFile(version) {
 }
 
 async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const version = required('version', args.version);
   updateVersionFile(version);
 }
 
