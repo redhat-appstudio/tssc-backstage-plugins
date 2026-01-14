@@ -43,7 +43,7 @@ jobs:
             --debug
 
       - name: Install plugin updates
-        run: yarn
+        run: yarn install --mode=update-lockfile
 
       - name: Update release.json file
         run: |
