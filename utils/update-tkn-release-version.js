@@ -18,8 +18,10 @@ const file_regex = {
     /appstudio.openshift.io\/application: tssc-backstage-plugins/g,
   component_label: /appstudio.openshift.io\/component: tssc-backstage-plugins/g,
   pipeline_name: /tssc-backstage-plugins-on-(push|pull-request)/g,
-  output_image_value:
-    /quay.io\/redhat-user-workloads\/rhtap-shared-team-tenant\/rhtap-shared-team-tenant-tenant\/tssc-backstage-plugins\/tssc-backstage-plugins:on-pr-\{\{revision}}/g,
+  output_image_value: {
+    push: /quay\.io\/redhat-user-workloads\/rhtap-shared-team-tenant\/rhtap-shared-team-tenant-tenant\/tssc-backstage-plugins\/tssc-backstage-plugins:\{\{revision}}/g,
+    pull: /quay\.io\/redhat-user-workloads\/rhtap-shared-team-tenant\/rhtap-shared-team-tenant-tenant\/tssc-backstage-plugins\/tssc-backstage-plugins:on-pr-\{\{revision}}/g,
+  },
   service_account_name: /build-pipeline-tssc-backstage-plugins/g,
 };
 
@@ -57,9 +59,12 @@ async function main() {
       file_regex.pipeline_name,
       pipelineName,
     );
+    const outputImageRegex = forOnPush
+      ? file_regex.output_image_value.push
+      : file_regex.output_image_value.pull;
     const updatedOutputImagevalue = updatedPipelineName.replace(
-      file_regex.output_image_value,
-      `quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins-${versionInsert}:on-pr-{{revision}}`,
+      outputImageRegex,
+      `quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins-${versionInsert}:${forOnPush ? "" : "on-pr-"}{{revision}}`,
     );
     const finalEdit = updatedOutputImagevalue.replace(
       file_regex.service_account_name,
