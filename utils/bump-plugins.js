@@ -61,6 +61,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2)); //Ignore 'node <filename>'
   const target = required("target", args.target);
   const ref = args.ref || "main";
+  const debugEnabled = args.debug;
 
   // Get all package updates at backstage version target
   const results = await Promise.all(
@@ -68,7 +69,7 @@ async function main() {
   );
 
   const packageUpdates = Object.assign({}, ...results);
-  if (args.debug) {
+  if (debugEnabled) {
     console.log("🔍 Debug info on packages with Backstage target", target);
     console.log(packageUpdates);
     console.log("\n");
@@ -82,8 +83,9 @@ async function main() {
   );
 
   console.log("⏳ Starting plugin bumps\n");
+  // Keep count of how many packages were updated.
   let updated = 0;
-  // Iterate and look for pkg udpates
+  // Look for pkg updates
   for (const pkgPath of packageJsonFiles) {
     const data = fs.readFileSync(pkgPath, "utf8");
     const pkg = JSON.parse(data);

@@ -50,10 +50,6 @@ async function fetchRawJson(owner, repo, shaOrRef, filePath) {
   }
 }
 
-/**
- * Retrieves the commit where the version value in the backstage.json file
- * matches the value passed in the CLI arg.
- */
 async function findCommitWhereBackstageVersionMatches({
   owner,
   repo,
@@ -67,7 +63,6 @@ async function findCommitWhereBackstageVersionMatches({
     console.error(`Could not fetch/parse ${backstageJsonPath} at ref "${ref}"`);
   }
 
-  // but can still be used for an update.
   // Check if we already found the version we want.
   const currentVersion = String(current.json?.version);
   if (currentVersion === target) {
@@ -86,8 +81,8 @@ async function findCommitWhereBackstageVersionMatches({
   const versionsFound = {};
 
   while (true) {
-    // Grab all related commits
-    // paginate, grab 100 at at time.
+    // Grab all commits related to backstage.json file.
+    // Grab 100 commits at at time and paginate.
     const commitsUrl =
       `https://api.github.com/repos/${owner}/${repo}/commits` +
       `?sha=${encodeURIComponent(ref)}` +
@@ -97,7 +92,9 @@ async function findCommitWhereBackstageVersionMatches({
 
     const commits = await ghJson(commitsUrl);
 
+    // Reached the end, no target found.
     if (!Array.isArray(commits) || commits.length === 0) {
+      // Log the targets we did find.
       const debugJson = { [backstageJsonPath]: versionsFound };
       console.log("\n");
       console.warn(
@@ -119,13 +116,13 @@ async function findCommitWhereBackstageVersionMatches({
         sha,
         backstageJsonPath,
       );
-      // No file? Continue.
+      // No file? Skip.
       if (!fileAtCommit) continue;
 
       // Extract version from file, return data.
       const v = String(fileAtCommit.json?.version);
 
-      // Collect version found for debug.
+      // Collect version found for debug logs.
       versionsFound[v] = {
         commitSha: sha,
         url: `https://raw.githubusercontent.com/${owner}/${repo}/${sha}/${backstageJsonPath}`,
@@ -133,10 +130,6 @@ async function findCommitWhereBackstageVersionMatches({
 
       // We found a version that matches or Backstage target
       if (v === target) {
-        // Remove last version found if it matches target.
-        // It won't be needed in the debug logs.
-        delete versionsFound[v];
-
         const date =
           c.commit?.committer?.date ?? c.commit?.author?.date ?? null;
         const msg = c.commit?.message?.split("\n")[0] ?? null;
@@ -165,10 +158,7 @@ async function listRepoContents({ owner, repo, dirPath, ref }) {
   return data; // entries: { type: "file"|"dir", name, path, ... }
 }
 
-/**
- * Traverse down the directory in the specified repo
- */
-async function collectPackageJsonUnderDir({
+async function collectPluginPackageJsons({
   owner,
   repo,
   ref,
@@ -177,11 +167,7 @@ async function collectPackageJsonUnderDir({
 }) {
   let result = {};
 
-  // Get directories using:
-  // repo owner (bacsktage)
-  // repo name (community-plugins)
-  // directory path
-  // SHA ref
+  // Grab all the stuff under the specified repo at the specified SHA.
   const entries = await listRepoContents({
     owner,
     repo,
@@ -199,6 +185,7 @@ async function collectPackageJsonUnderDir({
     const pkgPath = path.posix.join(e.path, "package.json");
     const pkg = await fetchRawJson(owner, repo, ref, pkgPath);
 
+    // Found a package.json file
     if (pkg?.json && typeof pkg.json === "object") {
       const { name, version } = pkg.json;
       result[name] = {
@@ -238,7 +225,7 @@ async function getPluginPackagesForBackstageVersion(
   }
 
   // Get all the package.json files for each plugin
-  const packages = await collectPackageJsonUnderDir({
+  const packages = await collectPluginPackageJsons({
     owner,
     repo,
     ref: match.sha,
