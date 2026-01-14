@@ -7,7 +7,7 @@ on:
     # Run daily at 2am UTC
     - cron: "0 2 * * *"
 
-permission:
+permissions:
   pull-requests: write
   contents: read
 
