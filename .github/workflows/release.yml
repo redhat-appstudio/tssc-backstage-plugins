@@ -52,6 +52,11 @@ jobs:
           node utils/update-container-release-version.js \
             --version ${{ inputs.version }}
 
+      - name: Update .tekton files
+        run: |
+          node utils/update-tkn-release-version.js \
+            --version ${{ inputs.version }}
+
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
