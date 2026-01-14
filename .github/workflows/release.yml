@@ -38,7 +38,7 @@ jobs:
         run: |
           node scripts/update-release-json.js
           node scripts/bump-plugins.js \
-            --target ${{github.event.inputs.backstage_target}}
+            --target ${{ inputs.backstage_target }}
             --ref main
             --debug
 
@@ -48,28 +48,12 @@ jobs:
           # Github bot: https://api.github.com/users/github-actions%5Bbot%5D
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Commit and push (if changed)
-        env:
-          VERSION: ${{ inputs.version }}
-        run: |
-          BRANCH_NAME="release-${VERSION}"
-          git checkout -b "$BRANCH_NAME"
-
-          git add -A
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-
-          git commit -m "chore: auto-release to version ${VERSION}"
-          git push origin "$BRANCH_NAME"
-
       - name: Create Pull Request
         env:
           VERSION: ${{ inputs.version }}
         uses: peter-evans/create-pull-request@v6
         with:
+          base: main
           branch: release-${{ inputs.version }}
           title: "chore: auto-release to version ${{ inputs.version }}"
           body: |
@@ -78,3 +62,6 @@ jobs:
             Auto release to version ${{ inputs.version }}
           commit-message: "chore: auto-release to version ${{ inputs.version }}"
           labels: automated, release-${{ inputs.version }}
+          delete-branch: true
+          add-paths: |
+            release.json
