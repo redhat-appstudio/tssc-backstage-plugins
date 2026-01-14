@@ -16,21 +16,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Close PRs for release-* branches
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          set -euo pipefail
+
+          LIMIT=50
+
           echo "Finding open PRs that are for release branches"
 
+          # Get all PRs trying to merge into a 'release-*' branch.
           prs=$(gh pr list \
             --state open \
-            --json number,headRefName \
-            --jq '.[] | select(.headRefName | contains("release-")) | .number') 
+            --limit 500 \
+            --json number,baseRefName \
+            --jq '.[] | select(.baseRefName | contains("release-")) | .number')
 
           if [ -z "$prs" ]; then
             echo "No matching PRs found."
             exit 0
           fi
+
+          count=$(echo "$prs" | wc -w | tr -d ' ')
+          echo "Found $count release-* PR(s) to close."
 
           for pr in $prs; do
             echo "Closing PR #$pr"
