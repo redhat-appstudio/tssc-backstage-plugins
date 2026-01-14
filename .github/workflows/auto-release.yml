@@ -77,6 +77,4 @@ jobs:
             
             Auto release to version ${{ inputs.version }}
           commit-message: "chore: auto-release to version ${{ inputs.version }}"
-          labels: 
-            - automated
-            - release-${{ inputs.version }}
+          labels: automated, release-${{ inputs.version }}
