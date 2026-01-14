@@ -35,15 +35,22 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Run updater script
+      - name: bump plugins
         run: |
-          node utils/update-release-json.js \
-            --version ${{ inputs.version }}
-
           node utils/bump-plugins.js \
             --target ${{ inputs.backstage_target }} \
             --ref main \
             --debug
+
+      - name: Update release.json file
+        run: |
+          node utils/update-release-json.js \
+            --version ${{ inputs.version }}
+
+      - name: Update Containerfile
+        run: |
+          node utils/update-container-release-version.js \
+            --version ${{ inputs.version }}
 
       - name: Configure git
         run: |
