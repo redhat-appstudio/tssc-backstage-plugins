@@ -41,8 +41,8 @@ jobs:
             --version ${{ inputs.version }}
 
           node utils/bump-plugins.js \
-            --target ${{ inputs.backstage_target }}
-            --ref main
+            --target ${{ inputs.backstage_target }} \
+            --ref main \
             --debug
 
       - name: Configure git
