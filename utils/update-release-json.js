@@ -9,13 +9,10 @@
  */
 
 const { readFile, writeFile } = require("node:fs/promises");
-const {
-  parseArgs,
-  required
-} = require('./shared');
+const { parseArgs, required } = require("./shared");
 
 async function updateVersionFile(version) {
-  const path = 'release.json';
+  const path = "release.json";
 
   const raw = await readFile(path, "utf8");
   let json;
@@ -30,12 +27,12 @@ async function updateVersionFile(version) {
 
   await writeFile(path, JSON.stringify(json, null, 2) + "\n", "utf8");
 
-  console.log(`Updated ${path} version -> ${json.version}`)
+  console.log(`Updated ${path} version -> ${json.version}`);
 }
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const version = required('version', args.version);
+  const version = required("version", args.version);
   updateVersionFile(version);
 }
 
@@ -43,4 +40,3 @@ main().catch((e) => {
   console.error(`Error: ${e.message}`);
   process.exit(1);
 });
-
