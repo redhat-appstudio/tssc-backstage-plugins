@@ -29,11 +29,12 @@ jobs:
 
           echo "Finding open PRs that are for release branches"
 
+          # Get all PRs trying to merge into a 'release-*' branch.
           prs=$(gh pr list \
             --state open \
-            --limit "$LIMIT" \
-            --json number,headRefName \
-            --jq '.[] | select(.headRefName | contains("release-")) | .number') 
+            --limit 500 \
+            --json number,baseRefName \
+            --jq '.[] | select(.baseRefName | contains("release-")) | .number')
 
           if [ -z "$prs" ]; then
             echo "No matching PRs found."
