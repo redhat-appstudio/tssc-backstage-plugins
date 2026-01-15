@@ -50,13 +50,19 @@ async function fetchRawJson(owner, repo, shaOrRef, filePath) {
   }
 }
 
-async function findCommitWhereBackstageVersionMatches({
+/**
+ * Returns the most recent commit where the "version" value in `backstage.json`
+ * is closest to the the version target we pass.
+ * */
+async function findCommitsForBackstageTarget({
   owner,
   repo,
-  ref,
+  workspace,
   backstageJsonPath,
   target,
 }) {
+  // Always start at main.
+  const ref = "main";
   // Fast check at ref passed or default: 'main'
   const current = await fetchRawJson(owner, repo, ref, backstageJsonPath);
   if (!current) {
@@ -64,8 +70,13 @@ async function findCommitWhereBackstageVersionMatches({
   }
 
   // Check if we already found the version we want.
+  // Since the check starts at main it's safe to assume
+  // this is the highest version.
   const currentVersion = String(current.json?.version);
-  if (currentVersion === target) {
+  console.debug(
+    `⚡️ Workspace ${workspace} includes target (${target}) on main: ${currentVersion}`,
+  );
+  if (currentVersion.includes(target)) {
     return {
       sha: ref,
       info: { date: null, msg: null },
@@ -73,13 +84,14 @@ async function findCommitWhereBackstageVersionMatches({
     };
   }
 
-  // Walk commit history for that file
   let page = 1;
   const perPage = 100;
-  // In the event we do not find our target version
-  // collect the versions we did find.
+  // For debug
   const versionsFound = {};
+  // Collect any versions close to the target.
+  const relatedVersions = {};
 
+  // Walk commit history for that file
   while (true) {
     // Grab all commits related to backstage.json file.
     // Grab 100 commits at at time and paginate.
@@ -92,18 +104,10 @@ async function findCommitWhereBackstageVersionMatches({
 
     const commits = await ghJson(commitsUrl);
 
-    // Reached the end, no target found.
+    // Reached the end of commits
     if (!Array.isArray(commits) || commits.length === 0) {
-      // Log the targets we did find.
-      const debugJson = { [backstageJsonPath]: versionsFound };
-      console.log("\n");
-      console.warn(
-        `🚨 No commit found where ${backstageJsonPath} has version=${target}`,
-      );
-      console.debug("🕵️ Logging what was found:");
-      console.debug(debugJson);
-      console.debug("\n");
-      return null;
+      // Leave loop
+      break;
     }
 
     for (const c of commits) {
@@ -128,17 +132,44 @@ async function findCommitWhereBackstageVersionMatches({
         url: `https://raw.githubusercontent.com/${owner}/${repo}/${sha}/${backstageJsonPath}`,
       };
 
-      // We found a version that matches or Backstage target
-      if (v === target) {
+      // We found a version that closely matches backstage target:
+      // target: '1.45', v: '1.45.1'
+      if (v.includes(target)) {
         const date =
           c.commit?.committer?.date ?? c.commit?.author?.date ?? null;
         const msg = c.commit?.message?.split("\n")[0] ?? null;
-        return { sha, info: { date, msg }, rawUrl: fileAtCommit.rawUrl };
+        relatedVersions[v] = {
+          sha,
+          info: { date, msg },
+          rawUrl: fileAtCommit.rawUrl,
+        };
       }
     }
     // Next page
     page++;
   }
+
+  const foundVersions = Object.keys(relatedVersions);
+  if (foundVersions.length >= 1) {
+    // Only use the highest version closest to the target.
+    const highestVersion = foundVersions.sort().pop();
+    const result = relatedVersions[highestVersion];
+    console.debug(
+      `✅ Workspace ${workspace} includes target (${target}) on ${result.sha}: ${highestVersion}`,
+    );
+    return result;
+  }
+
+  // Log the targets we did find.
+  const debugJson = { [backstageJsonPath]: versionsFound };
+  console.log("\n");
+  console.warn(
+    `🚨 No commit found for ${workspace} with version close to ${target}`,
+  );
+  console.debug("🕵️ Logging what was found:");
+  console.debug(debugJson);
+  console.debug("\n");
+  return null;
 }
 
 /**
@@ -163,6 +194,7 @@ async function collectPluginPackageJsons({
   repo,
   ref,
   startDir,
+  workspace,
   backstageJsonPath,
 }) {
   let result = {};
@@ -189,6 +221,7 @@ async function collectPluginPackageJsons({
     if (pkg?.json && typeof pkg.json === "object") {
       const { name, version } = pkg.json;
       result[name] = {
+        workspace,
         version,
         path: pkgPath,
         rawUrl: pkg.rawUrl,
@@ -201,21 +234,17 @@ async function collectPluginPackageJsons({
   return result;
 }
 
-async function getPluginPackagesForBackstageVersion(
-  workspace,
-  target,
-  ref = "main",
-) {
+async function getPluginPackagesForBackstageVersion(workspace, target) {
   const owner = "backstage";
   const repo = "community-plugins";
   const backstageJsonPath = `workspaces/${workspace}/backstage.json`;
   const pluginsDir = `workspaces/${workspace}/plugins`;
 
   // Find the commit that has the version we want.
-  const match = await findCommitWhereBackstageVersionMatches({
+  const match = await findCommitsForBackstageTarget({
     owner,
     repo,
-    ref,
+    workspace,
     backstageJsonPath,
     target,
   });
@@ -224,12 +253,14 @@ async function getPluginPackagesForBackstageVersion(
     return;
   }
 
-  // Get all the package.json files for each plugin
+  // Using the commit we found, collect all the packages
+  // for each plugin in that workspace at that point in time.
   const packages = await collectPluginPackageJsons({
     owner,
     repo,
     ref: match.sha,
     startDir: pluginsDir,
+    workspace,
     backstageJsonPath,
   });
 

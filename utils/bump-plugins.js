@@ -8,8 +8,7 @@
  *
  * Usage:
  *   node bump-plugins.js \
- *     --target 1.46.0 \
- *     --ref main (optional)
+ *     --target 1.46 \
  *     --debug (optional)
  *
  */
@@ -60,12 +59,11 @@ async function lookForUpdate(pkg, version = "latest") {
 async function main() {
   const args = parseArgs(process.argv.slice(2)); //Ignore 'node <filename>'
   const target = required("target", args.target);
-  const ref = args.ref || "main";
   const debugEnabled = args.debug;
 
   // Get all package updates at backstage version target
   const results = await Promise.all(
-    WORKSPACES.map((w) => getPluginPackagesForBackstageVersion(w, target, ref)),
+    WORKSPACES.map((w) => getPluginPackagesForBackstageVersion(w, target)),
   );
 
   const packageUpdates = Object.assign({}, ...results);
