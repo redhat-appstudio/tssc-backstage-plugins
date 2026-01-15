@@ -3,7 +3,7 @@
   "include": ["src", "dev", "migrations"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "outDir": "../../dist-types/plugins/redhat-argocd-backend",
+    "outDir": "../../dist-types/plugins/argocd-backend",
     "rootDir": "."
   }
 }
