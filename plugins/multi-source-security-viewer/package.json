@@ -26,8 +26,8 @@
     "test": "backstage-cli package test --passWithNoTests --coverage",
     "clean": "backstage-cli package clean",
     "clean-build": "rimraf dist dist-dynamic dist-scalprum dist-plugin",
-    "export-dynamic:frontend": "janus-cli package export-dynamic-plugin --clean",
-    "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
+    "export-dynamic:frontend": "rhdh-cli plugin export --clean",
+    "package-dynamic": "rhdh-cli plugin package --export-to dist-plugin"
   },
   "dependencies": {
     "@backstage-community/plugin-multi-source-security-viewer": "0.7.2"
