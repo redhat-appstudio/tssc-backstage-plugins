@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version to set in release.json (e.g. 1.2.3)"
+        description: "Version to set in release.json (e.g. 1.9)"
         required: true
         type: string
       backstage_target:
-        description: "Version of backstage to target for release (e.g. 1.46.1)"
+        description: "Floor version of Backstage you want to bump to (e.g. 1.45)"
         required: true
         type: string
 
@@ -39,7 +39,6 @@ jobs:
         run: |
           node utils/bump-plugins.js \
             --target ${{ inputs.backstage_target }} \
-            --ref main \
             --debug
 
       - name: Update release.json file
