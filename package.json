@@ -1,6 +1,7 @@
 {
   "name": "tssc-plugins",
-  "version": "1.0.0",
+  "version": "1.9",
+  "backstageTarget": "1.45",
   "private": true,
   "engine": {
     "node": 22
