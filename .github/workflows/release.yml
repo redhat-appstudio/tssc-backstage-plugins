@@ -79,7 +79,7 @@ jobs:
             
             These updates target Backstage version ${{ inputs.backstage_target }}.
           commit-message: "chore: auto-release to version ${{ inputs.version }}"
-          labels: automated, release, ${{ inputs.version }}, ${{ inputs.backstage_target }}
+          labels: automated, release, tssc-${{ inputs.version }}, backstage-${{ inputs.backstage_target }}
           delete-branch: true
           # What to commit
           add-paths: |
