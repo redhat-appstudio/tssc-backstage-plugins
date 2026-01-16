@@ -29,7 +29,9 @@ async function updateVersionFile(version, target) {
 
   await writeFile(path, JSON.stringify(json, null, 2) + "\n", "utf8");
 
-  console.log(`Updated ${path}. Release version: ${json.version}, Backstage target: ${json.backstageTarget}`);
+  console.log(
+    `Updated ${path}. Release version: ${json.version}, Backstage target: ${json.backstageTarget}`,
+  );
 }
 
 async function main() {
