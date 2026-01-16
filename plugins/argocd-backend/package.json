@@ -1,6 +1,6 @@
 {
-  "name": "@tssc-plugins/backstage-community-plugin-redhat-argocd-backend",
-  "version": "0.10.0",
+  "name": "@tssc-plugins/backstage-community-plugin-argocd-backend",
+  "version": "1.0.1",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "Apache-2.0",
@@ -12,14 +12,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/redhat-appstudio/tssc-backstage-plugins",
-    "directory": "plugins/redhat-argocd-backend"
+    "directory": "plugins/argocd-backend"
   },
   "backstage": {
     "role": "backend-plugin",
     "supported-versions": "1.42.5",
     "pluginId": "quay",
     "pluginPackages": [
-      "@tssc-plugins/backstage-community-plugin-redhat-argocd-backend"
+      "@tssc-plugins/backstage-community-plugin-argocd-backend"
     ]
   },
   "exports": {
@@ -40,15 +40,15 @@
     "test": "backstage-cli package test --passWithNoTests --coverage",
     "clean": "backstage-cli package clean",
     "clean-build": "rimraf dist dist-dynamic dist-scalprum dist-plugin",
-    "export-dynamic:backend": "janus-cli package export-dynamic-plugin --no-install --embed-package @backstage-community/plugin-redhat-argocd-backend",
+    "export-dynamic:backend": "janus-cli package export-dynamic-plugin --no-install --embed-package @backstage-community/plugin-argocd-backend",
     "export-dynamic:backend:postinstall": "cd dist-dynamic && yarn install --inline-builds",
     "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
   },
   "dependencies": {
-    "@backstage-community/plugin-redhat-argocd-backend": "0.10.0"
+    "@backstage-community/plugin-argocd-backend": "1.0.1"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.34.0",
+    "@backstage/cli": "^0.34.5",
     "@janus-idp/cli": "3.6.1",
     "typescript": "5.9.3"
   },
