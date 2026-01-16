@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@backstage-community/plugin-tekton": "3.29.0",
-    "@mui/material": "5.18.0"
+    "@mui/material": "7.3.7"
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.4",
