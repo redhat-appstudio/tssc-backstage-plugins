@@ -40,16 +40,16 @@
     "test": "backstage-cli package test --passWithNoTests --coverage",
     "clean": "backstage-cli package clean",
     "clean-build": "rimraf dist dist-dynamic dist-scalprum dist-plugin",
-    "export-dynamic:backend": "janus-cli package export-dynamic-plugin --no-install --embed-package @backstage-community/plugin-argocd-backend",
+    "export-dynamic:backend": "rhdh-cli plugin export --no-install --embed-package @backstage-community/plugin-argocd-backend",
     "export-dynamic:backend:postinstall": "cd dist-dynamic && yarn install --inline-builds",
-    "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
+    "package-dynamic": "rhdh-cli plugin package --export-to dist-plugin"
   },
   "dependencies": {
     "@backstage-community/plugin-argocd-backend": "1.0.1"
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.5",
-    "@janus-idp/cli": "3.6.1",
+    "@red-hat-developer-hub/cli": "1.9.1",
     "typescript": "5.9.3"
   },
   "files": [

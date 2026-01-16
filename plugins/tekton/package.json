@@ -25,8 +25,8 @@
     "test": "backstage-cli package test --passWithNoTests --coverage",
     "clean": "backstage-cli package clean",
     "clean-build": "rimraf dist dist-dynamic dist-scalprum dist-plugin",
-    "export-dynamic:frontend": "janus-cli package export-dynamic-plugin --clean",
-    "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
+    "export-dynamic:frontend": "rhdh-cli plugin export --clean",
+    "package-dynamic": "rhdh-cli plugin package --export-to dist-plugin"
   },
   "dependencies": {
     "@backstage-community/plugin-tekton": "3.29.0",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.4",
-    "@janus-idp/cli": "3.6.1",
+    "@red-hat-developer-hub/cli": "1.9.1",
     "@types/react": "^17.0.0 || ^18.0.0",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
