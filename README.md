@@ -1,5 +1,11 @@
 # TSSC Backstage Plugins
 
+This repository generates [RHDH dynamic plugin](https://github.com/redhat-developer/rhdh/blob/main/docs/dynamic-plugins/index.md) artifacts for the following plugins:
+- [Multi Source Security Viewer](https://github.com/backstage/community-plugins/tree/main/workspaces/multi-source-security-viewer)
+- [Quay](https://github.com/backstage/community-plugins/tree/main/workspaces/quay)
+- [ArgoCD](https://github.com/backstage/community-plugins/tree/main/workspaces/argocd)
+- [Tekton](https://github.com/backstage/community-plugins/tree/main/workspaces/tekton)
+
 ## Table of Contents
 
 - [Basic Information](#basic-information)
