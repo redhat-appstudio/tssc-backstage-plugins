@@ -9,8 +9,8 @@
  *
  */
 
-const path = require("node:path");
-const fs = require("fs");
+import path from "node:path";
+import fs from "fs";
 
 // Find all package.json files recursively
 export function findPackageJsonFiles(
