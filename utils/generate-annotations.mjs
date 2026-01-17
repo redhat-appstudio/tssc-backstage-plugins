@@ -5,7 +5,7 @@
  *
  * This file is used by Konflux in an image of nodejs-20, offline.
  * Because of that, no dependencies can be installed, so tsc/tsx cannot be used.
- * This is kept as a plain .js file for now.
+ * This is kept as a plain .mjs file for now.
  *
  */
 
