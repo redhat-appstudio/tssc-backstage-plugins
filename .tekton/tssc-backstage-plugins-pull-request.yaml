@@ -279,7 +279,7 @@ spec:
             value: |
               #!/bin/bash
 
-              yarn tsx ./utils/generate-annotations.ts
+              node ./utils/generate-annotations.js
           - name: SOURCE_ARTIFACT
             value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
           - name: HERMETIC

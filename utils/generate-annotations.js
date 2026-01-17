@@ -1,12 +1,42 @@
-#!/usr/bin/env node
+#!/usr/bin / env node
 "use strict";
 
-import { findPackageJsonFiles } from "./shared";
-import fs from "fs";
-import { PackageJson } from "./types";
+/**
+ *
+ * This file is used by Konflux in an image of nodejs-20, offline.
+ * Because of that, no dependencies can be installed, so tsc/tsx cannot be used.
+ * This is kept as a plain .js file for now.
+ *
+ */
 
+const path = require("node:path");
+const fs = require("fs");
+
+// Find all package.json files recursively
+export function findPackageJsonFiles(
+  dir,
+  ignoreDirs = ["node_modules", ".git"],
+) {
+  let results = [];
+  const items = fs.readdirSync(dir);
+
+  for (const item of items) {
+    if (ignoreDirs.includes(item)) continue;
+
+    const itemPath = path.join(dir, item);
+    const stat = fs.statSync(itemPath);
+
+    if (stat.isDirectory()) {
+      results = results.concat(findPackageJsonFiles(itemPath, ignoreDirs));
+    } else if (stat.isFile() && item === "package.json") {
+      results.push(itemPath);
+    }
+  }
+
+  return results;
+}
 // Transform a single package.json
-function transformPackageJson(inputJson: PackageJson) {
+function transformPackageJson(inputJson) {
   if (!inputJson.name || !inputJson.version || !inputJson.backstage)
     return null;
 
@@ -54,7 +84,7 @@ function main() {
           results.push({ [key]: transformedObject[key] });
           processedCount++;
         }
-      } catch (err: unknown) {
+      } catch (err) {
         if (err instanceof Error) {
           console.error(`Error processing ${filePath}: ${err?.message}`);
         }
@@ -79,7 +109,7 @@ function main() {
     );
     // Output so it gets grabbed by next task.
     console.log(hash);
-  } catch (err: unknown) {
+  } catch (err) {
     if (err instanceof Error) {
       console.error(`Error: ${err.message}`);
     } else {
