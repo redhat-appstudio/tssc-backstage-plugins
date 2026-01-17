@@ -31,11 +31,11 @@ This repository generates [RHDH dynamic plugin](https://github.com/redhat-develo
 
 ### Our Plugins
 
-We maintain these plugins in the Backstage community:
+We help maintain these plugins in the Backstage community:
 
 - [Multi Source Security Viewer](https://github.com/backstage/community-plugins/tree/main/workspaces/multi-source-security-viewer)
 - [Quay](https://github.com/backstage/community-plugins/tree/main/workspaces/quay)
-- [Red Hat ArgoCD](https://github.com/backstage/community-plugins/tree/main/workspaces/redhat-argocd)
+- [ArgoCD](https://github.com/backstage/community-plugins/tree/main/workspaces/argocd)
 - [Tekton](https://github.com/backstage/community-plugins/tree/main/workspaces/tekton)
 
 We don't maintain these plugins, but we do add features when needed:
