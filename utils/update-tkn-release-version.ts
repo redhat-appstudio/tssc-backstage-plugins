@@ -4,7 +4,7 @@
  * Update the .tekton files for a release
  *
  * Usage:
- *   node update-tkn-release-version.js \
+ *   yarn tsx update-tkn-release-version.ts \
  *     --version 1.9
  */
 

@@ -7,7 +7,7 @@
  * Use that to update the related package versions in this directory
  *
  * Usage:
- *   node bump-plugins.js \
+ *   yarn tsx bump-plugins.ts \
  *     --target 1.46 \
  *     --debug (optional)
  *

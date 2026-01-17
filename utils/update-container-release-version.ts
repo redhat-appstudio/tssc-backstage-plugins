@@ -4,7 +4,7 @@
  * Update the release metadata value in the Containerfile.
  *
  * Usage:
- *   node update-container-release-version.js \
+ *   yarn tsx update-container-release-version.ts \
  *     --version 1.9
  */
 

@@ -4,7 +4,7 @@
  * Update the 'package.json' file to the next release and backstage target.
  *
  * Usage:
- *   node update-package-json.js \
+ *   yarn tsx update-package-json.ts \
  *     --version 1.9 (TSSC Release version)
  *     --target 1.45 (backsage target (MAJOR.MINOR))
  */
