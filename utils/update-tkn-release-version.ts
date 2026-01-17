@@ -30,8 +30,8 @@ async function main() {
   const version = required("version", args.version);
   const versionInsert = `${version.replace(".", "-")}`;
   const paths = [
-    ".tekton/rhtap-backstage-plugins-pull-request.yaml",
-    ".tekton/rhtap-backstage-plugins-push.yaml",
+    ".tekton/tssc-backstage-plugins-pull-request.yaml",
+    ".tekton/tssc-backstage-plugins-push.yaml",
   ];
   for (const path of paths) {
     const forOnPush = path.includes("push.yaml");
