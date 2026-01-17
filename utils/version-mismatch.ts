@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 "use strict";
 
-const fs = require("fs");
-const {
+import fs from "fs";
+import {
   extractDependencyFromPackageName,
   findPackageJsonFiles,
-} = require("./shared");
+} from "./shared";
+import { PackageJson } from "./types";
 
-function verifyVersions(pkg) {
+function verifyVersions(pkg: PackageJson) {
   const dependency = extractDependencyFromPackageName(pkg.name);
 
   if (pkg.dependencies[dependency] !== pkg.version) {

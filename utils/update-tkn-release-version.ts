@@ -8,8 +8,8 @@
  *     --version 1.9
  */
 
-const { readFile, writeFile } = require("node:fs/promises");
-const { parseArgs, required } = require("./shared");
+import { readFile, writeFile } from "node:fs/promises";
+import { parseArgs, required } from "./shared";
 
 const file_regex = {
   cel_expression:

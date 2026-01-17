@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 "use strict";
 
-const findPackageJsonFiles = require("./shared").findPackageJsonFiles;
-const fs = require("fs");
+import { findPackageJsonFiles } from "./shared";
+import fs from "fs";
+import { PackageJson } from "./types";
 
 // Transform a single package.json
-function transformPackageJson(inputJson) {
+function transformPackageJson(inputJson: PackageJson) {
   if (!inputJson.name || !inputJson.version || !inputJson.backstage)
     return null;
 
@@ -53,15 +54,18 @@ function main() {
           results.push({ [key]: transformedObject[key] });
           processedCount++;
         }
-      } catch (err) {
-        console.error(`Error processing ${filePath}: ${err.message}`);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error(`Error processing ${filePath}: ${err?.message}`);
+        }
+        console.error('An unknown error occurred', err);
       }
     }
 
     // Write the combined result
     fs.writeFileSync(
       outputFilePath,
-      JSON.stringify(results, null, null),
+      JSON.stringify(results),
       "utf8",
     );
     console.log(
@@ -79,8 +83,12 @@ function main() {
     );
     // Output so it gets grabbed by next task.
     console.log(hash);
-  } catch (err) {
-    console.error(`Error: ${err.message}`);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error(`Error: ${err.message}`);
+    } else {
+      console.log("An unknown error occurred", err);
+    }
     process.exit(1);
   }
 }

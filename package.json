@@ -20,7 +20,12 @@
     "plugins:build:frontend": "turbo run export-dynamic:frontend --filter='./plugins/**'",
     "plugins:build:backend": "turbo run export-dynamic:backend --filter='./plugins/**'",
     "plugins:build:backend:postinstall": "turbo run export-dynamic:backend:postinstall --filter='./plugins/**'",
-    "plugins:package": "turbo run package-dynamic --filter='./plugins/**'"
+    "plugins:package": "turbo run package-dynamic --filter='./plugins/**'",
+    "build:utils": "tsc -p utils",
+    "bump:plugins": "node utils/dist/bump-plugins.js"
+    "bump:containerfile": "node utils/dist/update-container-release-version.js"
+    "bump:packagejson": "node utils/dist/update-package-json.js"
+    "bump:konflux:tekton": "node utils/dist/update-tkn-release-version.js"
   },
   "lint-staged": {
     "*.{js,ts,json}": [
