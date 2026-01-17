@@ -36,47 +36,29 @@ async function main() {
   for (const path of paths) {
     const forOnPush = path.includes("push.yaml");
     const raw = await readFile(path, "utf8");
-    // update cel-expression label
     const celEvent = forOnPush ? "push" : "pull_request";
-    const updatedCel = raw.replace(
-      file_regex.cel_expression,
-      `pipelinesascode.tekton.dev/on-cel-expression: event == "${celEvent}" && target_branch == "release-${version}"`,
-    );
-    // update application label
-    const updatedApplicationLabel = updatedCel.replace(
-      file_regex.application_label,
-      `appstudio.openshift.io/application: tssc-backstage-plugins-${versionInsert}`,
-    );
-    // and so on.
-    const updatedComponentLabel = updatedApplicationLabel.replace(
-      file_regex.component_label,
-      `appstudio.openshift.io/component: tssc-backstage-plugins-${versionInsert}`,
-    );
     const pipelineName = forOnPush
       ? `tssc-backstage-plugins-${versionInsert}-on-push`
       : `tssc-backstage-plugins-${versionInsert}-on-pull-request`;
-    const updatedPipelineName = updatedComponentLabel.replace(
-      file_regex.pipeline_name,
-      pipelineName,
-    );
     const outputImageRegex = forOnPush
       ? file_regex.output_image_value.push
       : file_regex.output_image_value.pull;
-    const updatedOutputImagevalue = updatedPipelineName.replace(
-      outputImageRegex,
-      `quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins-${versionInsert}:${forOnPush ? "" : "on-pr-"}{{revision}}`,
-    );
-    const finalEdit = updatedOutputImagevalue.replace(
-      file_regex.service_account_name,
-      `build-pipeline-tssc-backstage-plugins-${versionInsert}`,
-    );
-
-    await writeFile(path, finalEdit, "utf8");
+    const replacements: [RegExp, string][] = [
+      [file_regex.cel_expression, `pipelinesascode.tekton.dev/on-cel-expression: event == "${celEvent}" && target_branch == "release-${version}"`],
+      [file_regex.application_label, `appstudio.openshift.io/application: tssc-backstage-plugins-${versionInsert}`],
+      [file_regex.component_label, `appstudio.openshift.io/component: tssc-backstage-plugins-${versionInsert}`],
+      [file_regex.pipeline_name, pipelineName],
+      [outputImageRegex, `quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins-${versionInsert}:${forOnPush ? "" : "on-pr-"}{{revision}}`],
+      [file_regex.service_account_name, `build-pipeline-tssc-backstage-plugins-${versionInsert}`],
+    ];
+    const result = replacements.reduce((content, [regex, replacement]) => content.replace(regex, replacement), raw);
+    await writeFile(path, result, "utf8");
 
     console.log(`Updated ${path} version -> ${version}`);
   }
 }
 
 main().catch((e) => {
-  console.log(`Error: ${e.message}`);
+  console.error(`Error: ${e.message}`);
+  process.exit(1);
 });
