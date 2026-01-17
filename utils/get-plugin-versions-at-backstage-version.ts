@@ -2,10 +2,10 @@
 "use strict";
 
 import path from "node:path";
-import { HeadersInit, Workspace } from "./types";
+import { GithubHeaders, Workspace } from "./types";
 
 // Formats request headers for Github
-export function ghHeaders(): HeadersInit {
+export function ghHeaders(): GithubHeaders {
   const github_token = process.env.GITHUB_TOKEN;
   const authHeader = { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` };
   const headers = {
