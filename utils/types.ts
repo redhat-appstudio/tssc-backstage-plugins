@@ -2,9 +2,20 @@ export type DependencyMap = Record<string, string>;
 export type PackageJson = {
   name: string;
   version: string;
-  backstage: Record<string, any>;
+  backstage: {
+    role?: string;
+    "supported-versions"?: string;
+    pluginId?: string;
+    pluginPackages: string[];
+    [key: string]: any
+  }
+  repository: {
+    type?: string;
+    url?: string;
+    directory?: string;
+    [key: string]: any
+  }
   homepage: string;
-  repository: Record<string, any>;
   license: string;
   author: string;
   bugs: string;
@@ -13,7 +24,7 @@ export type PackageJson = {
   devDependencies: DependencyMap;
   peerDependencies: DependencyMap;
 };
-export type HeadersInit = Headers | Record<string, string> | undefined;
+export type GithubHeaders = Headers | Record<string, string> | undefined;
 export type Workspace =
   | "argocd"
   | "tekton"
