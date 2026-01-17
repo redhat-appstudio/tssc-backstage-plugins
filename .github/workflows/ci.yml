@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Install dependencies
+        run: yarn install
+
       - name: Run utils/version-mismatch
         run: yarn tsx utils/version-mismatch.ts
 
