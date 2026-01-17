@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 
-import fs from "fs";
+import { readFile } from "node:fs/promises";
 import {
   extractDependencyFromPackageName,
   findPackageJsonFiles,
@@ -11,14 +11,14 @@ import { PackageJson } from "./types";
 function verifyVersions(pkg: PackageJson) {
   const dependency = extractDependencyFromPackageName(pkg.name);
 
-  if (pkg.dependencies[dependency] !== pkg.version) {
+  if (pkg?.dependencies?.[dependency] !== pkg.version) {
     throw new Error(
       `Version mismatch: expected version ${pkg.version} for ${dependency}`,
     );
   }
 }
 
-function main() {
+async function main() {
   const pluginsDir = "./plugins";
   // Find all package.json files in plugins dir
   const packageJsonFiles = findPackageJsonFiles(pluginsDir);
@@ -28,7 +28,7 @@ function main() {
 
   // Iterate and look for version mismatch
   for (const pkgPath of packageJsonFiles) {
-    const data = fs.readFileSync(pkgPath, "utf8");
+    const data = await readFile(pkgPath, "utf8");
     const pkg = JSON.parse(data);
 
     console.log(`Verifying ${pkgPath}`);
@@ -37,4 +37,8 @@ function main() {
   }
 }
 
-main();
+main().catch((e) => {
+  console.error(`Error: ${e.message}`);
+  process.exit(1);
+});
+
