@@ -36,6 +36,9 @@ jobs:
         run: yarn
 
       - name: bump plugins
+        env:
+          # Needed for API rate limits
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           yarn tsx utils/bump-plugins.ts \
             --target ${{ inputs.backstage_target }} \
