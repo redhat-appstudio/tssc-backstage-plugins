@@ -18,13 +18,13 @@ export function findPackageJsonFiles(
   ignoreDirs = ["node_modules", ".git"],
 ): string[] {
   let results: string[] = [];
-  const items: string[] = fs.readdirSync(dir);
+  const items = fs.readdirSync(dir);
 
   for (const item of items) {
     if (ignoreDirs.includes(item)) continue;
 
-    const itemPath: string = path.join(dir, item);
-    const stat: fs.Stats = fs.statSync(itemPath);
+    const itemPath = path.join(dir, item);
+    const stat = fs.statSync(itemPath);
 
     if (stat.isDirectory()) {
       results = results.concat(findPackageJsonFiles(itemPath, ignoreDirs));
@@ -46,7 +46,7 @@ export function updateDependencies(
   pkg: PackageJson,
   upstreamDependency: string,
   latest: PackageJson,
-): Pick<PackageJson, "dependencies" | "devDependencies"> | null {
+): Pick<PackageJson, "dependencies" | "devDependencies"> {
   const initialDeps: DependencyMap = {};
 
   const dependencies = Object.keys(pkg.dependencies || {}).reduce(
@@ -105,14 +105,13 @@ export function parseArgs(argv: string[]): CliArgs {
 
     // Boolean flag: --debug (or --somethingElse)
     if (BOOLEAN_FLAGS.has(key)) {
-      args.debug = true;
+      (args as any)[key] = true
       continue;
     }
 
     // --version 1.9 / --target 1.45
     if (STRING_FLAGS.has(key) && next && !next.startsWith("--")) {
-      if (rawKey === "version") args.version = next;
-      if (rawKey === "target") args.target = next;
+      (args as any)[key] = next;
       // Increment so next flag is used
       i++;
     }
