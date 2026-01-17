@@ -38,8 +38,9 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const version = required("version", args.version);
   const target = required("target", args.target);
-  await updateVersionFile(version, target)
-    .then(() => console.log('Process completed'));
+  await updateVersionFile(version, target).then(() =>
+    console.log("Process completed"),
+  );
 }
 
 main().catch((e) => {

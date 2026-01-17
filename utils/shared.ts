@@ -105,7 +105,7 @@ export function parseArgs(argv: string[]): CliArgs {
 
     // Boolean flag: --debug (or --somethingElse)
     if (BOOLEAN_FLAGS.has(key)) {
-      (args as any)[key] = true
+      (args as any)[key] = true;
       continue;
     }
 

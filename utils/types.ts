@@ -7,14 +7,14 @@ export type PackageJson = {
     "supported-versions"?: string;
     pluginId?: string;
     pluginPackages: string[];
-    [key: string]: any
-  }
+    [key: string]: any;
+  };
   repository: {
     type?: string;
     url?: string;
     directory?: string;
-    [key: string]: any
-  }
+    [key: string]: any;
+  };
   homepage: string;
   license: string;
   author: string;

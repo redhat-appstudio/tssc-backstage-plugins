@@ -44,14 +44,32 @@ async function main() {
       ? file_regex.output_image_value.push
       : file_regex.output_image_value.pull;
     const replacements: [RegExp, string][] = [
-      [file_regex.cel_expression, `pipelinesascode.tekton.dev/on-cel-expression: event == "${celEvent}" && target_branch == "release-${version}"`],
-      [file_regex.application_label, `appstudio.openshift.io/application: tssc-backstage-plugins-${versionInsert}`],
-      [file_regex.component_label, `appstudio.openshift.io/component: tssc-backstage-plugins-${versionInsert}`],
+      [
+        file_regex.cel_expression,
+        `pipelinesascode.tekton.dev/on-cel-expression: event == "${celEvent}" && target_branch == "release-${version}"`,
+      ],
+      [
+        file_regex.application_label,
+        `appstudio.openshift.io/application: tssc-backstage-plugins-${versionInsert}`,
+      ],
+      [
+        file_regex.component_label,
+        `appstudio.openshift.io/component: tssc-backstage-plugins-${versionInsert}`,
+      ],
       [file_regex.pipeline_name, pipelineName],
-      [outputImageRegex, `quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins-${versionInsert}:${forOnPush ? "" : "on-pr-"}{{revision}}`],
-      [file_regex.service_account_name, `build-pipeline-tssc-backstage-plugins-${versionInsert}`],
+      [
+        outputImageRegex,
+        `quay.io/redhat-user-workloads/rhtap-shared-team-tenant/tssc-backstage-plugins-${versionInsert}:${forOnPush ? "" : "on-pr-"}{{revision}}`,
+      ],
+      [
+        file_regex.service_account_name,
+        `build-pipeline-tssc-backstage-plugins-${versionInsert}`,
+      ],
     ];
-    const result = replacements.reduce((content, [regex, replacement]) => content.replace(regex, replacement), raw);
+    const result = replacements.reduce(
+      (content, [regex, replacement]) => content.replace(regex, replacement),
+      raw,
+    );
     await writeFile(path, result, "utf8");
 
     console.log(`Updated ${path} version -> ${version}`);
