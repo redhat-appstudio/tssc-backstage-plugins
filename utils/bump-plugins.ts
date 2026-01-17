@@ -50,7 +50,7 @@ async function lookForUpdate(pkg: PackageJson, version = "latest") {
 
   if (!packageDeps) {
     console.error(
-      "Failed to retireve package dependencies for the following package:",
+      "Failed to retrieve package dependencies for the following package:",
       pkg,
     );
     return;
