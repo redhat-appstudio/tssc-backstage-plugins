@@ -12,7 +12,7 @@ export function ghHeaders(): HeadersInit {
     Accept: "application/vnd.github+json",
     "User-Agent": "tssc-backstage-workspace-npm-version-finder",
     // Use passed GITHUB_TOKEN if available.
-    ...(github_token ? authHeader : {})
+    ...(github_token ? authHeader : {}),
   };
   return headers;
 }
@@ -37,10 +37,15 @@ export async function ghJson(url: string): Promise<unknown> {
 // - commit SHA or ref
 // - path to file
 type RawJson = {
-  rawUrl: string,
-  json: Record<string, any>,
-}
-export async function fetchRawJson(owner: string, repo: string, shaOrRef: string, filePath: string): Promise<RawJson | null> {
+  rawUrl: string;
+  json: Record<string, any>;
+};
+export async function fetchRawJson(
+  owner: string,
+  repo: string,
+  shaOrRef: string,
+  filePath: string,
+): Promise<RawJson | null> {
   const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${shaOrRef}/${filePath}`;
   const res = await fetch(rawUrl);
   if (!res.ok) {
@@ -60,19 +65,19 @@ export async function fetchRawJson(owner: string, repo: string, shaOrRef: string
  * */
 
 type FindCommitsForBackstageTargetArgs = {
-  owner: string
-  repo: string
-  workspace: Workspace
-  backstageJsonPath: string
-  target: string
-}
+  owner: string;
+  repo: string;
+  workspace: Workspace;
+  backstageJsonPath: string;
+  target: string;
+};
 type CommitForBackstageTarget = {
-  sha: string
+  sha: string;
   info: {
-    date: string | null
-    msg: string | null
-  }
-  rawUrl: string
+    date: string | null;
+    msg: string | null;
+  };
+  rawUrl: string;
 };
 
 export async function findCommitsForBackstageTarget({
@@ -198,12 +203,17 @@ export async function findCommitsForBackstageTarget({
  * Gets the repository contents at the specified directory and commit ref
  */
 type ListRepoContentArgs = {
-  owner: string
-  repo: string
-  dirPath: string
-  ref: string
-}
-export async function listRepoContents({ owner, repo, dirPath, ref }: ListRepoContentArgs) {
+  owner: string;
+  repo: string;
+  dirPath: string;
+  ref: string;
+};
+export async function listRepoContents({
+  owner,
+  repo,
+  dirPath,
+  ref,
+}: ListRepoContentArgs) {
   // GET /repos/{owner}/{repo}/contents/{path}?ref=
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(
     dirPath,
@@ -218,21 +228,21 @@ export async function listRepoContents({ owner, repo, dirPath, ref }: ListRepoCo
 }
 
 type CollectPluginPackageJsonsArgs = {
-  owner: string
-  repo: string
-  ref: string
-  startDir: string
-  workspace: Workspace
-  backstageJsonPath: string
-}
+  owner: string;
+  repo: string;
+  ref: string;
+  startDir: string;
+  workspace: Workspace;
+  backstageJsonPath: string;
+};
 
 type PluginPackageJson = {
-  workspace: Workspace
-  version: string
-  path: string
-  rawUrl: string
+  workspace: Workspace;
+  version: string;
+  path: string;
+  rawUrl: string;
   // Used to verify that the target version matches what we want.
-  verifyTarget: string
+  verifyTarget: string;
 };
 
 export async function collectPluginPackageJsons({
@@ -280,7 +290,10 @@ export async function collectPluginPackageJsons({
   return result;
 }
 
-export async function getPluginPackagesForBackstageVersion(workspace: Workspace, target: string) {
+export async function getPluginPackagesForBackstageVersion(
+  workspace: Workspace,
+  target: string,
+) {
   const owner = "backstage";
   const repo = "community-plugins";
   const backstageJsonPath = `workspaces/${workspace}/backstage.json`;

@@ -19,19 +19,18 @@ import {
   parseArgs,
   required,
 } from "./shared";
-import {
-  getPluginPackagesForBackstageVersion,
-} from "./get-plugin-versions-at-backstage-version";
-import {
-  CliArgs,
-  PackageJson,
-  Workspace
-} from './types';
+import { getPluginPackagesForBackstageVersion } from "./get-plugin-versions-at-backstage-version";
+import { CliArgs, PackageJson, Workspace } from "./types";
 import fs from "node:fs";
 import semver from "semver";
 
 // Workspaces used to get updates.
-const WORKSPACES: Workspace[] = ["tekton", "argocd", "quay", "multi-source-security-viewer"];
+const WORKSPACES: Workspace[] = [
+  "tekton",
+  "argocd",
+  "quay",
+  "multi-source-security-viewer",
+];
 
 // Get the pkg versions of the plugin and check if there is an update
 async function lookForUpdate(pkg: PackageJson, version = "latest") {
@@ -44,15 +43,16 @@ async function lookForUpdate(pkg: PackageJson, version = "latest") {
     throw new Error(`HTTP response ${lookup.status}: ${lookup.statusText}`);
   }
 
-  const latest: PackageJson = await lookup.json().then((value) => value as PackageJson);
-  const packageDeps = updateDependencies(
-    pkg,
-    dependency,
-    latest,
-  );
+  const latest: PackageJson = await lookup
+    .json()
+    .then((value) => value as PackageJson);
+  const packageDeps = updateDependencies(pkg, dependency, latest);
 
   if (!packageDeps) {
-    console.error("Failed to retireve package dependencies for the following package:", pkg);
+    console.error(
+      "Failed to retireve package dependencies for the following package:",
+      pkg,
+    );
     return;
   }
 
@@ -75,7 +75,9 @@ async function main() {
 
   // Get all package updates at backstage version target
   const results = await Promise.all(
-    WORKSPACES.map((w: Workspace) => getPluginPackagesForBackstageVersion(w, target)),
+    WORKSPACES.map((w: Workspace) =>
+      getPluginPackagesForBackstageVersion(w, target),
+    ),
   );
 
   const packageUpdates = Object.assign({}, ...results);

@@ -3,10 +3,20 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { PackageJson, CliArgs, DependencyMap, STRING_FLAGS, BOOLEAN_FLAGS, ALLOWED_FLAGS } from "./types";
+import {
+  PackageJson,
+  CliArgs,
+  DependencyMap,
+  STRING_FLAGS,
+  BOOLEAN_FLAGS,
+  ALLOWED_FLAGS,
+} from "./types";
 
 // Find all package.json files recursively
-export function findPackageJsonFiles(dir: string, ignoreDirs = ["node_modules", ".git"]): string[] {
+export function findPackageJsonFiles(
+  dir: string,
+  ignoreDirs = ["node_modules", ".git"],
+): string[] {
   let results: string[] = [];
   const items: string[] = fs.readdirSync(dir);
 
@@ -32,7 +42,11 @@ export function extractDependencyFromPackageName(name: string): string {
   });
 }
 
-export function updateDependencies(pkg: PackageJson, upstreamDependency: string, latest: PackageJson): Pick<PackageJson, "dependencies" | "devDependencies"> | null {
+export function updateDependencies(
+  pkg: PackageJson,
+  upstreamDependency: string,
+  latest: PackageJson,
+): Pick<PackageJson, "dependencies" | "devDependencies"> | null {
   const initialDeps: DependencyMap = {};
 
   const dependencies = Object.keys(pkg.dependencies || {}).reduce(
@@ -41,7 +55,8 @@ export function updateDependencies(pkg: PackageJson, upstreamDependency: string,
         key === upstreamDependency ? latest.version : pkg!.dependencies[key];
       return acc;
     },
-    initialDeps);
+    initialDeps,
+  );
 
   const initialDevDeps: DependencyMap = {};
   const devDependencies = Object.keys(pkg?.devDependencies || {}).reduce(
@@ -52,7 +67,8 @@ export function updateDependencies(pkg: PackageJson, upstreamDependency: string,
           : pkg.devDependencies[key];
       return acc;
     },
-    initialDevDeps);
+    initialDevDeps,
+  );
 
   return { dependencies, devDependencies };
 }
@@ -94,7 +110,7 @@ export function parseArgs(argv: string[]): CliArgs {
     }
 
     // --version 1.9 / --target 1.45
-    if (STRING_FLAGS.has(key) && next && !next.startsWith('--')) {
+    if (STRING_FLAGS.has(key) && next && !next.startsWith("--")) {
       if (rawKey === "version") args.version = next;
       if (rawKey === "target") args.target = next;
       // Increment so next flag is used

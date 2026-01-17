@@ -58,16 +58,12 @@ function main() {
         if (err instanceof Error) {
           console.error(`Error processing ${filePath}: ${err?.message}`);
         }
-        console.error('An unknown error occurred', err);
+        console.error("An unknown error occurred", err);
       }
     }
 
     // Write the combined result
-    fs.writeFileSync(
-      outputFilePath,
-      JSON.stringify(results),
-      "utf8",
-    );
+    fs.writeFileSync(outputFilePath, JSON.stringify(results), "utf8");
     console.log(
       `Successfully processed ${processedCount} plugins and saved to ${outputFilePath}`,
     );
