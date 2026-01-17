@@ -2477,9 +2477,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage-community/plugin-argocd@npm:2.4.1":
-  version: 2.4.1
-  resolution: "@backstage-community/plugin-argocd@npm:2.4.1"
+"@backstage-community/plugin-argocd@npm:2.4.2":
+  version: 2.4.2
+  resolution: "@backstage-community/plugin-argocd@npm:2.4.2"
   dependencies:
     "@backstage-community/plugin-argocd-common": "npm:^1.12.1"
     "@backstage/catalog-model": "npm:^1.7.6"
@@ -2505,7 +2505,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
     react-router-dom: ^6.3.0
-  checksum: 10c0/00195406054672d2a60dad68ca8421a6db3a3ba079216ba08fbb36540bd307bc53cf5b3e8be32edb91b90b014f268db97932de4d1b1907f24467e09fd127256c
+  checksum: 10c0/41a180f0272cc4cadf6595598c096d866667344759f4f67ae1681a7db10fbda5b26911331336aef6f33bed420f2186bbdd7a391e62d8c83941b1d74c0203eaba
   languageName: node
   linkType: hard
 
@@ -11718,7 +11718,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tssc-plugins/backstage-community-plugin-argocd@workspace:plugins/argocd"
   dependencies:
-    "@backstage-community/plugin-argocd": "npm:2.4.1"
+    "@backstage-community/plugin-argocd": "npm:2.4.2"
     "@backstage/cli": "npm:^0.34.5"
     "@mui/material": "npm:5.18.0"
     "@red-hat-developer-hub/cli": "npm:1.9.1"
