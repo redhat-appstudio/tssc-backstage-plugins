@@ -20,9 +20,7 @@ jobs:
           node-version: "20"
 
       - name: Run utils/version-mismatch
-        run: |
-          yarn build:utils
-          node utils/dist/version-mismatch.js
+        run: yarn tsx utils/version-mismatch.ts
 
   run-prettier:
     runs-on: ubuntu-latest
