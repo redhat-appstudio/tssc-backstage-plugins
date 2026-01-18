@@ -19,8 +19,11 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Run utils/version-mismatch.js
-        run: node utils/version-mismatch.js
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run utils/version-mismatch
+        run: yarn tsx utils/version-mismatch.ts
 
   run-prettier:
     runs-on: ubuntu-latest

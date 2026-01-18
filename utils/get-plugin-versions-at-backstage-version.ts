@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 "use strict";
 
-const path = require("node:path");
+import path from "node:path";
+import { GithubHeaders, Workspace } from "./types";
 
 // Formats request headers for Github
-function ghHeaders() {
-  //
+export function ghHeaders(): GithubHeaders {
+  const github_token = process.env.GITHUB_TOKEN;
+  const authHeader = { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` };
   const headers = {
     Accept: "application/vnd.github+json",
     "User-Agent": "tssc-backstage-workspace-npm-version-finder",
+    // Use passed GITHUB_TOKEN if available.
+    ...(github_token ? authHeader : {}),
   };
-  // Use passed GITHUB_TOKEN if available.
-  if (process.env.GITHUB_TOKEN) {
-    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-  }
   return headers;
 }
 
@@ -21,7 +21,7 @@ function ghHeaders() {
 // - custom GitHub media type: application/vnd.github+json
 // - a valid User-Agent header (or else we get 403)
 // - optional: Authorization header using Github Token
-async function ghJson(url) {
+export async function ghJson(url: string): Promise<unknown> {
   const res = await fetch(url, { headers: ghHeaders() });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
@@ -36,7 +36,16 @@ async function ghJson(url) {
 // - specified owner and repo
 // - commit SHA or ref
 // - path to file
-async function fetchRawJson(owner, repo, shaOrRef, filePath) {
+type RawJson = {
+  rawUrl: string;
+  json: Record<string, any>;
+};
+export async function fetchRawJson(
+  owner: string,
+  repo: string,
+  shaOrRef: string,
+  filePath: string,
+): Promise<RawJson | null> {
   const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${shaOrRef}/${filePath}`;
   const res = await fetch(rawUrl);
   if (!res.ok) {
@@ -54,19 +63,37 @@ async function fetchRawJson(owner, repo, shaOrRef, filePath) {
  * Returns the most recent commit where the "version" value in `backstage.json`
  * is closest to the the version target we pass.
  * */
-async function findCommitsForBackstageTarget({
+
+type FindCommitsForBackstageTargetArgs = {
+  owner: string;
+  repo: string;
+  workspace: Workspace;
+  backstageJsonPath: string;
+  target: string;
+};
+type CommitForBackstageTarget = {
+  sha: string;
+  info: {
+    date: string | null;
+    msg: string | null;
+  };
+  rawUrl: string;
+};
+
+export async function findCommitsForBackstageTarget({
   owner,
   repo,
   workspace,
   backstageJsonPath,
   target,
-}) {
+}: FindCommitsForBackstageTargetArgs): Promise<CommitForBackstageTarget | null> {
   // Always start at main.
   const ref = "main";
   // Fast check at ref passed or default: 'main'
   const current = await fetchRawJson(owner, repo, ref, backstageJsonPath);
-  if (!current) {
+  if (current === null) {
     console.error(`Could not fetch/parse ${backstageJsonPath} at ref "${ref}"`);
+    return null;
   }
 
   // Check if we already found the version we want.
@@ -87,9 +114,9 @@ async function findCommitsForBackstageTarget({
   let page = 1;
   const perPage = 100;
   // For debug
-  const versionsFound = {};
+  const versionsFound: Record<string, any> = {};
   // Collect any versions close to the target.
-  const relatedVersions = {};
+  const relatedVersions: Record<string, CommitForBackstageTarget> = {};
 
   // Walk commit history for that file
   while (true) {
@@ -152,7 +179,7 @@ async function findCommitsForBackstageTarget({
   const foundVersions = Object.keys(relatedVersions);
   if (foundVersions.length >= 1) {
     // Only use the highest version closest to the target.
-    const highestVersion = foundVersions.sort().pop();
+    const highestVersion = foundVersions.sort().pop()!;
     const result = relatedVersions[highestVersion];
     console.debug(
       `✅ Workspace ${workspace} includes target (${target}) on ${result.sha}: ${highestVersion}`,
@@ -175,7 +202,18 @@ async function findCommitsForBackstageTarget({
 /**
  * Gets the repository contents at the specified directory and commit ref
  */
-async function listRepoContents({ owner, repo, dirPath, ref }) {
+type ListRepoContentArgs = {
+  owner: string;
+  repo: string;
+  dirPath: string;
+  ref: string;
+};
+export async function listRepoContents({
+  owner,
+  repo,
+  dirPath,
+  ref,
+}: ListRepoContentArgs) {
   // GET /repos/{owner}/{repo}/contents/{path}?ref=
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(
     dirPath,
@@ -189,15 +227,33 @@ async function listRepoContents({ owner, repo, dirPath, ref }) {
   return data; // entries: { type: "file"|"dir", name, path, ... }
 }
 
-async function collectPluginPackageJsons({
+type CollectPluginPackageJsonsArgs = {
+  owner: string;
+  repo: string;
+  ref: string;
+  startDir: string;
+  workspace: Workspace;
+  backstageJsonPath: string;
+};
+
+type PluginPackageJson = {
+  workspace: Workspace;
+  version: string;
+  path: string;
+  rawUrl: string;
+  // Used to verify that the target version matches what we want.
+  verifyTarget: string;
+};
+
+export async function collectPluginPackageJsons({
   owner,
   repo,
   ref,
   startDir,
   workspace,
   backstageJsonPath,
-}) {
-  let result = {};
+}: CollectPluginPackageJsonsArgs): Promise<Record<string, PluginPackageJson>> {
+  let result: Record<string, PluginPackageJson> = {};
 
   // Grab all the stuff under the specified repo at the specified SHA.
   const entries = await listRepoContents({
@@ -234,7 +290,10 @@ async function collectPluginPackageJsons({
   return result;
 }
 
-async function getPluginPackagesForBackstageVersion(workspace, target) {
+export async function getPluginPackagesForBackstageVersion(
+  workspace: Workspace,
+  target: string,
+) {
   const owner = "backstage";
   const repo = "community-plugins";
   const backstageJsonPath = `workspaces/${workspace}/backstage.json`;
@@ -266,7 +325,3 @@ async function getPluginPackagesForBackstageVersion(workspace, target) {
 
   return packages;
 }
-
-module.exports = {
-  getPluginPackagesForBackstageVersion,
-};

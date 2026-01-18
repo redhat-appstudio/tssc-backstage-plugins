@@ -276,7 +276,7 @@ spec:
             value: |
               #!/bin/bash
 
-              node ./utils/generate-annotations.js
+              node ./utils/generate-annotations.mjs
           - name: SOURCE_ARTIFACT
             value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
           - name: HERMETIC

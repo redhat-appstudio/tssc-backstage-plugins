@@ -4,15 +4,15 @@
  * Update the release metadata value in the Containerfile.
  *
  * Usage:
- *   node update-container-release-version.js \
+ *   yarn tsx update-container-release-version.ts \
  *     --version 1.9
  */
 
-const { readFile, writeFile } = require("node:fs/promises");
-const { parseArgs, required } = require("./shared");
+import { readFile, writeFile } from "node:fs/promises";
+import { parseArgs, required } from "./shared";
 
-const VERSION_REGEX = /version\=\".\"/g;
-const RELEASE_REGEX = /release\=\".\"/g;
+const VERSION_REGEX = /version\=\".+\"/g;
+const RELEASE_REGEX = /release\=\".+\"/g;
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
@@ -32,6 +32,6 @@ async function main() {
 }
 
 main().catch((e) => {
-  console.log(`Error: ${e.message}`);
+  console.error(`Error: ${e.message}`);
   process.exit(1);
 });

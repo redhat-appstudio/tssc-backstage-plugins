@@ -4,15 +4,15 @@
  * Update the 'package.json' file to the next release and backstage target.
  *
  * Usage:
- *   node update-package-json.js \
+ *   yarn tsx update-package-json.ts \
  *     --version 1.9 (TSSC Release version)
  *     --target 1.45 (backsage target (MAJOR.MINOR))
  */
 
-const { readFile, writeFile } = require("node:fs/promises");
-const { parseArgs, required } = require("./shared");
+import { readFile, writeFile } from "node:fs/promises";
+import { parseArgs, required } from "./shared";
 
-async function updateVersionFile(version, target) {
+async function updateVersionFile(version: string, target: string) {
   const path = "package.json";
 
   const raw = await readFile(path, "utf8");
@@ -38,7 +38,9 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const version = required("version", args.version);
   const target = required("target", args.target);
-  updateVersionFile(version, target);
+  await updateVersionFile(version, target).then(() =>
+    console.log("Process completed"),
+  );
 }
 
 main().catch((e) => {

@@ -1,9 +1,40 @@
 #!/usr/bin/env node
 "use strict";
 
-const findPackageJsonFiles = require("./shared").findPackageJsonFiles;
-const fs = require("fs");
+/**
+ *
+ * This file is used by Konflux in an image of nodejs-20, offline.
+ * Because of that, no dependencies can be installed, so tsc/tsx cannot be used.
+ * This is kept as a plain .mjs file for now.
+ *
+ */
 
+import path from "node:path";
+import fs from "fs";
+
+// Find all package.json files recursively
+export function findPackageJsonFiles(
+  dir,
+  ignoreDirs = ["node_modules", ".git"],
+) {
+  let results = [];
+  const items = fs.readdirSync(dir);
+
+  for (const item of items) {
+    if (ignoreDirs.includes(item)) continue;
+
+    const itemPath = path.join(dir, item);
+    const stat = fs.statSync(itemPath);
+
+    if (stat.isDirectory()) {
+      results = results.concat(findPackageJsonFiles(itemPath, ignoreDirs));
+    } else if (stat.isFile() && item === "package.json") {
+      results.push(itemPath);
+    }
+  }
+
+  return results;
+}
 // Transform a single package.json
 function transformPackageJson(inputJson) {
   if (!inputJson.name || !inputJson.version || !inputJson.backstage)
@@ -54,16 +85,15 @@ function main() {
           processedCount++;
         }
       } catch (err) {
-        console.error(`Error processing ${filePath}: ${err.message}`);
+        if (err instanceof Error) {
+          console.error(`Error processing ${filePath}: ${err?.message}`);
+        }
+        console.error("An unknown error occurred", err);
       }
     }
 
     // Write the combined result
-    fs.writeFileSync(
-      outputFilePath,
-      JSON.stringify(results, null, null),
-      "utf8",
-    );
+    fs.writeFileSync(outputFilePath, JSON.stringify(results), "utf8");
     console.log(
       `Successfully processed ${processedCount} plugins and saved to ${outputFilePath}`,
     );
@@ -80,7 +110,11 @@ function main() {
     // Output so it gets grabbed by next task.
     console.log(hash);
   } catch (err) {
-    console.error(`Error: ${err.message}`);
+    if (err instanceof Error) {
+      console.error(`Error: ${err.message}`);
+    } else {
+      console.log("An unknown error occurred", err);
+    }
     process.exit(1);
   }
 }
