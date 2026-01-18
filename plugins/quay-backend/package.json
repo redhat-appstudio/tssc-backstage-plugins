@@ -48,7 +48,7 @@
     "@backstage-community/plugin-quay-backend": "1.6.0"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.34.4",
+    "@backstage/cli": "^0.35.0",
     "@red-hat-developer-hub/cli": "1.9.1",
     "typescript": "5.9.3"
   },
