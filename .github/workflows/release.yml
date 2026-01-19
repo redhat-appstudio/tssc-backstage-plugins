@@ -47,7 +47,7 @@ jobs:
       - name: Install plugin updates
         run: yarn install --mode=update-lockfile
 
-      - name: Update release.json file
+      - name: Update package.json file
         run: |
           yarn tsx utils/update-package-json.ts \
             --version ${{ inputs.version }} \
@@ -65,8 +65,7 @@ jobs:
 
       - name: Update dynamic-plugins.yaml file
         run: |
-          yarn tsx utils/update-dynamic-plugins.ts \
-            --version ${{ inputs.version }}
+          yarn tsx utils/update-dynamic-plugins.ts
 
       - name: Configure git
         run: |
