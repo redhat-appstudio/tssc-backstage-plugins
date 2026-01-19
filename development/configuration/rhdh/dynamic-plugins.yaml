@@ -7,9 +7,6 @@ plugins:
   # Github Actions
   - package: ./dynamic-plugins/dist/backstage-community-plugin-github-actions
     disabled: false
-  # Gitlab Backend
-  - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
-    disabled: false
 
   # RBAC
   - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
@@ -41,7 +38,6 @@ plugins:
     # Gitlab
   - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
     disabled: false
-#    disabled: false
     pluginConfig:
       dynamicPlugins:
         frontend:
@@ -73,6 +69,10 @@ plugins:
                   if:
                     allOf:
                       - isGitlabAvailable
+
+  # Gitlab Backend
+  - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+    disabled: false
 
   # Quay plugin
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-quay
@@ -188,7 +188,6 @@ plugins:
                   if:
                     allOf:
                       - isArgocdConfigured
-
 
   # ArgoCD Backend
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-redhat-argocd-backend
