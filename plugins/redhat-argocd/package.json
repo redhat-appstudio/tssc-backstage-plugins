@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@backstage-community/plugin-redhat-argocd": "2.0.0",
-    "@mui/material": "5.18.0"
+    "@mui/material": "7.3.7"
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.1",
