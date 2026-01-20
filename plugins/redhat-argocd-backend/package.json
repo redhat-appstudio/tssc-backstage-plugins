@@ -48,7 +48,7 @@
     "@backstage-community/plugin-redhat-argocd-backend": "0.10.0"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.34.0",
+    "@backstage/cli": "^0.35.0",
     "@janus-idp/cli": "3.6.1",
     "typescript": "5.9.3"
   },
