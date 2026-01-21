@@ -38,6 +38,6 @@
     "rimraf": "6.0.1",
     "tsx": "^4.21.0",
     "turbo": "^2.4.4",
-    "typescript": "5.8.2"
+    "typescript": "5.9.3"
   }
 }
