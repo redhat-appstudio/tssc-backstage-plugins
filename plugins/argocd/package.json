@@ -44,7 +44,7 @@
     "package-dynamic": "rhdh-cli plugin package --export-to dist-plugin"
   },
   "dependencies": {
-    "@backstage-community/plugin-argocd": "2.4.1",
+    "@backstage-community/plugin-argocd": "2.4.4",
     "@mui/material": "5.18.0"
   },
   "devDependencies": {
