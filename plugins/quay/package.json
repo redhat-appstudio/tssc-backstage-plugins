@@ -29,7 +29,7 @@
     "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
   },
   "dependencies": {
-    "@backstage-community/plugin-quay": "1.23.2",
+    "@backstage-community/plugin-quay": "1.30.0",
     "@mui/material": "5.17.1"
   },
   "devDependencies": {
