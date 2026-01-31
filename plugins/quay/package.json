@@ -29,7 +29,7 @@
     "package-dynamic": "rhdh-cli plugin package --export-to dist-plugin"
   },
   "dependencies": {
-    "@backstage-community/plugin-quay": "1.24.0",
+    "@backstage-community/plugin-quay": "1.30.0",
     "@mui/material": "5.18.0"
   },
   "devDependencies": {
