@@ -30,7 +30,7 @@
     "package-dynamic": "rhdh-cli plugin package --export-to dist-plugin"
   },
   "dependencies": {
-    "@backstage-community/plugin-multi-source-security-viewer": "0.7.2"
+    "@backstage-community/plugin-multi-source-security-viewer": "0.12.0"
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.0",
