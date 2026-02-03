@@ -29,7 +29,7 @@
     "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
   },
   "dependencies": {
-    "@backstage-community/plugin-tekton": "3.27.3",
+    "@backstage-community/plugin-tekton": "3.35.0",
     "@mui/material": "5.17.1"
   },
   "devDependencies": {
