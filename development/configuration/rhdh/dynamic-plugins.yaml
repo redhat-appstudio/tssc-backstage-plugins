@@ -1,4 +1,11 @@
 # Copy this into your RHDH dynamic-plugins file.
+# If testing with RHDH-local, paste this into dynamic-plugins.override.yaml
+
+extensions:
+  installation:
+    enabled: true
+    saveToSingleFile:
+       file: dynamic-plugins.override.yaml
 
 includes:
   - dynamic-plugins.default.yaml
@@ -15,6 +22,28 @@ plugins:
     forceDownload: true
     pullPolicy: Always
     disabled: false
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          backstage-community.plugin-rbac:
+            translationResources:
+              - importName: rbacTranslations
+                ref: rbacTranslationRef
+                module: Alpha
+            appIcons:
+              - name: rbacIcon
+                importName: RbacIcon
+            dynamicRoutes:
+              - path: /rbac
+                importName: RbacPage
+                menuItem:
+                  icon: rbacIcon
+                  text: RBAC
+                  textKey: menuItem.rbac
+            menuItems:
+              rbac:
+                parent: default.admin
+                icon: rbacIcon
 
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-rbac-backend:<tag>
     forceDownload: true
@@ -192,7 +221,7 @@ plugins:
     disabled: false
 
   # ArgoCD
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-redhat-argocd
+  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-argocd
     forceDownload: true
     pullPolicy: Always
     disabled: false
@@ -221,13 +250,13 @@ plugins:
                       - isArgocdConfigured
 
   # ArgoCD Backend
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-redhat-argocd-backend
+  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-argocd-backend
     forceDownload: true
     pullPolicy: Always
     disabled: false
 
   # MSSV
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-dynamic
+  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer
     forceDownload: true
     pullPolicy: Always
     disabled: false
