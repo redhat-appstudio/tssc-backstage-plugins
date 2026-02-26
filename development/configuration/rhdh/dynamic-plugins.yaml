@@ -6,16 +6,25 @@ includes:
 plugins:
   # Github Actions
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-github-actions:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # RBAC
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-rbac:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
+
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-rbac-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # Azure-DevOps
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-azure-devops:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -33,10 +42,14 @@ plugins:
                       - hasAnnotation: dev.azure.com/build-definition
 
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-azure-devops-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
     # Gitlab
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/immobiliarelabs-backstage-plugin-gitlab:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -72,10 +85,14 @@ plugins:
 
   # Gitlab Backend
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/immobiliarelabs-backstage-plugin-gitlab-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # Quay plugin
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-quay
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -92,10 +109,14 @@ plugins:
                       - isQuayAvailable
 
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-quay-backend
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # K8s
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-plugin-kubernetes:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -114,10 +135,14 @@ plugins:
 
 
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-plugin-kubernetes-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # TEKTON
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-tekton
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -136,6 +161,8 @@ plugins:
 
   # Jenkins
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-jenkins:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -160,10 +187,14 @@ plugins:
                       - isJenkinsAvailable
 
   - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-jenkins-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # ArgoCD
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-redhat-argocd
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -191,10 +222,14 @@ plugins:
 
   # ArgoCD Backend
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-redhat-argocd-backend
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # MSSV
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-dynamic
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -210,3 +245,10 @@ plugins:
                       - isMultiCIAvailable
                 importName: EntityMultiCIPipelinesContent
                 mountPoint: entity.page.ci/cards
+
+
+  # MSSV Backend (For RBAC)
+  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-backend
+    forceDownload: true
+    pullPolicy: Always
+    disabled: false
