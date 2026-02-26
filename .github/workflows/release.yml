@@ -63,10 +63,6 @@ jobs:
           yarn tsx utils/update-tkn-release-version.ts \
             --version ${{ inputs.version }}
 
-      - name: Update TSSC plugin references in dynamic-plugins.yaml file
-        run: |
-          yarn tsx utils/update-tssc-dynamic-plugin-tags.ts
-
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
