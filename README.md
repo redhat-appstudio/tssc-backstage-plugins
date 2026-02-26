@@ -21,6 +21,7 @@ This repository generates [RHDH dynamic plugin](https://github.com/redhat-develo
 - [Your Responsibilities](#your-responsibilities)
 - [Creating Pull Requests](#creating-pull-requests)
 - [Testing](#testing)
+  - [Release Preparation](#release-preparation)
   - [RHDH-local](#rhdh-local)
   - [Running Services Locally](#running-services-locally)
 - [Helpful Links](#helpful-links)
@@ -113,6 +114,10 @@ When submitting changes:
 2. Complete as much of the [PR checklist](https://github.com/backstage/community-plugins/blob/main/CONTRIBUTING.md#submitting-a-pull-request) as possible
 
 ## Testing
+
+### Release Preparation
+
+For building, pushing, and configuring the OCI image for a release, see the [Release Preparation guide](./docs/release-preparation.md).
 
 ### RHDH-local
 

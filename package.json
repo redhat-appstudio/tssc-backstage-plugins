@@ -21,7 +21,12 @@
     "plugins:build:backend": "turbo run export-dynamic:backend --filter='./plugins/**'",
     "plugins:build:backend:postinstall": "turbo run export-dynamic:backend:postinstall --filter='./plugins/**'",
     "plugins:package": "turbo run package-dynamic --filter='./plugins/**'",
-    "build:utils": "tsc -p utils"
+    "build:image": "./scripts/build-and-push.sh",
+    "build:utils": "tsc -p utils",
+    "update:tssc-dynamic-plugins": "tsx utils/update-tssc-dynamic-plugin-tags.ts",
+    "update:rhdh-dynamic-plugins": "tsx utils/update-rhdh-dynamic-plugin-tags.ts",
+    "check:rhdh-dynamic-plugins": "tsx utils/update-rhdh-dynamic-plugin-tags.ts --check",
+    "update:tekton-bundles": "./scripts/update-tekton-task-bundles.sh"
   },
   "lint-staged": {
     "*.{js,ts,json}": [
@@ -30,6 +35,7 @@
   },
   "packageManager": "yarn@4.8.1",
   "devDependencies": {
+    "@octokit/rest": "^22.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.0.0",
     "node-gyp": "^11.2.0",
@@ -38,6 +44,7 @@
     "rimraf": "6.0.1",
     "tsx": "^4.21.0",
     "turbo": "^2.4.4",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "yaml": "^2.8.2"
   }
 }

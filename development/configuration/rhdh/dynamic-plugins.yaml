@@ -5,17 +5,17 @@ includes:
 
 plugins:
   # Github Actions
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-github-actions
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-github-actions:<tag>
     disabled: false
 
   # RBAC
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-rbac:<tag>
     disabled: false
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-rbac-backend:<tag>
     disabled: false
 
   # Azure-DevOps
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-azure-devops
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-azure-devops:<tag>
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -32,11 +32,11 @@ plugins:
                       - hasAnnotation: dev.azure.com/project
                       - hasAnnotation: dev.azure.com/build-definition
 
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-azure-devops-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-azure-devops-backend:<tag>
     disabled: false
 
     # Gitlab
-  - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/immobiliarelabs-backstage-plugin-gitlab:<tag>
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -71,7 +71,7 @@ plugins:
                       - isGitlabAvailable
 
   # Gitlab Backend
-  - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/immobiliarelabs-backstage-plugin-gitlab-backend:<tag>
     disabled: false
 
   # Quay plugin
@@ -95,7 +95,7 @@ plugins:
     disabled: false
 
   # K8s
-  - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-plugin-kubernetes:<tag>
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -113,7 +113,7 @@ plugins:
                       - hasAnnotation: backstage.io/kubernetes-namespace
 
 
-  - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-plugin-kubernetes-backend:<tag>
     disabled: false
 
   # TEKTON
@@ -135,7 +135,7 @@ plugins:
               mountPoint: entity.page.ci/cards 
 
   # Jenkins
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-jenkins:<tag>
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -159,7 +159,7 @@ plugins:
                     anyOf:
                       - isJenkinsAvailable
 
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-jenkins-backend:<tag>
     disabled: false
 
   # ArgoCD

@@ -1,0 +1,81 @@
+# Release Preparation
+
+This guide walks through building, pushing, and configuring the TSSC Backstage plugins OCI image for a release.
+
+## Prerequisites
+
+### Credentials
+
+The build script requires authentication to two registries:
+
+- **quay.io** — you must be logged in (`podman login quay.io` or `docker login quay.io`)
+- **registry.redhat.io** — you'll need a username and password. You can either:
+  - [Get a Red Hat Login](https://access.redhat.com/articles/RegistryAuthentication#getting-a-red-hat-login-2)
+  - [Create a Registry Service Account](https://access.redhat.com/articles/RegistryAuthentication#creating-registry-service-accounts-6)
+
+### Environment Variables
+
+Create a `.env` file at the root of this repository:
+```bash
+export CONTAINER_REGISTRY='quay.io/<username>'
+export REDHAT_REGISTRY_USERNAME='<username>'
+export REDHAT_REGISTRY_PASSWORD='<password>'
+export GITHUB_TOKEN='<github_token>'
+```
+
+Then load it:
+```bash
+source .env
+```
+
+| Variable | Required | Description |
+|---|---|---|
+| `CONTAINER_REGISTRY` | Yes | Target registry URL (e.g. `quay.io/<username>`) |
+| `REDHAT_REGISTRY_USERNAME` | Yes | Red Hat registry username |
+| `REDHAT_REGISTRY_PASSWORD` | Yes | Red Hat registry password |
+| `GITHUB_TOKEN` | Yes | GitHub personal access token with `read:packages` scope. Used by the RHDH plugin tag updater to query GitHub Container Registry package versions. [Create one here](https://github.com/settings/tokens). |
+| `IMAGE_NAME` | No | Override the default image name (`tssc-backstage-plugins`) |
+
+## 1. Build and Push the Image
+
+From the root of the repository:
+```bash
+# Build and push
+yarn build:image --release=1.x --push
+
+# Dry-run (print commands without executing)
+yarn build:image --release=1.x --push --dry-run
+```
+
+> **NOTE**: The `release-x.y` tag should match the version in the root `package.json` file.
+
+## 2. Update Dynamic Plugin References
+
+After the image is pushed, update the dynamic plugin configuration to point to your image.
+
+### Update TSSC plugin references
+```bash
+yarn update:tssc-dynamic-plugins \
+  --registry '<registry>' \
+  --username '<username>' \
+  --repository '<repository>'
+```
+
+This updates `development/configuration/rhdh/dynamic-plugins.yaml` with your container registry, username, and repository. The updated references will look like:
+```
+oci://quay.io/<username>/tssc-backstage-plugins:release-1.8
+```
+
+### Update RHDH plugin tags
+```bash
+yarn update:rhdh-dynamic-plugins
+
+# Dry-run
+yarn update:rhdh-dynamic-plugins --dry-run
+```
+
+## 3. Verify Locally
+
+Use the updated `dynamic-plugins.yaml` in your RHDH configuration to verify.
+
+The easiest way to test locally is with [RHDH-Local](https://github.com/redhat-developer/rhdh-local).
