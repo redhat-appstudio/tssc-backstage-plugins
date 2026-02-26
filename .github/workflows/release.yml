@@ -39,29 +39,37 @@ jobs:
         env:
           # Needed for API rate limits
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BACKSTAGE_TARGET: ${{ inputs.backstage_target }}
         run: |
           yarn tsx utils/bump-plugins.ts \
-            --target ${{ inputs.backstage_target }} \
+            --target "$BACKSTAGE_TARGET" \
             --debug
 
       - name: Install plugin updates
         run: yarn install --mode=update-lockfile
 
       - name: Update package.json file
+        env:
+          VERSION: ${{ inputs.version }}
+          BACKSTAGE_TARGET: ${{ inputs.backstage_target }}
         run: |
           yarn tsx utils/update-package-json.ts \
-            --version ${{ inputs.version }} \
-            --target ${{ inputs.backstage_target }}
+            --version "$VERSION" \
+            --target "$BACKSTAGE_TARGET"
 
       - name: Update Containerfile
+        env:
+          VERSION: ${{ inputs.version }}
         run: |
           yarn tsx utils/update-container-release-version.ts \
-            --version ${{ inputs.version }}
+            --version "$VERSION"
 
       - name: Update .tekton files
+        env:
+          VERSION: ${{ inputs.version }}
         run: |
           yarn tsx utils/update-tkn-release-version.ts \
-            --version ${{ inputs.version }}
+            --version "$VERSION"
 
       - name: Configure git
         run: |
