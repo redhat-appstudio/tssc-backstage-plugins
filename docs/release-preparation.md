@@ -79,3 +79,38 @@ yarn update:rhdh-dynamic-plugins --dry-run
 Use the updated `dynamic-plugins.yaml` in your RHDH configuration to verify.
 
 The easiest way to test locally is with [RHDH-Local](https://github.com/redhat-developer/rhdh-local).
+
+---
+
+## Automated Release Testing Workflow
+
+The [`release-testing.yml`](../.github/workflows/release-testing.yml) GitHub Actions workflow automates much of the release preparation process for testing purposes. It bumps plugin versions, updates configuration files, and opens a PR with all the changes.
+
+### Prerequisites
+
+**The OCI image must be built and pushed before running this workflow.** The workflow updates configuration to point at the image, so the artifact needs to exist in the registry first. Follow [Step 1](#1-build-and-push-the-image) to build and push the image to your test registry.
+
+### Running the Workflow
+
+Trigger the workflow manually from the **Actions** tab in GitHub. It requires the following inputs:
+
+| Input | Description | Example |
+|---|---|---|
+| `version` | Version to set in `package.json` | `1.9` |
+| `backstage_target` | Backstage version to bump to (MAJOR.MINOR) | `1.45` |
+| `registry` | Registry hosting the test release artifact | `quay.io` |
+| `username` | Username in the registry | `<your-username>` |
+| `repository` | Repository name in the registry (default: `backstage-plugins`) | `backstage-plugins` |
+
+### What It Does
+
+The workflow automates the following steps:
+
+1. Bumps plugin versions to the target Backstage version
+2. Updates `package.json` with the new version and Backstage target
+3. Updates the `Containerfile` with the new version
+4. Updates `.tekton` files with the new version
+5. Updates `dynamic-plugins.yaml` to point at the test artifact (using the provided registry, username, and repository)
+6. Opens a PR on `main` with all changes, labeled `do-not-merge`, `release-testing`, and version tags
+
+> **NOTE**: The PR is explicitly marked **do-not-merge** — it is intended for testing only and should not be merged.
