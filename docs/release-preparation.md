@@ -34,7 +34,7 @@ source .env
 | `REDHAT_REGISTRY_USERNAME` | Yes | Red Hat registry username |
 | `REDHAT_REGISTRY_PASSWORD` | Yes | Red Hat registry password |
 | `GITHUB_TOKEN` | Yes | GitHub personal access token with `read:packages` scope. Used by the RHDH plugin tag updater to query GitHub Container Registry package versions. [Create one here](https://github.com/settings/tokens). |
-| `IMAGE_NAME` | No | Override the default image name (`tssc-backstage-plugins`) |
+| `REPO_NAME` | No | Override the default repository name (`backstage-plugins`) |
 
 ## 1. Build and Push the Image
 
@@ -63,7 +63,7 @@ yarn update:tssc-dynamic-plugins \
 
 This updates `development/configuration/rhdh/dynamic-plugins.yaml` with your container registry, username, and repository. The updated references will look like:
 ```
-oci://quay.io/<username>/tssc-backstage-plugins:release-1.8
+oci://quay.io/redhat-tssc/backstage-plugins:release-1.8!<plugin>
 ```
 
 ### Update RHDH plugin tags

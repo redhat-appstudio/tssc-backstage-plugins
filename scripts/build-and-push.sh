@@ -11,7 +11,7 @@
 set -euo pipefail
 
 # Default values
-IMAGE_NAME="${IMAGE_NAME:-tssc-backstage-plugins}"
+REPO_NAME="${REPO_NAME:-backstage-plugins}"
 CONTAINER_ENGINE="${CONTAINER_ENGINE:-}"
 PUSH=false
 DRY_RUN=false
@@ -51,7 +51,7 @@ Options:
 
 Environment Variables:
   CONTAINER_REGISTRY           (Required) Target container registry URL
-  IMAGE_NAME                   Image name (default: tssc-backstage-plugins)
+  REPO_NAME                    Repository name (default: backstage-plugins)
   REDHAT_REGISTRY_USERNAME     (Required for build) Red Hat registry username
   REDHAT_REGISTRY_PASSWORD     (Required for build) Red Hat registry password
   CONTAINER_ENGINE             Container engine to use (default: podman, fallback: docker)
@@ -175,7 +175,7 @@ main() {
 
   # Construct image tag
   local image_tag="release-${RELEASE}"
-  local full_image="${CONTAINER_REGISTRY}/${IMAGE_NAME}:${image_tag}"
+  local full_image="${CONTAINER_REGISTRY}/${REPO_NAME}:${image_tag}"
 
   log_info "Building image: $full_image"
 

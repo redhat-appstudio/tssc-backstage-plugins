@@ -15,12 +15,12 @@ Think of it like a standardized box that can hold different types of items, maki
 
 1. Pull the image (if not already local)
 ```bash
-docker pull <registery><repository>:<tag>
+docker pull <registry>/<repository>:<tag>
 ```
 
 2. Save the image as a Tar file
 ```bash
-docker save -o image.tar <register>/<repository>:tag
+docker save -o image.tar <registry>/<repository>:<tag>
 ```
 
 3. Extract the Tar file

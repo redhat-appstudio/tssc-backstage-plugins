@@ -22,9 +22,9 @@ You can either:
 
 Once you have those, update the `.env` file with those values.
 
-### Image Registry
-I recommend using quay.io. By default the image name the build process will use is `tssc-backstage-plugins`.
-You can also add a `IMAGE_NAME` to your `.env` file and the script will use that value instead.
+### Container Registry
+I recommend using quay.io. By default the repository name the build process will use is `backstage-plugins`.
+You can also add a `REPO_NAME` to your `.env` file and the script will use that value instead.
 
 ## Run the script
 From the root of the repository run
@@ -52,10 +52,10 @@ yarn tsx utils/update-dynamic-plugins.ts \
 This will update the dynamic-plugins file in `development/configuration/rhdh/dynamic-plugins.yaml` with:
 - your container registry (e.g. quay.io)
 - your username (e.g. bramos)
-- your repository (e.g. tssc-backstage-plugins)
+- your repository (e.g. backstage-plugins)
 
 The updated sections in `dynamic-plugins.yaml` should look something like:
-`oci://<registry>/<username>/tssc-backstage-plugins:release-1.X`
+`oci://<registry>/<username>/backstage-plugins:release-1.X`
 
 You can use this file in your RHDH configuration to test.
 
