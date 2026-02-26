@@ -19,7 +19,8 @@ on:
         required: true
       repository:
         description: "The repository where the test release artifact is hosted"
-        required: true
+        required: false
+        default: "backstage-plugins"
 
 permissions:
   contents: write
