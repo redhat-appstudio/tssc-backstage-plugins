@@ -2610,11 +2610,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage-community/plugin-multi-source-security-viewer-backend@npm:0.2.0":
-  version: 0.2.0
-  resolution: "@backstage-community/plugin-multi-source-security-viewer-backend@npm:0.2.0"
+"@backstage-community/plugin-multi-source-security-viewer-backend@npm:0.2.3":
+  version: 0.2.3
+  resolution: "@backstage-community/plugin-multi-source-security-viewer-backend@npm:0.2.3"
   dependencies:
-    "@backstage-community/plugin-multi-source-security-viewer-common": "npm:^0.10.0"
+    "@backstage-community/plugin-multi-source-security-viewer-common": "npm:^0.11.0"
     "@backstage/backend-defaults": "npm:^0.14.0"
     "@backstage/backend-plugin-api": "npm:^1.6.0"
     "@backstage/catalog-client": "npm:^1.12.1"
@@ -2626,16 +2626,16 @@ __metadata:
     express: "npm:^4.17.1"
     express-promise-router: "npm:^4.1.0"
     zod: "npm:^3.22.4"
-  checksum: 10c0/4f48aa3f67aabb850d030cd9df73c9d03bfde8c20bcf6495a580f2581c8a8cb5c0c90e5af655f67d54626f883aeb6effafce7a8144c855b840bf60e462d7bdd8
+  checksum: 10c0/7828a6cc49a20211a258cdbba06dce76377446feeba125ea7cce3aa8b392f1857b8780f2deef2b8be45c663fc694a3ee541ee4fda72ca8d0da58439371ad34c4
   languageName: node
   linkType: hard
 
-"@backstage-community/plugin-multi-source-security-viewer-common@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "@backstage-community/plugin-multi-source-security-viewer-common@npm:0.10.0"
+"@backstage-community/plugin-multi-source-security-viewer-common@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "@backstage-community/plugin-multi-source-security-viewer-common@npm:0.11.0"
   dependencies:
-    "@backstage/plugin-permission-common": "npm:^0.9.3"
-  checksum: 10c0/fbc29f2ed5b41a51e90fd335cad4bd612b8b17d257e40a7a7b2c3e5f945eb94c7f3cd67ba4a09f9c2c6c5a603eef5be7c5aa2ec3873f154cc24bfcad38aa817b
+    "@backstage/plugin-permission-common": "npm:^0.9.5"
+  checksum: 10c0/ff02c3bd64137c3d112a9411a10d7cafa07cd5b673a888045e12286f9733406b7749ea35c3cec13f71340d66d4918211fabb92a2030e9cecb4c75f1e0183b70f
   languageName: node
   linkType: hard
 
@@ -12173,7 +12173,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@tssc-plugins/backstage-community-plugin-multi-source-security-viewer-backend@workspace:plugins/multi-source-security-viewer-backend"
   dependencies:
-    "@backstage-community/plugin-multi-source-security-viewer-backend": "npm:0.2.0"
+    "@backstage-community/plugin-multi-source-security-viewer-backend": "npm:0.2.3"
     "@backstage/cli": "npm:^0.34.4"
     "@red-hat-developer-hub/cli": "npm:1.9.1"
     typescript: "npm:5.9.3"
