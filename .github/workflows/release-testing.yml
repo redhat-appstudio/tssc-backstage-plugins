@@ -11,16 +11,9 @@ on:
         description: "General version of Backstage you want to bump to (e.g. 1.45). Only use (MAJOR.MINOR) values."
         required: true
         type: string
-      registry:
-        description: "The registry where the test release artifact is hosted"
+      image:
+        description: "Full OCI image reference for the test release artifact, e.g. quay.io/org/namespace/repo:tag"
         required: true
-      username:
-        description: "The username in the registry where the test release artifact is hosted"
-        required: true
-      repository:
-        description: "The repository where the test release artifact is hosted"
-        required: false
-        default: "backstage-plugins"
 
 permissions:
   contents: write
@@ -83,15 +76,11 @@ jobs:
 
       - name: Update dynamic-plugins.yaml for local testing
         env:
-          REGISTRY: ${{ inputs.registry }}
-          USERNAME: ${{ inputs.username }}
-          REPOSITORY: ${{ inputs.repository }}
+          IMAGE: ${{ inputs.image }}
           BACKSTAGE_TARGET: ${{ inputs.backstage_target }}
         run: |
           yarn tsx utils/update-tssc-dynamic-plugin-tags.ts \
-            --registry "$REGISTRY" \
-            --username "$USERNAME" \
-            --repository "$REPOSITORY"
+            --image "$IMAGE"
 
           yarn tsx utils/update-rhdh-dynamic-plugin-tags.ts \
             --target "$BACKSTAGE_TARGET"

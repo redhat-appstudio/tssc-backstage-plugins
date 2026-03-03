@@ -71,9 +71,7 @@ Updates `dynamic-plugins.yaml` for TSSC plugin releases. Reads the version from 
 yarn tsx utils/update-tssc-dynamic-plugin-tags.ts [options]
 ```
 
-- `--registry <value>` — Replace `<registry>` placeholders.
-- `--username <value>` — Replace `<username>` placeholders.
-- `--repository <value>` — Replace `<repository>` placeholders.
+- `--image <value>` — Full OCI image reference (e.g. `quay.io/org/namespace/repo:tag`). Replaces `<image>` placeholders in TSSC plugin lines.
 
 ## version-mismatch.ts
 

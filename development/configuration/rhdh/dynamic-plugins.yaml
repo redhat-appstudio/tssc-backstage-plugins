@@ -119,7 +119,7 @@ plugins:
     disabled: false
 
   # Quay plugin
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-quay
+  - package: oci://<image>!tssc-plugins-backstage-community-plugin-quay
     forceDownload: true
     pullPolicy: Always
     disabled: false
@@ -137,7 +137,7 @@ plugins:
                     allOf:
                       - isQuayAvailable
 
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-quay-backend
+  - package: oci://<image>!tssc-plugins-backstage-community-plugin-quay-backend
     forceDownload: true
     pullPolicy: Always
     disabled: false
@@ -169,7 +169,7 @@ plugins:
     disabled: false
 
   # TEKTON
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-tekton
+  - package: oci://<image>!tssc-plugins-backstage-community-plugin-tekton
     forceDownload: true
     pullPolicy: Always
     disabled: false
@@ -221,7 +221,7 @@ plugins:
     disabled: false
 
   # ArgoCD
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-argocd
+  - package: oci://<image>!tssc-plugins-backstage-community-plugin-argocd
     forceDownload: true
     pullPolicy: Always
     disabled: false
@@ -250,13 +250,13 @@ plugins:
                       - isArgocdConfigured
 
   # ArgoCD Backend
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-argocd-backend
+  - package: oci://<image>!tssc-plugins-backstage-community-plugin-argocd-backend
     forceDownload: true
     pullPolicy: Always
     disabled: false
 
   # MSSV
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer
+  - package: oci://<image>!tssc-plugins-backstage-community-plugin-multi-source-security-viewer
     forceDownload: true
     pullPolicy: Always
     disabled: false
@@ -277,7 +277,7 @@ plugins:
 
 
   # MSSV Backend (For RBAC)
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-backend
+  - package: oci://<image>!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-backend
     forceDownload: true
     pullPolicy: Always
     disabled: false
