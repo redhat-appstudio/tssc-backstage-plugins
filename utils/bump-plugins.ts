@@ -40,11 +40,17 @@ const WORKSPACES: Workspace[] = [
 // Get the pkg versions of the plugin and check if there is an update
 async function lookForUpdate(pkg: PackageJson, version = "latest") {
   const dependency = extractDependencyFromPackageName(pkg.name);
-  const lookup = await fetch(
-    `https://registry.npmjs.org/${dependency}/${version}`,
-  );
+  const registryUrl = `https://registry.npmjs.org/${encodeURIComponent(dependency)}/${version}`;
+  const lookup = await fetch(registryUrl);
 
   if (!lookup.ok) {
+    if (lookup.status === 404) {
+      console.warn(
+        `⚠️  Skipping ${dependency}@${version}: version not found on npm registry`,
+        `⚠️  URL: https://registry.npmjs.org/${encodeURIComponent(dependency)}/${version}`,
+      );
+      return;
+    }
     throw new Error(`HTTP response ${lookup.status}: ${lookup.statusText}`);
   }
 
@@ -117,7 +123,7 @@ async function main() {
     const version = foundPackage.version;
     const update = await lookForUpdate(pkg, version);
     if (!update) {
-      throw new Error("Failed to retrieve package updates");
+      continue;
     }
 
     if (semver.lt(pkg.version, update.version)) {
