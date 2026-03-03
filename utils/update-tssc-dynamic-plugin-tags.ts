@@ -4,7 +4,7 @@
  * Update the dynamic-plugins.yaml file for a release
  *
  * Usage:
- *   yarn tsx utils/update-dynamic-plugins.ts [--registry <value>] [--username <value>] [--repository <value>]
+ *   yarn tsx utils/update-tssc-dynamic-plugin-tags.ts [--registry <value>] [--username <value>] [--repository <value>]
  *
  * Options:
  *   --registry <value>    Replace <registry> placeholders with the given value

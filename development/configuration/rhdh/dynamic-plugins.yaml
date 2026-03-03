@@ -1,21 +1,59 @@
 # Copy this into your RHDH dynamic-plugins file.
+# If testing with RHDH-local, paste this into dynamic-plugins.override.yaml
+
+extensions:
+  installation:
+    enabled: true
+    saveToSingleFile:
+       file: dynamic-plugins.override.yaml
 
 includes:
   - dynamic-plugins.default.yaml
 
 plugins:
   # Github Actions
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-github-actions
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-github-actions:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # RBAC
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-rbac:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-rbac-backend-dynamic
+    pluginConfig:
+      dynamicPlugins:
+        frontend:
+          backstage-community.plugin-rbac:
+            translationResources:
+              - importName: rbacTranslations
+                ref: rbacTranslationRef
+                module: Alpha
+            appIcons:
+              - name: rbacIcon
+                importName: RbacIcon
+            dynamicRoutes:
+              - path: /rbac
+                importName: RbacPage
+                menuItem:
+                  icon: rbacIcon
+                  text: RBAC
+                  textKey: menuItem.rbac
+            menuItems:
+              rbac:
+                parent: default.admin
+                icon: rbacIcon
+
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-rbac-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # Azure-DevOps
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-azure-devops
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-azure-devops:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -32,11 +70,15 @@ plugins:
                       - hasAnnotation: dev.azure.com/project
                       - hasAnnotation: dev.azure.com/build-definition
 
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-azure-devops-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-azure-devops-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
     # Gitlab
-  - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/immobiliarelabs-backstage-plugin-gitlab:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -71,11 +113,15 @@ plugins:
                       - isGitlabAvailable
 
   # Gitlab Backend
-  - package: ./dynamic-plugins/dist/immobiliarelabs-backstage-plugin-gitlab-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/immobiliarelabs-backstage-plugin-gitlab-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # Quay plugin
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-quay
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -92,10 +138,14 @@ plugins:
                       - isQuayAvailable
 
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-quay-backend
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # K8s
-  - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-plugin-kubernetes:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -113,11 +163,15 @@ plugins:
                       - hasAnnotation: backstage.io/kubernetes-namespace
 
 
-  - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-plugin-kubernetes-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # TEKTON
   - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-tekton
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -135,7 +189,9 @@ plugins:
               mountPoint: entity.page.ci/cards 
 
   # Jenkins
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-jenkins:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -159,11 +215,15 @@ plugins:
                     anyOf:
                       - isJenkinsAvailable
 
-  - package: ./dynamic-plugins/dist/backstage-community-plugin-jenkins-backend-dynamic
+  - package: oci://ghcr.io/redhat-developer/rhdh-plugin-export-overlays/backstage-community-plugin-jenkins-backend:<tag>
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # ArgoCD
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-redhat-argocd
+  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-argocd
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -190,11 +250,15 @@ plugins:
                       - isArgocdConfigured
 
   # ArgoCD Backend
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-redhat-argocd-backend
+  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-argocd-backend
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
 
   # MSSV
-  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-dynamic
+  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer
+    forceDownload: true
+    pullPolicy: Always
     disabled: false
     pluginConfig:
       dynamicPlugins:
@@ -210,3 +274,10 @@ plugins:
                       - isMultiCIAvailable
                 importName: EntityMultiCIPipelinesContent
                 mountPoint: entity.page.ci/cards
+
+
+  # MSSV Backend (For RBAC)
+  - package: oci://<registry>/<username>/<repository>:release-x.y!tssc-plugins-backstage-community-plugin-multi-source-security-viewer-backend
+    forceDownload: true
+    pullPolicy: Always
+    disabled: false
