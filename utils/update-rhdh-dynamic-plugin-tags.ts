@@ -216,7 +216,12 @@ async function processPlugins(
     // Resolve tag (with caching)
     let tag = tagCache.get(imageName);
     if (!tag) {
-      const resolved = await resolveLatestTag(octokit, imageName, verbose, target);
+      const resolved = await resolveLatestTag(
+        octokit,
+        imageName,
+        verbose,
+        target,
+      );
       tag = resolved.tag;
       tagCache.set(imageName, tag);
     }
