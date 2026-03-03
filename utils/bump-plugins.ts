@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 "use strict";
 /**
- * Find npm package versions for all plugin packages under a workspace's /plugins
- * directory, at the commit where backstage.json has the requested "version".
+ * Bump plugin package versions to match a specific Backstage minor release.
  *
- * Use that to update the related package versions in this directory
+ * Given a target like "1.46", this script finds the highest patch release
+ * of that minor version (e.g., 1.46.3) in the upstream Backstage
+ * community-plugins repo. It then updates local plugin package.json files
+ * to match the plugin versions at that release.
  *
  * Usage:
  *   yarn tsx bump-plugins.ts \
  *     --target 1.46 \
  *     --debug (optional)
  *
+ * --target  The Backstage minor version to align plugins with.
+ *           The script resolves the latest patch (e.g., 1.46 -> 1.46.3).
+ * --debug   Print additional info about resolved packages.
  */
 import {
   extractDependencyFromPackageName,
