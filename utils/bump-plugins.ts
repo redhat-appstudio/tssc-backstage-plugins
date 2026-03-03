@@ -32,7 +32,7 @@ import semver from "semver";
 // Workspaces used to get updates.
 const WORKSPACES: Workspace[] = [
   "tekton",
-  "argocd",
+  "redhat-argocd", // TODO: Replace in V1.10 with 'argocd'
   "quay",
   "multi-source-security-viewer",
 ];

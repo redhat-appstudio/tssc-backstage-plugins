@@ -26,7 +26,7 @@ export type PackageJson = {
 };
 export type GithubHeaders = Headers | Record<string, string> | undefined;
 export type Workspace =
-  | "argocd"
+  | "redhat-argocd" // TODO: Replace in V1.10 with 'argocd'
   | "tekton"
   | "quay"
   | "multi-source-security-viewer";
