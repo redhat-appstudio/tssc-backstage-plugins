@@ -86,13 +86,15 @@ jobs:
           REGISTRY: ${{ inputs.registry }}
           USERNAME: ${{ inputs.username }}
           REPOSITORY: ${{ inputs.repository }}
+          BACKSTAGE_TARGET: ${{ inputs.backstage_target }}
         run: |
           yarn tsx utils/update-tssc-dynamic-plugin-tags.ts \
             --registry "$REGISTRY" \
             --username "$USERNAME" \
             --repository "$REPOSITORY"
 
-          yarn tsx utils/update-rhdh-dynamic-plugin-tags.ts
+          yarn tsx utils/update-rhdh-dynamic-plugin-tags.ts \
+            --target "$BACKSTAGE_TARGET"
 
       - name: Configure git
         run: |

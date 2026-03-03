@@ -13,6 +13,7 @@
  *
  * Options:
  *   --file <path>   Path to dynamic-plugins.yaml (default: development/configuration/rhdh/dynamic-plugins.yaml)
+ *   --target <ver>  Backstage minor version to match (e.g. "1.45" resolves to latest patch like "1.45.3")
  *   --dry-run       Print changes without writing the file
  *   --check         CI mode: exit non-zero if changes would be made
  *   --verbose       Enable verbose logging
@@ -40,6 +41,7 @@ const PACKAGE_NAMESPACE = "rhdh-plugin-export-overlays";
 
 interface CliOptions {
   file: string;
+  target?: string;
   dryRun: boolean;
   check: boolean;
   verbose: boolean;
@@ -49,6 +51,7 @@ function parseCliArgs(): CliOptions {
   const { values } = parseArgs({
     options: {
       file: { type: "string", short: "f", default: DEFAULT_FILE },
+      target: { type: "string", short: "t" },
       "dry-run": { type: "boolean", default: false },
       check: { type: "boolean", default: false },
       verbose: { type: "boolean", short: "v", default: false },
@@ -58,6 +61,7 @@ function parseCliArgs(): CliOptions {
 
   return {
     file: values.file as string,
+    target: values.target as string | undefined,
     dryRun: values["dry-run"] as boolean,
     check: values.check as boolean,
     verbose: values.verbose as boolean,
@@ -93,11 +97,17 @@ async function resolveLatestTag(
   octokit: Octokit,
   imageName: string,
   verbose: boolean,
+  target?: string,
 ): Promise<ResolvedTag> {
   const packageName = `${PACKAGE_NAMESPACE}/${imageName}`;
+  // When a target is provided (e.g. "1.45"), only match tags like "bs_1.45" or "bs_1.45.3".
+  const tagPrefix = target ? `bs_${target}` : "bs_";
 
   if (verbose) {
     console.log(`  Fetching versions for container package: ${packageName}`);
+    if (target) {
+      console.log(`  Filtering tags matching prefix: ${tagPrefix}`);
+    }
   }
 
   const { data: versions } =
@@ -112,13 +122,18 @@ async function resolveLatestTag(
     throw new Error(`No versions found for package ${packageName}`);
   }
 
-  // Filter to versions that have at least one tag starting with "bs_",
+  // Filter to versions that have at least one tag matching the prefix,
   // then sort by created_at descending to find the most recent.
+  const matchesTag = (t: string) =>
+    t === tagPrefix || t.startsWith(`${tagPrefix}.`);
+
   const sorted = versions
     .filter(
       (v) =>
         v.metadata?.container?.tags &&
-        v.metadata.container.tags.some((t: string) => t.startsWith("bs_")),
+        v.metadata.container.tags.some(
+          target ? matchesTag : (t: string) => t.startsWith("bs_"),
+        ),
     )
     .sort(
       (a, b) =>
@@ -126,14 +141,15 @@ async function resolveLatestTag(
     );
 
   if (sorted.length === 0) {
-    throw new Error(
-      `No versions with a bs_ tag found for package ${packageName}.`,
-    );
+    const msg = target
+      ? `No versions with a tag matching "${tagPrefix}" found for package ${packageName}.`
+      : `No versions with a bs_ tag found for package ${packageName}.`;
+    throw new Error(msg);
   }
 
   const latest = sorted[0];
-  const tag = latest.metadata!.container!.tags!.find((t: string) =>
-    t.startsWith("bs_"),
+  const tag = latest.metadata!.container!.tags!.find(
+    target ? matchesTag : (t: string) => t.startsWith("bs_"),
   )!;
 
   if (verbose) {
@@ -170,6 +186,7 @@ async function processPlugins(
   doc: Document,
   octokit: Octokit,
   verbose: boolean,
+  target?: string,
 ): Promise<UpdateResult[]> {
   const results: UpdateResult[] = [];
   const tagCache = new Map<string, string>();
@@ -199,7 +216,7 @@ async function processPlugins(
     // Resolve tag (with caching)
     let tag = tagCache.get(imageName);
     if (!tag) {
-      const resolved = await resolveLatestTag(octokit, imageName, verbose);
+      const resolved = await resolveLatestTag(octokit, imageName, verbose, target);
       tag = resolved.tag;
       tagCache.set(imageName, tag);
     }
@@ -262,8 +279,12 @@ async function main(): Promise<void> {
   const originalContent = await readFile(filePath, "utf8");
   const doc = parseDocument(originalContent, { keepSourceTokens: true });
 
+  if (opts.target) {
+    console.log(`Targeting Backstage version: ${opts.target}`);
+  }
+
   // Process plugins
-  const results = await processPlugins(doc, octokit, opts.verbose);
+  const results = await processPlugins(doc, octokit, opts.verbose, opts.target);
 
   if (results.length === 0) {
     console.log("No changes needed.");
