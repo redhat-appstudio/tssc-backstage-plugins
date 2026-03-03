@@ -64,13 +64,6 @@ jobs:
           yarn tsx utils/update-container-release-version.ts \
             --version "$VERSION"
 
-      - name: Update .tekton files
-        env:
-          VERSION: ${{ inputs.version }}
-        run: |
-          yarn tsx utils/update-tkn-release-version.ts \
-            --version "$VERSION"
-
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
@@ -97,5 +90,4 @@ jobs:
             package.json
             plugins/**
             Containerfile
-            .tekton/**
             yarn.lock

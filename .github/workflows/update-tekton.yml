@@ -1,0 +1,78 @@
+name: Update Tekton Pipelines
+
+on:
+  workflow_run:
+    workflows: ["Release"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to update .tekton files for (e.g. 1.9)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  resolve-version:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    outputs:
+      version: ${{ steps.resolve.outputs.version }}
+    steps:
+      - name: Resolve version
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            branch="${{ github.event.workflow_run.head_branch }}"
+            version="${branch#release-}"
+            echo "version=${version}" >> "$GITHUB_OUTPUT"
+          fi
+
+  update-tekton:
+    needs: resolve-version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@v4
+        with:
+          ref: release-${{ needs.resolve-version.outputs.version }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Update .tekton files
+        env:
+          VERSION: ${{ needs.resolve-version.outputs.version }}
+        run: |
+          yarn tsx utils/update-tkn-release-version.ts \
+            --version "$VERSION"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          base: release-${{ needs.resolve-version.outputs.version }}
+          branch: tekton-update-${{ needs.resolve-version.outputs.version }}
+          title: "chore: update .tekton pipelines for release-${{ needs.resolve-version.outputs.version }}"
+          body: |
+            This PR updates the Konflux CI pipeline configurations (`.tekton` files) for the `release-${{ needs.resolve-version.outputs.version }}` branch.
+
+            These changes configure the tekton pipelines to target the release branch instead of main.
+          commit-message: "chore: update .tekton pipelines for release-${{ needs.resolve-version.outputs.version }}"
+          labels: automated,tekton-update
+          add-paths: |
+            .tekton/**
+          delete-branch: true
