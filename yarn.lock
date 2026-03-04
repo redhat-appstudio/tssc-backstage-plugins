@@ -7260,9 +7260,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@janus-idp/cli@npm:3.6.1":
-  version: 3.6.1
-  resolution: "@janus-idp/cli@npm:3.6.1"
+"@janus-idp/cli@npm:3.7.0":
+  version: 3.7.0
+  resolution: "@janus-idp/cli@npm:3.7.0"
   dependencies:
     "@backstage/cli-common": "npm:^0.1.15"
     "@backstage/cli-node": "npm:^0.2.12"
@@ -7318,7 +7318,7 @@ __metadata:
       optional: true
   bin:
     janus-cli: bin/janus-cli
-  checksum: 10c0/cd47e282ef12a739ff25580642695f2c10dac76d906173c818abe7bd9ba46042b9da2ecfb8811dca82d337e04d496946fdd0aa3f2f9eb22650340757563ad29c
+  checksum: 10c0/269b00359de1d51ab4fa55c413143f5ec38be070d37ebc721bc69bccc87919e96811a2b84c8e67e7ea04182cfb28f5534dbc534d7fae89921bf4a25b5a44c7b4
   languageName: node
   linkType: hard
 
@@ -13292,7 +13292,7 @@ __metadata:
   dependencies:
     "@backstage-community/plugin-redhat-argocd-backend": "npm:0.10.0"
     "@backstage/cli": "npm:^0.34.0"
-    "@janus-idp/cli": "npm:3.6.1"
+    "@janus-idp/cli": "npm:3.7.0"
     typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
@@ -13303,7 +13303,7 @@ __metadata:
   dependencies:
     "@backstage-community/plugin-redhat-argocd": "npm:2.0.0"
     "@backstage/cli": "npm:^0.34.1"
-    "@janus-idp/cli": "npm:3.6.1"
+    "@janus-idp/cli": "npm:3.7.0"
     "@mui/material": "npm:5.18.0"
     "@types/react": "npm:^17.0.0 || ^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
