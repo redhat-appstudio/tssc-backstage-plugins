@@ -44,7 +44,7 @@
     "package-dynamic": "janus-cli package package-dynamic-plugins --export-to dist-plugin"
   },
   "dependencies": {
-    "@backstage-community/plugin-redhat-argocd": "2.0.0",
+    "@backstage-community/plugin-redhat-argocd": "2.3.0",
     "@mui/material": "5.18.0"
   },
   "devDependencies": {
