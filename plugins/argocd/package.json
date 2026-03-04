@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.5",
-    "@red-hat-developer-hub/cli": "1.9.1",
+    "@red-hat-developer-hub/cli": "1.10.0",
     "@types/react": "^17.0.0 || ^18.0.0",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^18",
