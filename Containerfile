@@ -34,7 +34,11 @@ RUN \
     yarn plugins:package
 
 # Compose merged index.json
+# TODO(v1.10): Revert this exclusion — remove the argocd/argocd-backend skip
+# guard below. The community argocd plugins are not yet ready to ship in this
+# release; redhat-argocd variants are used instead.
 RUN for plugin in $(ls ${PLUGINS_WORKSPACE}/plugins); do \
+     if [ "$plugin" = "argocd" ] || [ "$plugin" = "argocd-backend" ]; then continue; fi && \
      mv "${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/index.json" "${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/${plugin}-index.json" && \
      cp -R ${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/* ${PLUGINS_OUTPUT}; \
    done && \
@@ -52,7 +56,7 @@ LABEL name="TSSC backstage plugins" \
       com.redhat.component="rhads" \
       vendor="Red Hat, Inc." \
       version="1" \
-      release="8" \
+      release="9" \
       description="Artifact with Backstage plugins for TSSC" \
       io.k8s.description="Artifact with Backstage plugins for TSSC" \
       summary="Artifact with Backstage plugins for TSSC" \

@@ -1,7 +1,7 @@
 {
   "name": "tssc-plugins",
-  "version": "1.8",
-  "backstageTarget": "1.35",
+  "version": "1.9",
+  "backstageTarget": "1.45",
   "private": true,
   "engine": {
     "node": 22
@@ -16,11 +16,12 @@
     "build": "turbo run build",
     "format": "prettier \"**/*.{js,ts,json}\" --write",
     "prettier": "prettier \"**/*.{js,ts,json}\" --check",
-    "plugins:prepare": "rimraf dist-plugin && turbo run clean-build --filter='./plugins/**'",
-    "plugins:build:frontend": "turbo run export-dynamic:frontend --filter='./plugins/**'",
-    "plugins:build:backend": "turbo run export-dynamic:backend --filter='./plugins/**'",
-    "plugins:build:backend:postinstall": "turbo run export-dynamic:backend:postinstall --filter='./plugins/**'",
-    "plugins:package": "turbo run package-dynamic --filter='./plugins/**'",
+    "__comment_plugins": "TODO(v1.10): Revert the argocd exclusion filters below — remove the --filter='!./plugins/argocd' and --filter='!./plugins/argocd-backend' from each script. The community argocd plugins are not yet ready to ship in this release; redhat-argocd variants are used instead.",
+    "plugins:prepare": "rimraf dist-plugin && turbo run clean-build --filter='./plugins/**' --filter='!./plugins/argocd' --filter='!./plugins/argocd-backend'",
+    "plugins:build:frontend": "turbo run export-dynamic:frontend --filter='./plugins/**' --filter='!./plugins/argocd' --filter='!./plugins/argocd-backend'",
+    "plugins:build:backend": "turbo run export-dynamic:backend --filter='./plugins/**' --filter='!./plugins/argocd' --filter='!./plugins/argocd-backend'",
+    "plugins:build:backend:postinstall": "turbo run export-dynamic:backend:postinstall --filter='./plugins/**' --filter='!./plugins/argocd' --filter='!./plugins/argocd-backend'",
+    "plugins:package": "turbo run package-dynamic --filter='./plugins/**' --filter='!./plugins/argocd' --filter='!./plugins/argocd-backend'",
     "build:image": "./scripts/build-and-push.sh",
     "build:utils": "tsc -p utils",
     "update:tssc-dynamic-plugins": "tsx utils/update-tssc-dynamic-plugin-tags.ts",

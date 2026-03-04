@@ -13,9 +13,12 @@ import path from "node:path";
 import fs from "fs";
 
 // Find all package.json files recursively
+// TODO(v1.10): Revert this exclusion — remove "argocd" and "argocd-backend"
+// from the ignoreDirs default below. The community argocd plugins are not yet
+// ready to ship in this release; redhat-argocd variants are used instead.
 export function findPackageJsonFiles(
   dir,
-  ignoreDirs = ["node_modules", ".git"],
+  ignoreDirs = ["node_modules", ".git", "argocd", "argocd-backend"],
 ) {
   let results = [];
   const items = fs.readdirSync(dir);
