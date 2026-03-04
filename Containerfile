@@ -34,7 +34,11 @@ RUN \
     yarn plugins:package
 
 # Compose merged index.json
+# TODO(v1.10): Revert this exclusion — remove the argocd/argocd-backend skip
+# guard below. The community argocd plugins are not yet ready to ship in this
+# release; redhat-argocd variants are used instead.
 RUN for plugin in $(ls ${PLUGINS_WORKSPACE}/plugins); do \
+     if [ "$plugin" = "argocd" ] || [ "$plugin" = "argocd-backend" ]; then continue; fi && \
      mv "${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/index.json" "${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/${plugin}-index.json" && \
      cp -R ${PLUGINS_WORKSPACE}/plugins/${plugin}/dist-plugin/* ${PLUGINS_OUTPUT}; \
    done && \
