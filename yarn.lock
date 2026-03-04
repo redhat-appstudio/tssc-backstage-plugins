@@ -11582,9 +11582,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@red-hat-developer-hub/cli@npm:1.9.1":
-  version: 1.9.1
-  resolution: "@red-hat-developer-hub/cli@npm:1.9.1"
+"@red-hat-developer-hub/cli@npm:1.10.0":
+  version: 1.10.0
+  resolution: "@red-hat-developer-hub/cli@npm:1.10.0"
   dependencies:
     "@backstage/cli": "npm:0.34.1"
     "@backstage/cli-common": "npm:^0.1.15"
@@ -11642,7 +11642,7 @@ __metadata:
       optional: true
   bin:
     rhdh-cli: bin/rhdh-cli
-  checksum: 10c0/4384d34dbb53952968cf70568b024ca9fa3fd9d718fbfa3e5bbccdaab56785f55751040adf03e390fa8dadf0b543f018e953d2fb311b5f418da18e24241ca423
+  checksum: 10c0/ee3d09f7d3e112745241053dfefe96601cdcec35481e415674a4db810c5adaeb89a87f5611079cf9dbd5b4e2a739c6dbf94bd9e7f6cbec0461ab49d0a2490c6c
   languageName: node
   linkType: hard
 
@@ -13201,7 +13201,7 @@ __metadata:
   dependencies:
     "@backstage-community/plugin-argocd-backend": "npm:1.0.1"
     "@backstage/cli": "npm:^0.34.5"
-    "@red-hat-developer-hub/cli": "npm:1.9.1"
+    "@red-hat-developer-hub/cli": "npm:1.10.0"
     typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
@@ -13213,7 +13213,7 @@ __metadata:
     "@backstage-community/plugin-argocd": "npm:2.4.1"
     "@backstage/cli": "npm:^0.34.5"
     "@mui/material": "npm:5.18.0"
-    "@red-hat-developer-hub/cli": "npm:1.9.1"
+    "@red-hat-developer-hub/cli": "npm:1.10.0"
     "@types/react": "npm:^17.0.0 || ^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^18"
@@ -13228,7 +13228,7 @@ __metadata:
   dependencies:
     "@backstage-community/plugin-multi-source-security-viewer-backend": "npm:0.2.0"
     "@backstage/cli": "npm:^0.34.4"
-    "@red-hat-developer-hub/cli": "npm:1.9.1"
+    "@red-hat-developer-hub/cli": "npm:1.10.0"
     typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
@@ -13243,7 +13243,7 @@ __metadata:
     "@immobiliarelabs/backstage-plugin-gitlab": "npm:^6.11.0"
     "@mui/icons-material": "npm:5.16.14"
     "@mui/material": "npm:5.16.14"
-    "@red-hat-developer-hub/cli": "npm:1.9.1"
+    "@red-hat-developer-hub/cli": "npm:1.10.0"
     "@types/react": "npm:^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
@@ -13265,7 +13265,7 @@ __metadata:
   dependencies:
     "@backstage-community/plugin-quay-backend": "npm:1.9.0"
     "@backstage/cli": "npm:^0.34.4"
-    "@red-hat-developer-hub/cli": "npm:1.9.1"
+    "@red-hat-developer-hub/cli": "npm:1.10.0"
     typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
@@ -13277,7 +13277,7 @@ __metadata:
     "@backstage-community/plugin-quay": "npm:1.27.0"
     "@backstage/cli": "npm:^0.34.4"
     "@mui/material": "npm:5.18.0"
-    "@red-hat-developer-hub/cli": "npm:1.9.1"
+    "@red-hat-developer-hub/cli": "npm:1.10.0"
     "@types/react": "npm:^18.2.58"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
@@ -13320,7 +13320,7 @@ __metadata:
     "@backstage-community/plugin-tekton": "npm:3.31.0"
     "@backstage/cli": "npm:^0.34.4"
     "@mui/material": "npm:5.18.0"
-    "@red-hat-developer-hub/cli": "npm:1.9.1"
+    "@red-hat-developer-hub/cli": "npm:1.10.0"
     "@types/react": "npm:^17.0.0 || ^18.0.0"
     react: "npm:^17.0.0 || ^18.0.0"
     react-dom: "npm:^17.0.0 || ^18.0.0"
