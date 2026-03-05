@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@backstage-community/plugin-quay": "1.27.0",
-    "@mui/material": "5.18.0"
+    "@mui/material": "7.3.9"
   },
   "devDependencies": {
     "@backstage/cli": "^0.34.4",
