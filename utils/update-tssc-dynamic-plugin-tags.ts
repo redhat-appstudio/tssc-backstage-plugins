@@ -72,9 +72,7 @@ async function main(): Promise<void> {
       "No release-x.y patterns found to update in dynamic-plugins.yaml",
     );
   } else {
-    console.log(
-      `Updated dynamic-plugins.yaml with version: ${releaseVersion}`,
-    );
+    console.log(`Updated dynamic-plugins.yaml with version: ${releaseVersion}`);
   }
 
   if (args.image) {
