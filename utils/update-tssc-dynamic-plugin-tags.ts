@@ -4,27 +4,22 @@
  * Update the dynamic-plugins.yaml file for a release
  *
  * Usage:
- *   yarn tsx utils/update-tssc-dynamic-plugin-tags.ts [--registry <value>] [--username <value>] [--repository <value>]
+ *   yarn tsx utils/update-tssc-dynamic-plugin-tags.ts [--image <value>]
  *
  * Options:
- *   --registry <value>    Replace <registry> placeholders with the given value
- *   --username <value>    Replace <username> placeholders with the given value
- *   --repository <value>  Replace <repository> placeholders with the given value
+ *   --image <value>    Full OCI image reference (e.g. quay.io/org/namespace/repo:tag).
+ *                      Replaces <image> placeholders in TSSC plugin lines.
  *
  * This script:
  * 1. Reads the version from the root package.json
  * 2. Finds the dynamic-plugins.yaml file
  * 3. Updates any 'release-x.y' values to match the current version
- * 4. Optionally updates <registry> placeholders if --registry flag is provided
- * 5. Optionally updates <username> placeholders if --username flag is provided
- * 6. Optionally updates <repository> placeholders if --repository flag is provided
+ * 4. Optionally updates <image> placeholders if --image flag is provided
  */
 
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
-
-type OptionalFlag = "registry" | "username" | "repository";
 
 const DYNAMIC_PLUGINS_PATH =
   "development/configuration/rhdh/dynamic-plugins.yaml";
@@ -32,14 +27,7 @@ const PACKAGE_JSON_PATH = "package.json";
 
 // Matches release-x.y patterns (literal x.y or numeric like release-1.8, release-2.0)
 const RELEASE_VERSION_REGEX = /release-(?:x\.y|\d+\.\d+)/g;
-const REGEX = {
-  // Matches <registry> placeholder
-  registry: /<registry>/g,
-  // Matches <username> placeholder
-  username: /<username>/g,
-  // Matches <repository> placeholder
-  repository: /<repository>/g,
-};
+const IMAGE_REGEX = /<image>/g;
 
 async function getLatestVersion(): Promise<string> {
   const packageJsonPath = path.resolve(PACKAGE_JSON_PATH);
@@ -54,23 +42,13 @@ async function getLatestVersion(): Promise<string> {
 }
 
 function parseCliArgs(): {
-  registry?: string;
-  username?: string;
-  repository?: string;
+  image?: string;
 } {
   const { values } = parseArgs({
     options: {
-      registry: {
+      image: {
         type: "string",
-        short: "r",
-      },
-      username: {
-        type: "string",
-        short: "u",
-      },
-      repository: {
-        type: "string",
-        short: "p",
+        short: "i",
       },
     },
     strict: true,
@@ -87,35 +65,31 @@ async function main(): Promise<void> {
   const content = await readFile(dynamicPluginsPath, "utf8");
 
   const releaseVersion = `release-${version}`;
-  const updatedContent = content.replace(RELEASE_VERSION_REGEX, releaseVersion);
+  let updatedContent = content.replace(RELEASE_VERSION_REGEX, releaseVersion);
 
   if (content === updatedContent) {
     console.log(
       "No release-x.y patterns found to update in dynamic-plugins.yaml",
     );
-    return;
+  } else {
+    console.log(`Updated dynamic-plugins.yaml with version: ${releaseVersion}`);
   }
 
-  await writeFile(dynamicPluginsPath, updatedContent, "utf8");
-  console.log(`Updated dynamic-plugins.yaml with version: ${releaseVersion}`);
-
-  const finalUpdates = Object.keys(args).reduce((content, option: string) => {
-    const replacement = args[option as OptionalFlag];
-    const contentUpdate = content.replace(
-      REGEX[option as OptionalFlag],
-      replacement as string,
-    );
-    if (content === contentUpdate) {
+  if (args.image) {
+    const imageUpdated = updatedContent.replace(IMAGE_REGEX, args.image);
+    if (updatedContent === imageUpdated) {
       console.log(
-        `No <${option}> placeholders found to update in dynamic-plugins.yaml`,
+        "No <image> placeholders found to update in dynamic-plugins.yaml",
       );
-      return content;
+    } else {
+      console.log(`Updated dynamic-plugins.yaml with image: ${args.image}`);
+      updatedContent = imageUpdated;
     }
-    console.log(`Updated dynamic-plugins.yaml with ${option}: ${replacement}`);
-    return contentUpdate;
-  }, updatedContent);
+  }
 
-  await writeFile(dynamicPluginsPath, finalUpdates, "utf8");
+  if (content !== updatedContent) {
+    await writeFile(dynamicPluginsPath, updatedContent, "utf8");
+  }
 }
 
 main().catch((e) => {
