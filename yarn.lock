@@ -32107,7 +32107,7 @@ __metadata:
     rimraf: "npm:6.0.1"
     tsx: "npm:^4.21.0"
     turbo: "npm:^2.4.4"
-    typescript: "npm:5.8.2"
+    typescript: "npm:5.9.3"
     yaml: "npm:^2.8.2"
   languageName: unknown
   linkType: soft
