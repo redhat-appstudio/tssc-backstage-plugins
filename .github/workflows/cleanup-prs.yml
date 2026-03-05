@@ -33,8 +33,8 @@ jobs:
           prs=$(gh pr list \
             --state open \
             --limit 500 \
-            --json number,baseRefName,labels \
-            --jq '.[] | select(.baseRefName | contains("release-")) | select((.labels // []) | map(.name) | any(. == "tekton-update") | not) | .number')
+            --json number,baseRefName,headRefName \
+            --jq '.[] | select(.baseRefName | contains("release-")) | select(.headRefName | startswith("tekton-update-") | not) | .number')
 
           if [ -z "$prs" ]; then
             echo "No matching PRs found."
