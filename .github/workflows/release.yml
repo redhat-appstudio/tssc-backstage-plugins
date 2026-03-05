@@ -26,6 +26,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Validate version is not current release
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          CURRENT_VERSION=$(jq -r '.version' package.json)
+          if [ "$VERSION" = "$CURRENT_VERSION" ]; then
+            echo "Error: Cannot create release for version $VERSION — it is already the current release. Use a newer version."
+            exit 1
+          fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
