@@ -22,6 +22,16 @@ jobs:
         with:
           ref: main
 
+      - name: Validate version is not current release
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          CURRENT_VERSION=$(jq -r '.version' package.json)
+          if [ "$VERSION" = "$CURRENT_VERSION" ]; then
+            echo "Error: Cannot update tekton pipelines for version $VERSION — it is already the current release."
+            exit 1
+          fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
