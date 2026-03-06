@@ -29332,7 +29332,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:16.13.1 || ^17.0.0 || ^18.0.0, react@npm:^17.0.0 || ^18.0.0":
+"react@npm:16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0":
+  version: 19.2.4
+  resolution: "react@npm:19.2.4"
+  checksum: 10c0/cd2c9ff67a720799cc3b38a516009986f7fc4cb8d3e15716c6211cf098d1357ee3e348ab05ad0600042bbb0fd888530ba92e329198c92eafa0994f5213396596
+  languageName: node
+  linkType: hard
+
+"react@npm:^17.0.0 || ^18.0.0":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
@@ -32339,7 +32346,7 @@ __metadata:
     lint-staged: "npm:^16.0.0"
     node-gyp: "npm:^12.0.0"
     prettier: "npm:^3.5.3"
-    react: "npm:16.13.1 || ^17.0.0 || ^18.0.0"
+    react: "npm:16.13.1 || ^17.0.0 || ^18.0.0 || ^19.0.0"
     rimraf: "npm:6.0.1"
     tsx: "npm:^4.21.0"
     turbo: "npm:^2.4.4"
