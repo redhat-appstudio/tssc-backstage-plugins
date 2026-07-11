@@ -34,7 +34,7 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@4.8.1",
+  "packageManager": "yarn@4.17.1",
   "devDependencies": {
     "@octokit/rest": "^22.0.1",
     "husky": "^9.1.7",
