@@ -45,7 +45,7 @@
     "rimraf": "6.0.1",
     "tsx": "^4.21.0",
     "turbo": "^2.4.4",
-    "typescript": "5.8.2",
+    "typescript": "7.0.2",
     "yaml": "^2.8.2"
   }
 }
